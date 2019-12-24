@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+      <!-- Google Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+ 
+ 
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/animate.css/animate.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/cubeportfolio/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.min.css">
+
+    <!-- CSS Front Template -->
+    <title>SureKeys Online</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but jamaica_job_bank doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+
+      <!-- JS Global Compulsory -->
+  <script src="<%= BASE_URL %>assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="<%= BASE_URL %>assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/svg-injector/dist/svg-injector.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/appear.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/circles/circles.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/gmaps/gmaps.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.legacy.min.js"></script>
+  <!-- JS Front -->
+
+<!-- JS Front -->
+  <script src="<%= BASE_URL %>assets/js/components/hs.validation.js"></script>
+  <script src="<%= BASE_URL %>assets/js/hs.core.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.header.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.selectpicker.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.unfold.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.malihu-scrollbar.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.fancybox.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.slick-carousel.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.cubeportfolio.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.chart-pie.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.svg-injector.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.focus-state.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.show-animation.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.g-map.js"></script>
+  <script src="<%= BASE_URL %>assets/js/components/hs.go-to.js"></script>
+
+
+  <!-- JS Plugins Init. -->
+  <script>
+    $(window).on('load', function () {
+      // initialization of svg injector module
+      $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
+    });
+
+    $(document).on('ready', function () {
+      
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+       // initialization of form validation
+      $.HSCore.components.HSValidation.init('.js-validate');
+      
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function () {
+          $(this).find('input[type="search"]').focus();
+        }
+      });
+
+
+     // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // // initialization of chartist area charts
+      // $.HSCore.components.HSChartistAreaChart.init('.js-area-chart');
+
+      // initialization of slick carousel
+      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+      // initialization of fancybox
+      $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+        // initialization of select picker
+       $.HSCore.components.HSSelectPicker.init('.js-select');
+    
+          // initialization of forms
+      $.HSCore.components.HSFocusState.init();
+
+      // initialization of cubeportfolio
+      $.HSCore.components.HSCubeportfolio.init('.cbp');
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+
+      // initialization of malihu scrollbar
+      var windW = window.innerWidth;
+
+      if(windW < 768) {
+        $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+      }
+
+      // initialization of chart pies
+      var items = $.HSCore.components.HSChartPie.init('.js-pie');
+    });
+
+    $(window).on('resize', function () {
+      // initialization of malihu scrollbar
+      var windW = window.innerWidth;
+
+      if(windW < 768) {
+        $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+      } else {
+        $('.js-scrollbar').mCustomScrollbar("destroy");
+      }
+
+
+    });
+  </script>
+  <!-- JS Plugins Init. -->
+<script>
+  // initialization of google map
+  function initMap() {
+    $.HSCore.components.HSGMap.init('.js-g-map');
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJVRSKX3i5obA6tXaiq4_f9ZAfNrTCj84&callback=initMap" async defer></script>
+  </body>
+</html>

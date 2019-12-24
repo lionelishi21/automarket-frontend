@@ -1,0 +1,8 @@
+{
+  "appId": "com.jamaicajobbank.ann",
+  "appName": "Action Ann Job Bank",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "cordova": {}
+}
