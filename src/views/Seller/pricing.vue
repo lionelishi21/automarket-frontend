@@ -85,7 +85,7 @@
                       <li class="list-group-item">20 Days of Run Time</li>
                     </ul>
 
-                    <button type="button" @click="selectPlan()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Starter</button>
+                    <button type="button" @click="selectPlan('starter-plan')" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Starter</button>
                   </div>
                   <!-- End Content -->
                 </div>
@@ -115,7 +115,7 @@
                       <li class="list-group-item">30 Days Run Time</li>
                       <li class="list-group-item">Up to 15 Photos</li>
                     </ul>
-                    <button  @click="selectPlan(2)"  type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Basic</button>
+                    <button  @click="selectPlan('basic-plan')"  type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Basic</button>
                   </div>
                   <!-- End Content -->
                 </div>
@@ -146,7 +146,7 @@
                       <li class="list-group-item">Up to 40 Photos</li>
                     </ul>
 
-                    <button  @click="selectPlan(3)" type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Dealer</button>
+                    <button  @click="selectPlan('dealer-plan')" type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Dealer</button>
                   </div>
                   <!-- End Content -->
                 </div>
@@ -177,7 +177,7 @@
                       <li class="list-group-item">Up to 100 Photos</li>
                     </ul>
 
-                    <button  @click="selectPlan(4)"  type="button" class="btn btn-sm btn-block btn-success transition-3d-hover">Contact Us</button>
+                    <button  @click="selectPlan('premium-dealer-plan')"  type="button" class="btn btn-sm btn-block btn-success transition-3d-hover">Contact Us</button>
                   </div>
                   <!-- End Content -->
                 </div>
@@ -327,6 +327,7 @@
                       <li class="list-group-item">100+ header variations</li>
                       <li class="list-group-item">20+ home page options</li>
                       <li class="list-group-item">Priority Support</li>
+                      <li>{{getPlans}}</li>
                     </ul>
 
                     <button type="button" class="btn btn-sm btn-block btn-success transition-3d-hover">Contact Us</button>
@@ -354,6 +355,7 @@
 
 </template>
 <script>
+ import { mapGetters } from 'vuex';
  export default {
   data() {
     return {
@@ -394,34 +396,33 @@
     }
   },
   created(){
-      this.$store.dispatch('USER_PLAN')
-        .then( response => {
-
-          let responseData = response.data
-          if (responseData == '' ) {
-              this.$router.push('/build')
-          } else {
-          }
-        }, error => {
-      })
+      this.$store.dispatch('GET_ALL_PLANS');
+  },
+  computed: {
+    ...mapGetters([
+      'getPlans',
+     ])
   },
   mounted() {
      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
      $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
   },
   methods: {
-    selectPlan() {
-      var plan_id = 1
+    selectPlan(plan) {
       this.loading = true
-      console.log(plan_id)
-      this.$store.dispatch('SELECT_USER_PLAN', plan_id)
-        .then( response => {
-            this.loading = false
-            this.$router.push('/payment-methods')
-        }, error => {
-          this.loading = false
-          // console.log(error.message)
-        })
+       var self = this
+       setTimeout(function(){
+          self.$router.push('/build/'+plan)
+       }, 1500);
+
+      // this.$store.dispatch('SELECT_USER_PLAN', plan_id)
+      //   .then( response => {
+      //       this.loading = false
+      //       this.$router.push('/payment-methods')
+      //   }, error => {
+      //     this.loading = false
+      //     // console.log(error.message)
+      //   })
     }
   }
  }

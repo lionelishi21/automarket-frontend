@@ -1,6 +1,14 @@
 <template>
   <!-- ========== MAIN CONTENT ========== -->
   <main id="content" role="main">
+        <!-- Page Preloader -->
+    <div id="jsPreloader" v-show="isLoading" class="page-preloader" style="background: rgba(0,0,0,0.5);">
+      <div class="page-preloader__content-centered">
+        <div class="spinner-grow text-warning" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
     <!-- Title Section -->
     <div class="bg-light">
       <div class="container py-5">
@@ -28,67 +36,66 @@
     <div class="container space-1">
         
         <!-- Top Filters -->
-        <div class="row align-items-center">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <div class="d-flex align-items-center">
-              
-              <!-- Select -->
-                <select class="js-select selectpicker dropdown-select mr-2" data-size="10" data-width="fit" 
-                     data-style="btn-soft-secondary btn-xs">
-                    <option value="showing25" selected>25</option>
-                    <option value="showing10">10</option>
-                    <option value="showing20">50</option>
-                    <option value="showing30">100</option>
-               </select>
-              <!-- End Select -->
-      
-              <span class="text-secondary font-size-1">Showing 1-6 of 27</span>
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="d-flex justify-content-sm-end align-items-center">
-             
-              <!-- Select -->
-              <select class="js-select selectpicker dropdown-select mr-2" data-size="10" data-width="fit"
-                  data-style="btn-soft-secondary btn-xs">
-                  <option value="mostRecent" selected>Most recent</option>
-                  <option value="HighestPrice">Highest price</option>
-                  <option value="LowestPrice">Lowest price</option>
-                  <option value="mostReduced">Most reduced</option>
-                  <option value="mostPopular">Most popular</option>
-              </select>
-              <!-- End Select -->
-            
-              <!-- View Map -->
-              <a class="btn btn-xs btn-soft-secondary mr-2" href="javascript:;">
-                <span class="fa fa-map-marked-alt mr-1"></span>
-                View Map
-              </a>
-              <!--End Map View  -->
-
-              <!-- Button Group -->
-              <div class="btn-group btn-group-toggle d-flex">
-                <a class="btn btn-xs btn-outline-secondary btn-custom-toggle-primary flex-fill" href="#" @click="change_view_type()" :class="{'active': grid }">
-                  <span class="fas fa-th-large"></span>
-                </a>
-
-                <a class="btn btn-xs btn-outline-secondary btn-custom-toggle-primary flex-fill" href="#" @click="change_view_type()" :class="{ 'active' : list }">
-                  <span class="fas fa-list"></span>
-                </a>
+          <div class="row align-items-center">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="d-flex align-items-center">
+                
+                <!-- Select -->
+                  <select v-model="filterOffset" class="js-select selectpicker dropdown-select mr-2" data-size="10" data-width="fit" 
+                       data-style="btn-soft-secondary btn-xs">
+                      <option value="25" selected>25</option>
+                      <option value="10">10</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                 </select>
+                <!-- End Select -->
+                <span class="text-secondary font-size-1">Showing 1-6 of 27</span>
               </div>
-              <!-- End Button Group -->
+            </div>
+
+            <div class="col-sm-6">
+              <div class="d-flex justify-content-sm-end align-items-center">
+               
+                <!-- Select -->
+                <select v-model="filterSorting" class="js-select selectpicker dropdown-select mr-2" data-size="10" data-width="fit"
+                    data-style="btn-soft-secondary btn-xs">
+                    <option value="mostRecent" selected>Most recent</option>
+                    <option value="highestPrice">Highest price</option>
+                    <option value="LowestPrice">Lowest price</option>
+                    <option value="mostReduced">Most reduced</option>
+                    <option value="mostPopular">Most popular</option>
+                </select>
+                <!-- End Select -->
+              
+                <!-- View Map -->
+                <a  @click="viewMap()" class="btn btn-xs btn-soft-secondary mr-2" href="javascript:;">
+                  <span class="fa fa-map-marked-alt mr-1"></span>
+                  View Map
+                </a>
+                <!--End Map View  -->
+
+                <!-- Button Group -->
+                <div class="btn-group btn-group-toggle d-flex">
+                  <a class="btn btn-xs btn-outline-secondary btn-custom-toggle-primary flex-fill" href="#" @click="change_view_type()" :class="{'active': grid }">
+                    <span class="fas fa-th-large"></span>
+                  </a>
+
+                  <a class="btn btn-xs btn-outline-secondary btn-custom-toggle-primary flex-fill" href="#" @click="change_view_type()" :class="{ 'active' : list }">
+                    <span class="fas fa-list"></span>
+                  </a>
+                </div>
+                <!-- End Button Group -->
+              </div>
             </div>
           </div>
-        </div>
         <!-- End Top Filters -->
    </div>
 
     <div class="container space-top-1 space-bottom-2">
         
         <div class="row">
-            <div class="col-lg-4">
-              <div class="pl-lg-4">
+            <div class="col-lg-4 col-md-4">
+              <div class="">
                   <!-- Sidebar Filter -->
                   <div class="card p-4">
                
@@ -98,9 +105,8 @@
                            <div class="row">
                               <div class="col-sm-6">
                                 <div class="border-bottom mb-4 ">
-
                                       <!-- Select -->
-                                      <select class="form-control form-control-sm">
+                                      <select class="form-control form-control-sm" v-model="filterMiles">
                                         <option value="10" selected>10 miles</option>
                                         <option value="20">20 miles</option>
                                         <option value="30">30 miles</option>
@@ -114,12 +120,28 @@
                                         <option value="300">300 miles</option>
                                       </select>
                                       <!-- End Select -->
-
                                  </div>
                               </div>
                                <div class="col-sm-6">
                                 <div class="border-bottom">
                                       <input type="number" class="form-control  form-control-sm" placeholder="60606" >
+                                 </div>
+                              </div>
+                          </div>
+                        
+                    </div>
+                    <!-- End LocationType -->
+                    
+                   <div class="border-bottom">
+                      <label class="form-label mb-2"><b>Parish</b></label>
+                           <div class="row">
+                              <div class="col-sm-12">
+                                <div class="border-bottom mb-4 ">
+                                      <!-- Select -->
+                                      <select class="form-control form-control-sm" v-model="filterParish">
+                                         <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
+                                      </select>
+                                      <!-- End Select -->
                                  </div>
                               </div>
                           </div>
@@ -136,7 +158,7 @@
                                       
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
-                                      <select class="form-control form-control-sm">
+                                      <select class="form-control form-control-sm" v-model="filterMin_year">
                                         <option value="2000" selected>2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -169,7 +191,7 @@
                                 <div class="border-bottom">
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
-                                     <select class="form-control form-control-sm">
+                                     <select class="form-control form-control-sm" v-model="filterMax_year">
                                         <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -206,15 +228,19 @@
                     <!-- Car Make -->
                     <div class="border-bottom">
                       <label class="form-label mb-2"> <b>Make</b></label>
-
                       <div class="row" style="overflow-y: scroll;  height:250px;">
                         <div class="col-12">
                          
                           <!-- Radio Checkbox -->
-                          <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2" v-for="make in makes">
-                            <input type="checkbox" class="custom-control-input" :id="'makeRadioChechbox'+make.id" name="makeRadioChechbox">
-                            <label class="custom-control-label" :for="'makeRadioChechbox'+make.id">
-                              {{make.make}}
+                          <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes">
+                            <input class="custom-control-input"
+                               type="checkbox"
+                               :value="make.id"
+                               :id="'makeRadio_'+make.id"
+                               @click="check($event)"
+                               v-model="filterMake">
+                            <label class="custom-control-label" :for="'makeRadio_'+make.id">
+                              {{make.name}}
                             </label>
                           </div>
                           <!-- End Radio Checkbox -->
@@ -223,30 +249,7 @@
                       </div>
                     </div>
                     <!-- End Car Make -->
-                    
                     <hr>  
-                      <!-- Trim -->
-                     <div class="border-bottom">
-                      <label class="form-label mb-2"><b>Trim</b></label>
-
-                      <div class="row" style="overflow-y: scroll;  height:250px;">
-                        <div class="col-12">
-                         
-                          <!-- Radio Checkbox -->
-                          <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2" v-for="trim in trims">
-                            <input type="checkbox" class="custom-control-input" :id="'trimRadioChechbox'+trim.id" name="trimRadioChechbox">
-                            <label class="custom-control-label" :for="'trimRadioChechbox'+trim.id">
-                              {{trim.trim}}
-                            </label>
-                          </div>
-                          <!-- End Radio Checkbox -->
-                        
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Trim -->
-                    
-
                     <!-- Year -->
                     <div class="border-bottom mb-2 pb-2">
                       <label class="form-label mb-2"><b>Price</b></label>
@@ -256,33 +259,33 @@
                                       
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
-                                      <select class="form-control form-control-sm">
-                                        <option value="2000" selected>100,000 JA$</option>
-                                        <option value="2000">150,000 JA$</option>
-                                        <option value="2000">250,000 JA$</option>
-                                        <option value="2000">300,000 JA$</option>
-                                        <option value="2000">400,000 JA$</option>
-                                        <option value="2000">500,000 JA$</option>
-                                        <option value="2000">600,000 JA$</option>
-                                        <option value="2000">700,000 JA$</option>
-                                        <option value="2000">800,000 JA$</option>
-                                        <option value="2000">900,000 JA$</option>
-                                        <option value="2000">1,000,000 JA$</option>
-                                        <option value="2000">1,250,000 JA$</option>
-                                        <option value="2000">1,500,000 JA$</option>
-                                        <option value="2000">1,700,000 JA$</option>
-                                        <option value="2000">2,000,000 JA$</option>
-                                        <option value="2000">2,250,000 JA$</option>
-                                        <option value="2000">2,500,000 JA$</option>
-                                        <option value="2000">3,500,000 JA$</option>
-                                        <option value="2000">4,000,000 JA$</option>
-                                        <option value="2000">4,500,000 JA$</option>
-                                        <option value="2000">5,000,000 JA$</option>
-                                        <option value="2000">6,000,000 JA$</option>
-                                        <option value="2000">7,000,000 JA$</option>
-                                        <option value="2000">8,000,000 JA$</option>
-                                        <option value="2000">9,000,000 JA$</option>
-                                        <option value="2000">10,000,000 JA$</option>
+                                      <select class="form-control form-control-sm" v-model="filterMin_price">
+                                        <option value="100000" selected>100,000 JA$</option>
+                                        <option value="150000">150,000 JA$</option>
+                                        <option value="250000">250,000 JA$</option>
+                                        <option value="300000">300,000 JA$</option>
+                                        <option value="400000">400,000 JA$</option>
+                                        <option value="500000">500,000 JA$</option>
+                                        <option value="600000">600,000 JA$</option>
+                                        <option value="700000">700,000 JA$</option>
+                                        <option value="800000">800,000 JA$</option>
+                                        <option value="900000">900,000 JA$</option>
+                                        <option value="1000000">1,000,000 JA$</option>
+                                        <option value="1250000">1,250,000 JA$</option>
+                                        <option value="1500000">1,500,000 JA$</option>
+                                        <option value="1700000">1,700,000 JA$</option>
+                                        <option value="2000000">2,000,000 JA$</option>
+                                        <option value="2250000">2,250,000 JA$</option>
+                                        <option value="2500000">2,500,000 JA$</option>
+                                        <option value="3500000">3,500,000 JA$</option>
+                                        <option value="4000000">4,000,000 JA$</option>
+                                        <option value="4500000">4,500,000 JA$</option>
+                                        <option value="5000000">5,000,000 JA$</option>
+                                        <option value="6000000">6,000,000 JA$</option>
+                                        <option value="7000000">7,000,000 JA$</option>
+                                        <option value="8000000">8,000,000 JA$</option>
+                                        <option value="9000000">9,000,000 JA$</option>
+                                       <option value="10000000">10,000,000 JA$</option>
                                       </select>
                                       <!-- End Select -->
 
@@ -293,46 +296,440 @@
                                 <div class="border-bottom">
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
-                                     <select class="form-control form-control-sm">
-                                         <option value="2000" selected>100,000 JA$</option>
-                                        <option value="2000">150,000 JA$</option>
-                                        <option value="2000">250,000 JA$</option>
-                                        <option value="2000">300,000 JA$</option>
-                                        <option value="2000">400,000 JA$</option>
-                                        <option value="2000">500,000 JA$</option>
-                                        <option value="2000">600,000 JA$</option>
-                                        <option value="2000">700,000 JA$</option>
-                                        <option value="2000">800,000 JA$</option>
-                                        <option value="2000">900,000 JA$</option>
-                                        <option value="2000">1,000,000 JA$</option>
-                                        <option value="2000">1,250,000 JA$</option>
-                                        <option value="2000">1,500,000 JA$</option>
-                                        <option value="2000">1,700,000 JA$</option>
-                                        <option value="2000">2,000,000 JA$</option>
-                                        <option value="2000">2,250,000 JA$</option>
-                                        <option value="2000">2,500,000 JA$</option>
-                                        <option value="2000">3,500,000 JA$</option>
-                                        <option value="2000">4,000,000 JA$</option>
-                                        <option value="2000">4,500,000 JA$</option>
-                                        <option value="2000">5,000,000 JA$</option>
-                                        <option value="2000">6,000,000 JA$</option>
-                                        <option value="2000">7,000,000 JA$</option>
-                                        <option value="2000">8,000,000 JA$</option>
-                                        <option value="2000">9,000,000 JA$</option>
-                                        <option value="2000" selected>10,000,000 JA$</option>
+                                     <select class="form-control form-control-sm" v-model="filterMax_price">
+                                        <option value="100000" selected>100,000 JA$</option>
+                                        <option value="150000">150,000 JA$</option>
+                                        <option value="250000">250,000 JA$</option>
+                                        <option value="300000">300,000 JA$</option>
+                                        <option value="400000">400,000 JA$</option>
+                                        <option value="500000">500,000 JA$</option>
+                                        <option value="600000">600,000 JA$</option>
+                                        <option value="700000">700,000 JA$</option>
+                                        <option value="800000">800,000 JA$</option>
+                                        <option value="900000">900,000 JA$</option>
+                                        <option value="1000000">1,000,000 JA$</option>
+                                        <option value="1250000">1,250,000 JA$</option>
+                                        <option value="1500000">1,500,000 JA$</option>
+                                        <option value="1700000">1,700,000 JA$</option>
+                                        <option value="2000000">2,000,000 JA$</option>
+                                        <option value="2250000">2,250,000 JA$</option>
+                                        <option value="2500000">2,500,000 JA$</option>
+                                        <option value="3500000">3,500,000 JA$</option>
+                                        <option value="4000000">4,000,000 JA$</option>
+                                        <option value="4500000">4,500,000 JA$</option>
+                                        <option value="5000000">5,000,000 JA$</option>
+                                        <option value="6000000">6,000,000 JA$</option>
+                                        <option value="7000000">7,000,000 JA$</option>
+                                        <option value="8000000">8,000,000 JA$</option>
+                                        <option value="9000000">9,000,000 JA$</option>
+                                       <option value="10000000">10,000,000 JA$</option>
                                       </select>
-                                      <!-- End Select -->
                                       <!-- End Select -->
                                  </div>
                               </div>
                           </div>
                     </div>
                     <!-- End Year -->
+                    
+                    <!-- Accordion -->
+                    <div id="paymentDetails" class="accordion">
+                      <!-- Card -->
+                      <div class="card">
+                        <div class="card-header card-collapse" id="cardHeadingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
+                                    data-toggle="collapse"
+                                    data-target="#cardOne"
+                                    aria-expanded="false"
+                                    aria-controls="cardOne">
+                              <span class="row align-items-center">
+                                <span class="col-md-12 mb-2 mb-md-0">
+                                  <span class="media align-items-center">
+                                    <!-- <img class="max-width-9 mr-3" src="../../assets/img/100x60/img1.jpg" alt="Image Description"> -->
+                                    <span class="media-body">
+                                      <span class="font-size-1"><strong>Body Style</strong></span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="cardOne" class="collapse mb-5" aria-labelledby="cardHeadingOne" data-parent="#paymentDetails">
+                          <div class="card-body px-4">
+                            <!-- Card Details -->
+                            <div class="row">
+                              <div class="col-sm-12 mb-2 mb-sm-0">
+                                <!-- Radio Checkbox -->
+                                    <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="sedan"
+                                         id="styleRadio_1"
+                                         @click="check($event)"
+                                         v-model="filterBodyStyle">
+                                      <label class="custom-control-label" for="styleRadio_1">
+                                      </label>
+                                      Sedan <small>(100)</small>
+                                    </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                <!-- Radio Checkbox -->
+                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="suv"
+                                         id="styleRadio_2"
+                                         @click="check($event)"
+                                         v-model="filterBodyStyle">
+                                      <label class="custom-control-label" for="styleRadio_2">
+                                      </label>
+                                      SUV
+                                   </div>
+                                <!-- End Radio Checkbox -->
 
+                                  <!-- Radio Checkbox -->
+                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="minivan"
+                                         id="styleRadio_3"
+                                         @click="check($event)"
+                                         v-model="filterBodyStyle">
+                                      <label class="custom-control-label" for="styleRadio_3">
+                                      </label>
+                                      Minivan 
+                                   </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                 <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="coupe"
+                                       id="styleRadio_4"
+                                       @click="check($event)"
+                                       v-model="filterBodyStyle">
+                                    <label class="custom-control-label" for="styleRadio_4">
+                                    </label>
+                                    Coupe
+                                 </div>
+                              <!-- End Radio Checkbox -->
+
+                               <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="hatchback"
+                                       id="styleRadio_5"
+                                       @click="check($event)"
+                                       v-model="filterBodyStyle">
+                                    <label class="custom-control-label" for="styleRadio_5">
+                                    </label>
+                                    Hatchback
+                                 </div>
+                              <!-- End Radio Checkbox -->
+                                
+                                 <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="passengervan"
+                                       id="styleRadio_6"
+                                       @click="check($event)"
+                                       v-model="filterBodyStyle">
+                                    <label class="custom-control-label" for="styleRadio_6">
+                                    </label>
+                                    Passenger Van
+                                 </div>
+                              <!-- End Radio Checkbox -->
+
+
+                                <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="wagon"
+                                       id="styleRadio_7"
+                                       @click="check($event)"
+                                       v-model="filterBodyStyle">
+                                    <label class="custom-control-label" for="styleRadio_7">
+                                    </label>
+                                    Wagon
+                                 </div>
+                              <!-- End Radio Checkbox -->
+                                   <!-- Radio Checkbox -->
+                               <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                  <input class="custom-control-input"
+                                     type="checkbox"
+                                     value="comercial"
+                                     id="'styleRadio_8"
+                                     @click="check($event)"
+                                     v-model="filterBodyStyle">
+                                  <label class="custom-control-label" for="styleRadio_8">
+                                  </label>
+                                   Commercial
+                               </div>
+                            <!-- End Radio Checkbox -->
+                              </div>
+                            </div>
+                            <!-- End Card Details -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Card -->
+
+      
+                    </div>
+                    <!-- End Accordion -->
+
+
+                    <!-- Accordion -->
+                    <div id="transmission" class="accordion">
+                      <!-- Card -->
+                      <div class="card">
+                        <div class="card-header card-collapse" id="transmission">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
+                                    data-toggle="collapse"
+                                    data-target="#cardTwo"
+                                    aria-expanded="false"
+                                    aria-controls="cardOne">
+                              <span class="row align-items-center">
+                                <span class="col-md-12 mb-2 mb-md-0">
+                                  <span class="media align-items-center">
+                                    <!-- <img class="max-width-9 mr-3" src="../../assets/img/100x60/img1.jpg" alt="Image Description"> -->
+                                    <span class="media-body">
+                                      <span class="font-size-1"><strong>Transmission</strong></span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="cardTwo" class="collapse mb-5" aria-labelledby="transmission" data-parent="#transmission">
+                          <div class="card-body px-4">
+                            <!-- Card Details -->
+                            <div class="row">
+                              <div class="col-sm-12 mb-2 mb-sm-0">
+                                <!-- Radio Checkbox -->
+                                    <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="automanual"
+                                         id="transRadio_1"
+                                         @click="check($event)"
+                                         v-model="filterTransmission">
+                                      <label class="custom-control-label" for="transRadio_1">
+                                      </label>
+                                     Automanual  <small>(100)</small>
+                                    </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                <!-- Radio Checkbox -->
+                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="automatic"
+                                         id="transRadio_2"
+                                         @click="check($event)"
+                                         v-model="filterTransmission">
+                                      <label class="custom-control-label" for="transRadio_2">
+                                      </label>
+                                      Automatic
+                                   </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                 <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="cvt"
+                                       id="transRadio_4"
+                                       @click="check($event)"
+                                       v-model="filterTransmission">
+                                    <label class="custom-control-label" for="transRadio_4">
+                                    </label>
+                                     CVT
+                                 </div>
+                              <!-- End Radio Checkbox -->
+
+                              
+                               <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                  <input class="custom-control-input"
+                                     type="checkbox"
+                                     value="manual"
+                                     id="'styleRadio_8"
+                                     @click="check($event)"
+                                     v-model="filterTransmission">
+                                  <label class="custom-control-label" for="styleRadio_8">
+                                  </label>
+                                   Manual
+                               </div>
+                            <!-- End Radio Checkbox -->
+                              </div>
+                            </div>
+                            <!-- End Card Details -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Card -->
+                   </div>
+                    <!-- End Accordion -->
+                        
+
+                    <!-- Accordion -->
+                    <div id="cyclinder" class="accordion">
+                      <!-- Card -->
+                      <div class="card">
+                        <div class="card-header card-collapse" id="transmission">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
+                                    data-toggle="collapse"
+                                    data-target="#cardThree"
+                                    aria-expanded="false"
+                                    aria-controls="cardOne">
+                              <span class="row align-items-center">
+                                <span class="col-md-12 mb-2 mb-md-0">
+                                  <span class="media align-items-center">
+                                    <!-- <img class="max-width-9 mr-3" src="../../assets/img/100x60/img1.jpg" alt="Image Description"> -->
+                                    <span class="media-body">
+                                      <span class="font-size-1"><strong> Cyclinder </strong></span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </button>
+                          </h5>
+                        </div>
+
+
+                        <div id="cardThree" class="collapse mb-5" aria-labelledby="transmission" data-parent="#cyclinder">
+                          <div class="card-body px-4">
+                            <!-- Card Details -->
+                            <div class="row">
+                              <div class="col-sm-12 mb-2 mb-sm-0">
+                                
+                                <!-- Radio Checkbox -->
+                                  <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="automanual"
+                                       id="cyRadio_1"
+                                       @click="check($event)"
+                                       v-model="filterCyclinder">
+                                    <label class="custom-control-label" for="cyRadio_1">
+                                    </label>
+                                    4-cylinder <small>(100)</small>
+                                  </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                <!-- Radio Checkbox -->
+                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="automatic"
+                                         id="cyRadio_2"
+                                         @click="check($event)"
+                                         v-model="filterCyclinder">
+                                      <label class="custom-control-label" for="cyRadio_2">
+                                      </label>
+                                      6-cylinder
+                                   </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                 <!-- Radio Checkbox -->
+                                 <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="cvt"
+                                       id="cyRadio_4"
+                                       @click="check($event)"
+                                       v-model="filterCyclinder">
+                                    <label class="custom-control-label" for="transRadio_4">
+                                    </label>
+                                     Unkown
+                                 </div>
+                              <!-- End Radio Checkbox -->
+                            <!-- End Radio Checkbox -->
+                              </div>
+                            </div>
+                            <!-- End Card Details -->
+                          </div>
+                        </div>
+                            <!-- Accordion -->
+                    <div id="cyclinder" class="accordion">
+                      <!-- Card -->
+                      <div class="card">
+                        <div class="card-header card-collapse" id="transmission">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
+                                    data-toggle="collapse"
+                                    data-target="#cardFour"
+                                    aria-expanded="false"
+                                    aria-controls="cardOne">
+                              <span class="row align-items-center">
+                                <span class="col-md-12 mb-2 mb-md-0">
+                                  <span class="media align-items-center">
+                                    <span class="media-body">
+                                      <span class="font-size-1"><strong> Seller Type</strong></span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </button>
+                          </h5>
+                        </div>
+                          <div id="cardFour" class="collapse mb-5" aria-labelledby="sellertype" data-parent="#sellertype">
+                          <div class="card-body px-4">
+                            <!-- Card Details -->
+                            <div class="row">
+                              <div class="col-sm-12 mb-2 mb-sm-0">
+                                
+                                <!-- Radio Checkbox -->
+                                  <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                    <input class="custom-control-input"
+                                       type="checkbox"
+                                       value="dealership"
+                                       id="stRadio_1"
+                                       @click="check($event)"
+                                       v-model="filterSellerType">
+                                    <label class="custom-control-label" for="cyRadio_1">
+                                    </label>
+                                    Dealership
+                                  </div>
+                                <!-- End Radio Checkbox -->
+                                
+                                <!-- Radio Checkbox -->
+                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                      <input class="custom-control-input"
+                                         type="checkbox"
+                                         value="automatic"
+                                         id="stRadio_2"
+                                         @click="check($event)"
+                                         v-model="filterSellerType">
+                                      <label class="custom-control-label" for="cyRadio_2">
+                                      </label>
+                                      Individual
+                                   </div>
+                                <!-- End Radio Checkbox -->
+                            <!-- End Radio Checkbox -->
+                              </div>
+                            </div>
+                            <!-- End Card Details -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                      <!-- End Card -->
+                   </div>
+                    <!-- End Accordion -->
                     <!-- Buttons -->
-                    <div class="row mx-gutters-2">
+                    <div class="row mx-gutters-2 mt-5">
                       <div class="col-6">
-                        <button type="submit" class="btn btn-block btn-sm btn-soft-secondary">Clear</button>
+                        <button type="submit" @click="clear()" class="btn btn-block btn-sm btn-soft-secondary">Clear</button>
                       </div>
                       <div class="col-6">
                         <button type="submit" class="btn btn-block btn-sm btn-primary">Save</button>
@@ -343,10 +740,10 @@
                   <!-- End Sidebar Filter -->
               </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-8 col-sm-8">
                 <!-- List and Grid view -->
-                <car-list  v-show="list" :cars="cars" ></car-list>
-                <car-grid  v-show="grid" :cars="cars" ></car-grid>
+                <car-list v-if="list"  v-for="car in FilteredCars" :car="car" ></car-list>
+                <car-grid  v-if="grid" :cars="FilteredCars"></car-grid>
                 <!-- End List Grid View -->
             </div>
 
@@ -359,11 +756,11 @@
   <!-- ========== END MAIN CONTENT ========== -->
 </template>
 <script>
-import CarList from '../components/cars/CarList.vue';
+import CarList from './Account/components/cars/list.vue';
 import CarGrid from '../components/cars/CarGrid.vue';
 
 import axios from 'axios';
-
+import { mapGetters } from 'vuex';
 export default {
 	components: {
 		CarList,
@@ -371,6 +768,20 @@ export default {
 	},
 	data() {
 		return {
+      filterOffset: 10,
+      filterSorting: null,
+      filterMiles: null,
+      filterParish: null,
+      filterBodyStyle: [],
+      filterMake: [],
+      filterTransmission: [],
+      filterSellerType: null,
+      filterMin_year: null,
+      filterMax_year: null,
+      filterMax_price: null,
+      filterMin_price: null,
+      filterCyclinder: [],
+      isLoading: false,
       makes: [
         {id: 1, make: 'Acura'},
         {id: 2, make: 'Audi'},
@@ -399,107 +810,265 @@ export default {
         {id: 5, trim: 'R/T Plus'},
         {id: 6, trim: 'R/T Scat Pack'}
       ],
-      cars: [
-       {
-          id: 1,
-          milage: 'N/A',
-          make: 'Subaru',
-          model: 'G4',
-          year: '2015',
-          location: 'Half Way Tree, Kingston, Jamaica',
-          extcolor: 'Black',
-          intcolor: 'Black',
-          desc: 'THis is a description for buyers',
-          name: 'Subaru',
-          transmission: 'Automatic',
-          price: '1,000,000.00', 
-          img: '../../assets/img/480x320/car1.jpg',
-          lrgimg: '../../assets/img/1920x1080/car1.jpg'
-        },{
-          id: 1,
-          milage: '10,123 mi',
-          make: 'Mitsubishi',
-          model: 'G4',
-          year: '2015',
-          location: 'Half Way Tree, Kingston, Jamaica',
-          extcolor: 'Blue',
-          intcolor: 'Black',
-          desc: 'THis is a description for buyers',
-          name: 'Mitsubishi',
-          transmission: 'Tiptronic',
-          price: '1,000,000.00', 
-          img: '../../assets/img/480x320/car1.jpg',
-          lrgimg: '../../assets/img/1920x1080/car1.jpg'
-        },{
-          id: 2,
-          name: 'Honda Fit',
-          milage: '20,123 mi',
-          make: 'Honda',
-          model: 'Fit',
-          year: '2017',
-          location: 'Half Way Tree, Kingston, Jamaica',
-          extcolor: 'Black',
-          intcolor: 'Black',
-          desc: 'THis is a description for buyers',
-          transmission: 'Automatic',
-          price: '2,000,000.00', 
-          img: '../../assets/img/480x320/car2.jpg',
-          lrgimg: '../../assets/img/1920x1080/car2.jpg'
-        },{
-          id: 3,
-          milage: '$13,123 mi',
-          make: 'Hyundai',
-          model: 'Accent',
-          year: '2000',
-          location: 'Madeville, Manchester, Jamaica',
-          extcolor: 'white',
-          intcolor: 'Black',
-          desc: 'THis is a description for buyers',
-          transmission: 'Automatic',
-          name: 'Hyundai Accent',
-          price: '1,800,000.00', 
-          img: '../../assets/img/480x320/car3.jpg',
-          lrgimg: '../../assets/img/1920x1080/car3.jpg'
-        },{
-          id: 4,
-          milage: '$23,123 mi',
-          make: 'Honda',
-          model: 'Civic',
-          year: '2014',
-          location: 'Half Way Tree, Kingston, Jamaica',
-          extcolor: 'Black',
-          intcolor: 'Black',
-          desc: 'THis is a description for buyers',
-          transmission: 'Manual',
-          name: 'Honda Civic',
-          price: '1,200,000.00', 
-          img: '../../assets/img/480x320/car4.jpg',
-          lrgimg: '../../assets/img/1920x1080/car4.jpg'
-        }
+       parishes: [
+        { name: 'Kingston' },
+        { name: 'St. Andrew' },
+        { name: 'Portland' },
+        { name: 'St.Thomas' },
+        { name: 'St. Catherine' },
+        { name: 'St. Mary'},
+        { name: 'St. Mary'},
+        { name: 'St. Ann'},
+        { name: 'Manchester'},
+        { name: 'Clarendon'},
+        { name: 'Hanover'},
+        { name: 'Westmoreland'},
+        { name: 'St. James'},
+        { name: 'Trelawny'},
+        { name: 'St. Elizabeth'},
       ],
 			preloader: false,
 			layouts: 'list',
 			list: true,
 			grid: false,
 			filter: {
-				type: '',
+				type: '', 
 				location: '',
 				company: '',
 				cateoger: '',
 			}
 		}
 	},
+ computed: {
+    ...mapGetters([
+        'UserCarDetails',
+        'AllDetails',
+        'AllModels',
+        'AllMakes',
+        'AllYears',
+        'FilteredCars'
+    ]),
+  },
+  watch:{
+
+    makeCheckbox: function() {
+        this.$store.dispatch('GET_VEHICLE_MODEL', this.filter.make )
+        this.$store.distpatch('FILTER_CARS', this.makeCheckbox)
+    },
+    filterMake: function( value ) {
+     
+      var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          make: value,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
+          bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType
+      }
+
+      this.$store.dispatch('FILTER_CARS', params)
+
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+      }, 1000);
+    },
+
+    filterMiles: function(value) {
+
+      var params = {
+          miles: value,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
+          bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType
+      }
+
+      this.isLoading = true
+      var self = this
+    
+      setTimeout(function(){
+          self.isLoading = false;
+      }, 1000);
+    
+     this.$store.distpatch('FILTER_CARS', params)
+    },
+    filterMin_year: function(value) {
+
+       var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: value,
+          maxYear: this.filterMax_year,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
+          bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType
+
+      }
+
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+           self.$store.dispatch('FILTER_CARS', params)
+          self.isLoading = false;
+
+      }, 1000);
+
+
+    },
+
+    filterMax_year: function(value) {
+
+      var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: value,
+          minPrice: this.filterMin_price,
+          maxPrice: value
+      }
+
+
+      this.$store.distpatch('FILTER_CARS', params)
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+      }, 1000);
+    },
+
+    filterParish: function( value ) {
+
+      var params = {
+          miles: this.filterMiles,
+          parish: value,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+      }
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+          self.$store.dispatch('FILTER_CARS', params)
+      }, 1000);
+    },
+
+    filterMin_price: function ( value ) {
+
+      var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          minPrice: value
+      }
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+          self.$store.dispatch('FILTER_CARS', params)
+      }, 1000);
+
+    },
+
+    filterMax_price: function(value) {
+
+      var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          minPrice: this.filterMin_price,
+          maxPrice: value
+      }
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+          self.$store.dispatch('FILTER_CARS', params)
+      }, 1000);
+    } 
+  },
 	created() {
-		this.preloader = true
-		setTimeout(() => {
-	    this.preloader = false
-		}, 2000)
+
+
+   // Pass make list tyoe popular or A-z
+    var params = 'popular';
+    this.$store.dispatch('GET_VEHICLE_MAKE')
+
+    var params = {
+        miles: this.filterMiles,
+        parish: this.filterParish,
+        minPrice: this.filterMin_price,
+        minYear: this.filterMin_year,
+        maxYear: this.filterMax_year,
+        make: this.filterMake
+    }
+
+    console.log(params)
+    this.$store.dispatch('FILTER_CARS', params)
+		// this.preloader = true
+		// setTimeout(() => {
+	 //    this.preloader = false
+		// }, 2000)
 	},
 	methods: {
 		change_view_type() {
 			this.list = !this.list
 			this.grid = !this.grid
-		}
+		},
+    check: function(e) {
+      if (e.target.checked) {
+        console.log(e.target.value)
+      }
+    },
+    clear: function() {
+          this.filterMiles = null
+          this.filterParish = null
+          this.filterMin_year = null
+          this.filterMax_year
+          this.filterMake = []
+          this.filterMin_year = null
+          this.filterMax_year = null
+          this.filterBodyStyle = []
+          this.filterTransmission = null
+          this.cyclinder = null
+          // this.filterSellerType
+          // 
+          
+     var params = {
+        miles:'',
+        parish: '',
+        minPrice: '',
+        minYear: '',
+        maxYear: '',
+        make: ''
+    }
+
+    console.log(params)
+    this.$store.dispatch('FILTER_CARS', params)
+    }
 	}
 }
 </script>
+<style>
+.page-preloade {
+  opacity: !important 0.5
+}
+</style>

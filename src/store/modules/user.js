@@ -9,9 +9,9 @@ const state = {
     refresh_token: null,
     token_type: null
   },
-  currentUser: {}
+  profile: {},
+  currentUser: null
 }
-
 
 const actions = {
   login( context, user) {
@@ -100,6 +100,24 @@ const actions = {
             reject(error)
           })
     });
+  },
+  GET_USER_PROFILE({commit}, payload) {
+
+     let token = localStorage.getItem('access_token')
+     console.log('access_token'+ token)
+     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    return new Promise((resolve, reject) => {
+      console.log('geeting user profile...')
+      axios.get('http://127.0.0.1:8000/api/profile')
+        .then( response => {
+           console.log(response)
+           commit('SET_USER_PROFILE', response.data)
+           resolve(response)
+        }).catch( error => {
+          console.log(error.response)
+          reject(error)
+        })
+    })
   }
 }
 
@@ -111,11 +129,17 @@ const mutations = {
     updateCurrentUser(state, currentUser) {
       state.currentUser = currentUser
     },
+    SET_USER_PROFILE(state, profile) {
+      state.profile = profile
+    }
 }
 
 const getters = {
     getAccessToken(state) {
       return state.tokens.access_token
+    },
+    GetUserProfile(state) {
+      return state.profile
     },
     getCurrentUser(state) {
       return state.currentUser

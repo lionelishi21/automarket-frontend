@@ -33,7 +33,10 @@ export default {
 	},
 
 	postUserCar(params) {
-		return Api().post('/api/cars/create{/id}')
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+		return Api().post('/api/cars/post', params, config)
 	},
 
 	updateUserCar (params) {
@@ -45,7 +48,7 @@ export default {
 	},
 
 	getchUserCars(car ) {
-		return Api().get('/api/cars/get/'+car)
+		return Api().get('/api/cars/user')
 	},
 
 	fetchCarDetails(id) {
@@ -69,6 +72,10 @@ export default {
 	},
 
 	filterCarsByUserInput( payload ) {
-		 return Api().get('/api/cars/filter', payload)
+		 return Api().post('/api/cars/filter', payload)
+	},
+
+	fetchCarDetails ( id ){
+		 return Api().get('/api/cars/details/'+id)
 	}
 }

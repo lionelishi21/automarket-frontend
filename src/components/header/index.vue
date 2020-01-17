@@ -41,7 +41,7 @@
            
 
                  <!-- Account Login -->
-                 <li  v-if="account" class="list-inline-item">
+                 <li  v-if="getCurrentUser" class="list-inline-item">
                     <!-- Account Sidebar Toggle Button -->
                     <a id="sidebarNavToggler" class="btn btn-xs btn-text-secondary u-sidebar--account__toggle-bg ml-1" href="javascript:;" role="button"
                       aria-controls="sidebar-account-settings"
@@ -173,16 +173,14 @@ export default {
        'getCurrentUser'
     ])
   },
-  created(){
+  mounted() {
      this.$store.dispatch('getCurrentUser')
        .then( resp => {
         this.account = true
-       }).catch( err => {
+     }).catch( err => {
+       console.log(err.response)
          // this.$router,push('/')
-       })
-
-  },
-  mounted() {
+   })
   },
 	methods: {
 		signin() {
@@ -194,6 +192,7 @@ export default {
     logout() {
       this.$store.dispatch('AUTH_LOGOUT')
         .then( response => {
+           this.$store.dispatch('getCurrentUser')
            this.$store.push('/')
         })
     }

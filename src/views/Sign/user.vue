@@ -86,6 +86,7 @@ export default {
 
         this.$store.dispatch('login', user)
           .then( response => {
+            console.log(response)
             console.log('getting user..')
              this.$store.dispatch('getCurrentUser')
                .then( resp => {
@@ -95,8 +96,8 @@ export default {
                })
           })
           .catch( error => {
-             let errorMessage = error.response.data.message
              console.log(error.response)
+             let errorMessage = error.response.data.message
              this.is_valid = 'is-invalid'
              this.error.message = error.response.data
           })

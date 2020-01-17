@@ -3,66 +3,56 @@
 <!-- Hero Section -->
 <div class="container space-top-1 space-top-sm-2">
   <div class="row">
-    <div class="col-lg-7 mb-7 mb-lg-0">
-      <div class="pr-lg-4">
-        <div class="position-relative">
-          <!-- Main Slider -->
-          <div id="heroSlider" class="js-slick-carousel u-slick border rounded"
-               data-fade="true"
-               data-arrows-classes="d-none d-sm-inline-block u-slick__arrow u-slick__arrow--flat-white content-centered-y shadow-soft rounded-circle"
-               data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-3"
-               data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-3"
-               data-nav-for="#heroSliderNav">
-        
-            <div class="js-slide">
-              <img class="img-fluid w-100" src="../../assets/img/480x320/car1.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide">
-              <img class="img-fluid w-100" src="../../assets/img/480x320/car2.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide">
-              <img class="img-fluid w-100" src="../../assets/img/480x320/car3.jpg" alt="Image Description">
-        
-            </div>
-          </div>
-          <!-- End Main Slider -->
+    <div class="col-lg-6 mb-7 mb-lg-0">
+        <div class="card col-md-12 d-md-flex align-items-md-start flex-md-column mb-5 mb-md-0">
+          <div class="row">
+            <!-- Gallery -->
+            <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
+               :data-src="'http://127.0.0.1:8000/storage/images/'+CarDetails.image"
+               data-fancybox="fancyboxGalleryExample1"
+               data-caption="image #01"
+               data-speed="700"
+               data-is-infinite="true">
+              <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+CarDetails.image" alt="Image Description">
 
-          <!-- Slider Nav -->
-          <div class="position-absolute bottom-0 right-0 left-0 px-4 py-3" style="margin-bottom: -13%">
-            <div id="heroSliderNav" class="js-slick-carousel u-slick u-slick--gutters-1 u-slick--transform-off max-width-40 mx-auto"
-                 data-slides-show="3"
-                 data-is-thumbs="true"
-                 data-is-thumbs-progress="false"
-                 data-thumbs-progress-options='{
-                   "color": "#377DFF",
-                   "width": 15
-                 }'
-                 data-thumbs-progress-container=".js-slick-thumb-progress"
-                 data-nav-for="#heroSlider">
-              <div class="js-slide p-1">
-                <a class="js-slick-thumb-progress position-relative d-block" href="javascript:;"">
-                  <img class="img-fluid " src="../../assets/img/480x320/car1.jpg" alt="Image Description">
-                </a>
+              <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
+                <span class="btn btn-icon btn-sm btn-white">
+                  <span class="fas fa-images btn-icon__inner"></span>
+                </span>
               </div>
-              <div class="js-slide p-1">
-                <a class="js-slick-thumb-progress position-relative d-block" href="javascript:;">
-                  <img class="img-fluid " src="../../assets/img/480x320/car2.jpg" alt="Image Description">
-                </a>
-              </div>
-              <div class="js-slide p-1">
-                <a class="js-slick-thumb-progress position-relative d-blockr" href="javascript:;">
-                  <img class="img-fluid " src="../../assets/img/480x320/car3.jpg" alt="Image Description">
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- End Slider Nav -->
-        </div>
-      </div>
+            </a>
+            <img class="js-fancybox d-none" v-for="img in CarDetails.images" alt="Image Description"
+                 data-fancybox="fancyboxGalleryExample1"
+                 :data-src="'http://127.0.0.1:8000/storage/images/'+img.image"
+                 data-caption="Front in frames - image #02"
+                 data-speed="700"
+                 data-is-infinite="true">
+         </div>
+       </div>
+         <div class="row">
+           <div class="col-md-3 d-none d-sm-block" v-for="image in CarDetails.images">
+               <!-- Gallery -->
+            <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
+               :data-src="'http://127.0.0.1:8000/storage/images/'+image.image"
+               data-fancybox="fancyboxGalleryExample1"
+               data-caption="Front in frames - image #01"
+               data-speed="700"
+               data-is-infinite="true">
+              <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+image.image" alt="Image Description">
+
+                    <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
+                      <span class="btn btn-icon btn-sm btn-white">
+                        <span class="fas fa-images btn-icon__inner"></span>
+                      </span>
+                    </div>
+                  </a>
+           
+           </div>
+         </div>
     </div>
     <hr>
     <!-- Product Description -->
-    <div class="col-lg-5">
+    <div class="col-lg-6">
       <!-- Rating -->
       <div class="d-flex align-items-center small mb-2">
         <div class="text-warning mr-2">
@@ -72,43 +62,41 @@
           <small class="fas fa-star"></small>
           <small class="fas fa-star"></small>
         </div>
-        <a class="js-go-to link-muted" href="#reviewSection"
+     <!--    <a class="js-go-to link-muted" href="#reviewSection"
            data-target="#reviewSection"
            data-compensation="#header"
-           data-type="static">Read all 287 reviews</a>
+           data-type="static">Read all 287 reviews</a> -->
       </div>
       <!-- End Rating -->
 
       <!-- Title -->
       <div class="mb-5">
-        <h1 class="h3 font-weight-medium">New Era 9Forty LA Dodgers adjustable cap in black</h1>
-        <p>American label New Era manufacturing baseball hats for teams since the 1930s.</p>
+        <h1 class="h3 font-weight-medium"> {{CarDetails.year}} {{CarDetails.make}} | <small> <i>{{CarDetails.model}} </i> </small></h1>
+        <p>Milage: {{CarDetails.milage}}</p>
       </div>
       <!-- End Title -->
 
       <!-- Price -->
       <div class="mb-5">
-        <h2 class="font-size-1 text-secondary font-weight-medium mb-0">price:</h2>
-        <span class="font-size-2 font-weight-medium">$159.99</span>
+        <h2 class="font-size-1 text-secondary font-weight-medium mb-0">price: <span class="badge badge-primage">Negotiable</span></h2>
+        <span class="font-size-2 font-weight-medium">  {{ CarDetails.price | currency }} JMD  </span>
       </div>
       <!-- End Price -->
-
-      <div class="mb-4">
-        <button type="button" class="btn btn-block btn-primary btn-pill transition-3d-hover">Contact Seller</button>
-      </div>
-
-      <!-- Help Link -->
-      <div class="media align-items-center">
-        <span id="icon4" class="svg-preloader ie-height-48 w-100 max-width-6 mr-2">
-          <img class="js-svg-injector" src="../../assets/svg/icons/icon-4.svg" alt="SVG"
-               data-parent="#icon4">
-        </span>
-        <div class="media-body text-secondary small">
-          <span class="font-weight-medium mr-1">Need Help?</span>
-          <a class="link-muted" href="#">Chat now</a>
+        <div  class="mb-4">
+          <a class="font-size-1" href="property-description.html">
+            <span class="fas fa-map-marker-alt mr-1"></span>
+            {{CarDetails.location}}
+          </a>
         </div>
+      <!--  -->
+      <div class="mb-4">
+        <textarea  class="form-control mb-4  transition-3d-hover"">I am interested in  {{CarDetails.year}} {{CarDetails.make}} {{CarDetails.model}} </textarea>
+        <button @click="show_modal = true" type="button" class="btn btn-block btn-primary btn-pill transition-3d-hover">Contact Seller</button>
       </div>
-      <!-- End Help Link -->
+
+      <!-- Should be in a seperate component- Contact Modal -->
+      <contact-modal :show="show_modal" :details="CarDetails.profile" :message="'I am interested in '+CarDetails.year+' '+CarDetails.make+' '+CarDetails.model "></contact-modal>  
+      <!-- End Contact Modal -->
 
     </div>
     <!-- End Product Description -->
@@ -122,7 +110,7 @@
         <div class="col-md-6 mb-5 mb-md-0">
           <div class="pr-lg-4">
             <h3 class="h5 font-weight-medium">Seller Notes</h3>
-            <p>{{details.seller_notes}}</p>
+            <p>{{CarDetails.desc}}</p>
           </div>
         </div>
 
@@ -132,64 +120,74 @@
           <div class="row">
             <div class="col-sm-6">
               <ul class="text-secondary pl-3 mb-0">
-                <li class="py-1">Fuel Type:{{details.fuel_type}}</li>
-                <li class="py-1">Interior Color: {{details.intcolor}}</li>
-                <li class="py-1">Drivetrain: {{details.drivetrain}}</li>
-                <li class="py-1">Engine: {{details.engine}}</li>
+                <li class="py-1">Fuel Type: <b>{{CarDetails.fuel_type}}</b></li>
+                <li class="py-1">Interior Color: <b>{{CarDetails.interior_color}} </b></li>
+                <!-- <li class="py-1">Drivetrain: <b>{{CarDetails.vehicle.drive}}</b></li> -->
+                <li class="py-1">Steering: <b>{{CarDetails.steering}} </b></li>
               </ul>
             </div>
 
             <div class="col-sm-6">
               <ul class="text-secondary pl-3 mb-0">
-                <li class="py-1">Milage: {{details.milage}}</li>
-                <li class="py-1">Exterior Color: {{details.extcolor}}</li>
-                <li class="py-1">Transmission: {{details.trans}}</li>
+                <li class="py-1">Milage: <b>{{CarDetails.milage}}</b></li>
+                <li class="py-1">Exterior Color: <b>{{CarDetails.exterior_color}}</b></li>
+                <li class="py-1">Interior Color: <b>{{CarDetails.interior_color}}</b></li>
+                <!-- <li class="py-1">Transmission: <b>{{CarDetails.vehicle.transmission}}</b></li> -->
               </ul>
             </div>
           </div>
         </div>
 
+      </div>
+    </div>
+
+       <!-- Product Description Section -->
+    <div class="container" style="margin-top: 50px">
+      <div class="row">
+        <div class="col-md-3 mb-5 mb-md-0">
+          <div class="pr-lg-4">
+            <h3 class="h5 font-weight-medium">Features</h3>
+              <ul class="text-secondary pl-3 mb-0">
+                <li class="py-1" v-for="feature in CarDetails.features">{{feature.name}}</li>
+              </ul>
+          </div>
+        </div>
+         <div class="col-md-3 mb-5 mb-md-0">
+          <div class="pr-lg-4">
+            <h3 class="h5 font-weight-medium">Entertainments</h3>
+              <ul class="text-secondary pl-3 mb-0">
+                <li class="py-1" v-for="enter in CarDetails.entertainment">{{enter.name}}</li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-md-3 mb-5 mb-md-0">
+          <div class="pr-lg-4">
+            <h3 class="h5 font-weight-medium">Safety</h3>
+              <ul class="text-secondary pl-3 mb-0">
+                  <li class="py-1" v-for="safey in CarDetails.safety">{{safey.name}}</li>
+              </ul>
+          </div>
+        </div>
+         <div class="col-md-3 mb-5 mb-md-0">
+          <div class="pr-lg-4">
+            <h3 class="h5 font-weight-medium">Seat</h3>
+              <ul class="text-secondary pl-3 mb-0">
+               <li class="py-1" v-for="seat in CarDetails.seat">{{seat.name}}</li>
+              </ul>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-5 mt-5 mb-md-0">
+          <div class="pr-lg-4">
+            <h3 class="h5 font-weight-medium">Other</h3>
+              <ul class="text-secondary pl-3 mb-0">
+               <li class="py-1" v-for="other in CarDetails.other">{{other.name}}</li>
+              </ul>
+          </div>
+        </div>
       </div>
     </div>
     <hr>
-    <!-- End Product Description Section -->
-    <!-- Product Description Section -->
-    <div class="container ">
-      <div class="row">
-        <div class="col-md-4 mb-5 mb-md-0">
-          <div class="pr-lg-4">
-            <h3 class="h5 font-weight-medium">Entertainment</h3>
-            <p>{{details.seller_notes}}</p>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-5 mb-md-0">
-          <h3 class="h5 font-weight-medium">Safety</h3>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <ul class="text-secondary pl-3 mb-0">
-                <li class="py-1">Backup Camera</li>
-                <li class="py-1">Brake Assist</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-         <div class="col-md-4 mb-5 mb-md-0">
-          <h3 class="h5 font-weight-medium">Exterior</h3>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <ul class="text-secondary pl-3 mb-0">
-                <li class="py-1">Tow Hitch</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
     <!-- End Product Description Section -->
 <hr>
 
@@ -201,17 +199,23 @@
  
     <!-- End Review Section -->
 
-
-
-
 </div>
 </template>
 <script>
+
+import ContactModal from './components/ModalContact.vue';
+import { mapGetters } from 'vuex'
 export default {
+  components: { ContactModal },
 	data() {
 		return {
+      show_modal: false,
+      slickOptions: {
+        slidesToShow: 3,
+        // Any other options that can be got from plugin documentation
+      },
 			details: {
-				 id: 2,
+				id: 2,
 			 	img: '@/assets/companies_logos/generalaccident.jpg',
 			 	title: 'Sales Rep',
 			 	company: 'General Accident',
@@ -222,20 +226,32 @@ export default {
 			}
 		}
 	},
-  mounted: function(){
-        // initialization of svg injector module
-    $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
+  computed: {
+    ...mapGetters([
+        'CarDetails'
+    ]),
+  },
+  beforeUpdate() {
+     $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
      // initialization of slick carousel
-    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-
-    // initialization of quantity counter
-    $.HSCore.components.HSQantityCounter.init('.js-quantity');
+     $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+  },
+  created() {
+      var batch_id = this.$route.params.id;
+      this.$store.dispatch('GET_CAR_DETAILS', batch_id);
+  },
+  mounted() {
+      // initialization of autonomous popups
+    $.HSCore.components.HSModalWindow.init('[data-modal-target]', '.js-subscribe-window', {
+      autonomous: true
+    });
   },
 	methods: {
 		company_profile() {
 			var id = 1
 			this.$router.push('/company/details/'+id)
-		}
+		},
+
 	}
 }
 </script>

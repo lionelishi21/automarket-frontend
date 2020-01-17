@@ -46,7 +46,7 @@
                       </span>
                     </div>
                     <div class="media-body">
-                      <h1 class="h3 text-white font-weight-medium mb-1">Howdy, {{userdata.name}}</h1>
+                      <h1 class="h3 text-white font-weight-medium mb-1">Hi, {{userdata.name}}</h1>
                       <span class="d-block text-white">{{userdata.email}}</span>
                     </div>
                   </div>

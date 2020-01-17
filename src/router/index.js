@@ -28,7 +28,7 @@ const routes = [
       },
       {
         path: '/cars',
-        name: 'job-list',
+        name: 'cars-list',
 
         component: () => import('../views/Cars.vue')
       },
@@ -104,7 +104,7 @@ const routes = [
           component: () => import ('../views/Account/userAccount.vue'),
       },
       {
-        path: '/build',
+        path: '/build/:id',
         name: 'build-add',
         component: () => import ('../views/cars/build.vue')
       },
@@ -114,15 +114,30 @@ const routes = [
           component: () => import ('../views/Account/ads.vue')
       },
       {
+        path: '/checkout/:batch_id/:plan/car',
+        name: 'checkout-car',
+        component: () => import ('../views/Seller/checkout.vue')
+      },
+      {
+        path: '/edit-profile',
+        name: 'edit-profile',
+        component: () => import('../views/Account/edit-profile.vue')
+      },
+      {
         path: 'uploader',
         name: 'Account-uploader',
         component: () => import ('../views/Resume/index.vue')
       },
-        {
+      {
           path: '/payment-methods',
           name: 'Payment-Methods',
           component: () => import('../views/Account/payment-methods.vue')
-        }
+       },
+       {
+        path: '/plans',
+        name: 'User-Plans',
+        component: () => import('../views/Account/plans.vue')
+       }
     ]
   },
   {

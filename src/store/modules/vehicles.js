@@ -33,7 +33,6 @@ const actions = {
 
 		api.fetchVehicleMakes()
 			.then( response => {
-				console.log(response)
 				commit('SET_VEHICLE_MAKE', response.data.makes)
 			})
 			.catch((err) => {
@@ -49,7 +48,6 @@ const actions = {
 	GET_VEHICLE_MODEL ({commit}, make_id) {
 		api.fetchVehicleModel(make_id)
 			.then( response => {
-				console.log(response)
 				commit('SET_VEHICLE_MODEL', response.data.models)
 			})
 	},
@@ -65,6 +63,7 @@ const actions = {
 
 		api.fetchVehicleYear(make, model)
 			.then( response => {
+				console.log(response.data.years)
 				commit('SET_VEHICLE_YEAR', response.data.years)
 			})
 	},
@@ -82,15 +81,17 @@ const actions = {
 
 		 api.fetchVehicle(make, model, year)
 		 	.then( response => {
-
+		 		console.log(response)
 		 		commit ('SET_VEHICLE_DETAILS', response.data.vehicles)
 		 	})
 	},
 
 	/**
+	 * ***************************************************************
 	 * This function post all user cars
 	 * @param {[type]} options.commit [description]
 	 * @param {[type]} payload        [description]
+	 * ***************************************************************
 	 */
 	SAVE_CARS ({commit}, payload) {
 		 api.postCars(payload)

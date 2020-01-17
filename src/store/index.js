@@ -6,6 +6,7 @@ import Vuex from 'vuex';
 import user from './modules/user.js';
 import plan from './modules/plan.js';
 import vehicles from './modules/vehicles.js'
+import car from './modules/car.js'
 // import carMake from './modules/carMake.js'
 
 Vue.use(Vuex)
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     	user,
     	plan,
     	vehicles,
+    	car
     	// carMake
     },
 });

@@ -53,6 +53,24 @@ export default {
 				{id: 1, name: 'Alloy Wheels'},
 				{id: 2, name: 'Moonroof/Sunroof'},
 				{id: 3, name: 'Third Row Seats'},
+			],
+			parishes: [
+				{ name: 'Kingston' },
+				{ name: 'St. Andrew' },
+				{ name: 'Portland' },
+				{ name: 'St.Thomas' },
+				{ name: 'St. Catherine' },
+				{ name: 'St. Mary'},
+				{ name: 'St. Mary'},
+				{ name: 'St. Ann'},
+				{ name: 'Manchester'},
+				{ name: 'Clarendon'},
+				{ name: 'Hanover'},
+				{ name: 'Westmoreland'},
+				{ name: 'St. James'},
+				{ name: 'Trelawny'},
+				{ name: 'St. Elizabeth'},
+
 			]
 		}
 	}

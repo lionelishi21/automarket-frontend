@@ -1,6 +1,16 @@
 <template>
   <!-- ========== MAIN ========== -->
   <main id="content" role="main">
+
+      <!-- Page Preloader -->
+    <div id="jsPreloader" class="page-preloader" v-show="loading">
+      <div class="page-preloader__content-centered">
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Preloader -->
     <!-- Login Form -->
     <div class="container space-2">
       <form class="w-md-75 w-lg-50 mx-md-auto"  @submit.prevent="register(user)">
@@ -108,6 +118,7 @@
 export default {
 	data() {
 		return {
+       loading: false,
 			 user: {
 				name: null,
 				email: null,
@@ -132,11 +143,13 @@ export default {
       }
     },
    register(user) {
+        this.loading = true;
         this.$store.dispatch('AUTH_REGISTER', user)
           .then(response => {
             this.resetUser()
+            this.loading = false
             let successMessage = response.data.message
-            // this.$router.push('/signin')
+            this.$router.push('/signin')
           })
           .catch(error => {
             let data = error.response.data
@@ -147,6 +160,7 @@ export default {
               if (errorMessage)
                 this.errors[key] = errorMessage
             }
+            this.loading = false
           })
       }
 	}
