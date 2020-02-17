@@ -196,9 +196,101 @@
 			  </div>
 			  <div class="row" v-if="paymentmethod == 'paypal'">
 
-			  	<div class="col-md-12">
-			  	
+			  	<div class="mb-7">
+			  		  	<!-- Payment -->
+		            <div class="mb-7">
+		            
+		              <!-- Title -->
+		              <div class="mb-4">
+		                 <h2 class="h4">Payment method</h2>
+		              </div>
+		              <!-- End Title -->
+
+		              <div class="col-md-12 mb-6">
+		              
+		                <label class="form-label">
+		                  Paypal Email Address
+		                </label>
+		              
+		                <input type="text" class="form-control" name="cardNumber" 
+		                       placeholder="**** **** **** ***" 
+		                       aria-label="**** **** **** ***" required
+		                       data-msg="Please enter a valid card number."
+		                       data-error-class="u-has-error"
+		                       data-success-class="u-has-success">
+		              </div>
+		            </div>
+		            <!-- End Payment -->
 			    </div>
+			  </div>
+			  <div class="row" v-if="paymentmethod == 'debit'">
+					<!-- Payment -->
+		            <div class="mb-7">
+		            
+		              <!-- Title -->
+		              <div class="mb-4">
+		                 <h2 class="h4">Payment method</h2>
+		              </div>
+		              <!-- End Title -->
+
+		              <div class="js-form-message mb-6">
+		              
+		                <label class="form-label">
+		                  Card number
+		                </label>
+		              
+		                <input type="text" class="form-control" name="cardNumber" 
+		                       placeholder="**** **** **** ***" 
+		                       aria-label="**** **** **** ***" required
+		                       data-msg="Please enter a valid card number."
+		                       data-error-class="u-has-error"
+		                       data-success-class="u-has-success">
+		              </div>
+		              <div class="row">
+		                <div class="col-md-8">
+		                  <!-- Input -->
+		                  <div class="js-form-message mb-6">
+		                    <label class="form-label">
+		                      Card holder
+		                    </label>
+		                    <input type="text" class="form-control" name="cardHolder" placeholder="Jack Wayley" aria-label="Jack Wayley" required
+		                           data-msg="Please enter a valid card holder."
+		                           data-error-class="u-has-error"
+		                           data-success-class="u-has-success">
+		                  </div>
+		                  <!-- End Input -->
+		                </div>
+
+		                <div class="col-md-2">
+		                  <!-- Input -->
+		                  <div class="js-form-message mb-6">
+		                    <label class="form-label">
+		                      Expiration
+		                    </label>
+		                    <input type="text" class="form-control" name="cardExpirationDate" placeholder="MM/YY" aria-label="MM/YY" required
+		                           data-msg="Please enter a valid date."
+		                           data-error-class="u-has-error"
+		                           data-success-class="u-has-success">
+		                  </div>
+		                  <!-- End Input -->
+		                </div>
+
+		                <div class="col-md-2">
+		                  <!-- Input -->
+		                  <div class="js-form-message mb-6">
+		                    <label class="form-label">
+		                      CVC
+		                    </label>
+		                    <input type="text" class="form-control" name="cardCVC" placeholder="***" aria-label="***" required
+		                           data-msg="Please enter a valid CVC number."
+		                           data-error-class="u-has-error"
+		                           data-success-class="u-has-success">
+		                  </div>
+		                  <!-- End Input -->
+		                </div>
+		              </div>
+		            </div>
+		            <!-- End Payment -->
 			  </div>
 
 		<!-- 	

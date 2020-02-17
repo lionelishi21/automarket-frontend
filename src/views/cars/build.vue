@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <!-- Page Preloader -->
+<!-- Page Preloader -->
   <div id="jsPreloader" class="page-preloader" v-show="isComplete">
       <div class="page-preloader__content-centered">
         <div class="spinner-grow text-primary" role="status">

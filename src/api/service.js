@@ -4,8 +4,9 @@ export default {
 	loginUser(email, pass) {
 		return Api().post('/api/login')
 	},
-	fetchVehicleMakes() {
-		return Api().get('/api/vehicles/makes')
+
+	fetchVehicleMakes(params) {
+		return Api().get('/api/vehicles/makes?make_type='+params)
 	},
 
 	fetchVehicleModel(make) {

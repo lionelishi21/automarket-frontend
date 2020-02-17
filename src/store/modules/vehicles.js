@@ -29,14 +29,15 @@ const actions = {
 	 * this function get vehicle makes
 	 * @param {[type]} options.commit [description]
 	 */
-	GET_VEHICLE_MAKE({commit}) {
+	GET_VEHICLE_MAKE({commit}, param) {
 
-		api.fetchVehicleMakes()
+		api.fetchVehicleMakes(param)
 			.then( response => {
-				commit('SET_VEHICLE_MAKE', response.data.makes)
+				console.log(response)
+				commit('SET_VEHICLE_MAKE', response.data)
 			})
 			.catch((err) => {
-				console.lot(err)
+				console.log(err.response)
 			})
 	},
 
@@ -171,7 +172,7 @@ const actions = {
 	 			commit ('SET_FILTER_CARS', response.data)
 	 		})
 	 		.catch ((err) => {
-	 			console.log(err.response)
+	 			console.log(err.message)
 	 		})
 	 }
 }

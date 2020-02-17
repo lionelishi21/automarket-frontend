@@ -1,7 +1,7 @@
 <template>
 	 <div class="card-deck d-block d-md-flex">
 	 	  <!-- Property Item -->
-          <div class="card mb-5" v-for="car in recsys">
+          <div class="card mb-5" v-for="car in cars">
             <!-- Gallery -->
             <a class="js-fancybox u-media-viewer" href="javascript:;"
                :data-src="car.lrgimg"
@@ -53,6 +53,7 @@
 <script>
 import fancyBox from 'vue-fancybox';
 export default {
+ props:['cars'],
  name: 'Imgage-view',
  data() {
  	return {

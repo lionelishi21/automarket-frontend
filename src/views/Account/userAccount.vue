@@ -4,7 +4,6 @@
     <div class="col-md-8">
         <!-- Stats -->
         <div class="card-deck d-block d-lg-flex card-lg-gutters-3 mb-6">
-        
             <!-- Card -->
             <div class="card mb-3 mb-lg-0">
               <div class="card-body p-5">
@@ -13,7 +12,7 @@
                     <span class="fas fa-car-alt btn-icon__inner"></span>
                   </span>
                   <div class="media-body">
-                    <span class="d-block font-size-3">10</span>
+                    <span class="d-block font-size-3">{{GetUserProfile.user_cars_count}}</span>
                     <h2 class="h6 text-secondary font-weight-normal mb-0">Cars in Garage</h2>
                   </div>
                 </div>
@@ -29,7 +28,7 @@
                     <span class="fas fa-car-alt btn-icon__inner"></span>
                   </span>
                   <div class="media-body">
-                    <span class="d-block font-size-3">5</span>
+                    <span class="d-block font-size-3">{{GetUserProfile.user_active_count}}</span>
                     <h3 class="h6 text-secondary font-weight-normal mb-0">Active Ads</h3>
                   </div>
                 </div>
@@ -41,17 +40,22 @@
        
        <!--  -->
         <div class="row">
-           <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon w-100">
-                <input type="radio" id="pricingRadio1" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
-                <label class="checkbox-outline__label checkbox-icon__label card w-100 p-6 mb-0" for="pricingRadio1">
-                  <h4 class="h6 text-primary mb-3">Starter</h4>
-                  <span class="d-block mb-2">
-                    <span class="h1 font-weight-normal">$22</span>
-                    <span class="font-size-1">/ mon</span>
-                  </span>
-                  <p class="font-size-1 mb-0">For individuals just getting started</p>
-                </label>
-              </div>
+          <div class="col-md-4" v-for="car in GetUserProfile.cars">
+              <div class="card mb-4 mb-md-0">
+                  <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/images/'+car.image" alt="">
+                  <!-- Card -->
+                  <div class="card-body p-3">
+                    <h4 class="h6" >{{car.year}} {{car.make}} - <span class="btn btn-xs btn-soft-success">{{car.days}} days remain</span></h4>
+                    <p class="font-size-1 mb-0"><small>Plan Description: <span class="badge badge-primary"> {{car.subscription.plan.name}}</span></small></p>
+                    <p class="font-size-1 mb-0"><small>Cost: <span class="badge badge-primary">{{car.subscription.plan.cost}}</span></small></p>
+                    <p class="font-size-1 mb-0"><small>Placement: <span class="badge badge-primary">Premium</span></small></p>
+                    <hr>
+                    <small class="font-size-1"><i>number of views: <span class="badge badge-primary">100</span></i></small>
+                    <!-- <a class="btn btn-xs btn-primary btn-block" href="#" @click="">Change plan</a> -->
+                  </div>
+                  <!-- End Card -->
+                 </div>
+            </div>
         </div>
         <!--  -->
     </div>
@@ -99,63 +103,23 @@
               <!-- End Title & Settings -->
 
               <hr class="mt-3 mb-4">
-
+            
               <div class="overflow-hidden">
                 <div class="js-scrollbar pr-3" style="max-height: 300px;">
                   <!-- Activity Feed -->
+                
                   <ul class="list-unstyled u-indicator-vertical-dashed">
-                    <li class="media u-indicator-vertical-dashed-item">
+
+                    <li class="media u-indicator-vertical-dashed-item" v-for="activity in GetUserProfile.activity">
                       <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
                         <span class="btn-icon__inner">A</span>
                       </span>
+
                       <div class="media-body">
+
                         <h5 class="font-size-1 mb-1">Amanta Owens</h5>
-                        <p class="small mb-1">Added new task: <span class="font-weight-medium">Slack home page redesign</span></p>
-                        <small class="d-block text-muted">30 min ago</small>
-                      </div>
-                    </li>
-
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-success rounded-circle mr-3">
-                        <span class="btn-icon__inner">S</span>
-                      </span>
-                      <div class="media-body">
-                        <h5 class="font-size-1 mb-1">Sebastian Diaz</h5>
-                        <p class="small mb-1">Added new task: <span class="font-weight-medium">Mapbox logo redesign</span></p>
-                        <small class="d-block text-muted">44 min ago</small>
-                      </div>
-                    </li>
-
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-warning rounded-circle mr-3">
-                        <span class="btn-icon__inner text-white">F</span>
-                      </span>
-                      <div class="media-body">
-                        <h5 class="font-size-1 mb-1">Eliza Donovan</h5>
-                        <p class="small mb-1">Added new task: <span class="font-weight-medium">Spotify branding</span></p>
-                        <small class="d-block text-muted">1 hour ago</small>
-                      </div>
-                    </li>
-
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
-                        <span class="btn-icon__inner">C</span>
-                      </span>
-                      <div class="media-body">
-                        <h5 class="font-size-1 mb-1">Cler Lockhart</h5>
-                        <p class="small mb-1">Added new task: <span class="font-weight-medium">Dropbox home page redesign</span></p>
-                        <small class="d-block text-muted">15 hours ago</small>
-                      </div>
-                    </li>
-
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-danger rounded-circle mr-3">
-                        <span class="btn-icon__inner">J</span>
-                      </span>
-                      <div class="media-body">
-                        <h5 class="font-size-1 mb-1">James Collins</h5>
-                        <p class="small mb-1">Added new task: <span class="font-weight-medium">InVison branding</span></p>
-                        <small class="d-block text-muted">1 day ago</small>
+                        <p class="small mb-1">{{activity.description}}: <span class="font-weight-medium">Slack home page redesign</span></p>
+                        <small class="d-block text-muted">{{activity.created_at}}</small>
                       </div>
                     </li>
                   </ul>
@@ -170,6 +134,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -179,11 +144,23 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters([
+      'GetUserProfile'
+    ])
+  },
   created() {
+    console.log('dashboard component created...')
     var userdata = localStorage.getItem('user')
     if ( userdata != null ) {
       this.userdata = JSON.parse(userdata);
     }
+
+    this.$store.dispatch('GET_USER_PROFILE')
+      .then( response => {
+        console.log('profile data')
+      })
+
   },
   mounted() {
       

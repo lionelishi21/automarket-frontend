@@ -6,19 +6,22 @@
 
               <div class="card col-md-4 d-md-flex align-items-md-start flex-md-column mb-5 mb-md-0">
                 <!-- Gallery -->
-                <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
+                <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">
+                    <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+car.image" alt="Image Description">
+                </router-link>
+
+
+                  <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
                    :data-src="'http://127.0.0.1:8000/storage/images/'+car.image"
                    data-fancybox="fancyboxGalleryExample1"
                    data-caption="Front in frames - image #01"
                    data-speed="700"
                    data-is-infinite="true">
-                  <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+car.image" alt="Image Description">
-
-                  <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
-                    <span class="btn btn-icon btn-sm btn-white">
-                      <span class="fas fa-images btn-icon__inner"></span>
-                    </span>
-                  </div>
+                    <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
+                      <span class="btn btn-icon btn-sm btn-white">
+                        <span class="fas fa-images btn-icon__inner"></span>
+                      </span>
+                    </div>
                 </a>
         
 

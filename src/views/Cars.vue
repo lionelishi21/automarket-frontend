@@ -228,7 +228,7 @@
                     <!-- Car Make -->
                     <div class="border-bottom">
                       <label class="form-label mb-2"> <b>Make</b></label>
-                      <div class="row" style="overflow-y: scroll;  height:250px;">
+                      <div class="row" style="overflow-y: scroll;  max-height:250px;">
                         <div class="col-12">
                          
                           <!-- Radio Checkbox -->
@@ -240,13 +240,14 @@
                                @click="check($event)"
                                v-model="filterMake">
                             <label class="custom-control-label" :for="'makeRadio_'+make.id">
-                              {{make.name}}
+                              {{make.name}} <span class="badge badge-primary badge-pill ml-1">{{make.count}}</span>
                             </label>
                           </div>
                           <!-- End Radio Checkbox -->
-                        
                         </div>
                       </div>
+                      <a v-show="makesType == 'popular'" @click="changeMakes('all')" class="btn btn-link"><small> Choose from A - z </small></a>
+                      <a v-show="makesType == 'all'" @click="changeMakes('popular')" class="btn btn-link"><small> Choose from popular makes </small></a>
                     </div>
                     <!-- End Car Make -->
                     <hr>  
@@ -478,8 +479,6 @@
                         </div>
                       </div>
                       <!-- End Card -->
-
-      
                     </div>
                     <!-- End Accordion -->
 
@@ -757,7 +756,7 @@
 </template>
 <script>
 import CarList from './Account/components/cars/list.vue';
-import CarGrid from '../components/cars/CarGrid.vue';
+import CarGrid from './Account/components/cars/grid.vue';
 
 import axios from 'axios';
 import { mapGetters } from 'vuex';
@@ -768,6 +767,7 @@ export default {
 	},
 	data() {
 		return {
+      makesType: 'popular',
       filterOffset: 10,
       filterSorting: null,
       filterMiles: null,
@@ -941,15 +941,16 @@ export default {
           minYear: this.filterMin_year,
           maxYear: value,
           minPrice: this.filterMin_price,
-          maxPrice: value
+          maxPrice: this.filterMax_price
       }
-
 
       this.$store.distpatch('FILTER_CARS', params)
       this.isLoading = true
       var self = this
+
       setTimeout(function(){
           self.isLoading = false;
+          self.$store.dispatch('FILTER_CARS', params)
       }, 1000);
     },
 
@@ -960,7 +961,10 @@ export default {
           parish: value,
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
+          minPrice: this.filterMin_price,
+          maxPrice: this.filterMax_price
       }
+
       this.isLoading = true
       var self = this
       setTimeout(function(){
@@ -976,7 +980,8 @@ export default {
           parish: this.filterParish,
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
-          minPrice: value
+          minPrice: value,
+          maxPrice: this.filterMax_price
       }
       this.isLoading = true
       var self = this
@@ -1009,8 +1014,9 @@ export default {
 
 
    // Pass make list tyoe popular or A-z
-    var params = 'popular';
-    this.$store.dispatch('GET_VEHICLE_MAKE')
+    this.makesType = 'popular';
+    // Make type can be popular or
+    this.$store.dispatch('GET_VEHICLE_MAKE', this.makesType)
 
     var params = {
         miles: this.filterMiles,
@@ -1029,20 +1035,35 @@ export default {
 		// }, 2000)
 	},
 	methods: {
+
+    changeMakes(string) {
+      this.makesType = string
+
+      this.isLoading = true
+      var self = this
+      setTimeout(function(){
+          self.isLoading = false;
+           this.$store.dispatch('GET_VEHICLE_MAKE', self.makesType)
+      }, 600);
+
+    },
+
 		change_view_type() {
 			this.list = !this.list
 			this.grid = !this.grid
 		},
+
     check: function(e) {
       if (e.target.checked) {
         console.log(e.target.value)
       }
     },
+
     clear: function() {
           this.filterMiles = null
           this.filterParish = null
           this.filterMin_year = null
-          this.filterMax_year
+          this.filterMax_year = null
           this.filterMake = []
           this.filterMin_year = null
           this.filterMax_year = null

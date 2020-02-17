@@ -2,18 +2,20 @@
 <!-- Car -->
 <!-- Property Item -->
 <div class="row">
-	<div class="col-md-6" v-for="car in cars">
-	    <div class="card mb-5">
-	 
+	<div class="col-md-3" v-for="car in cars">
+	    <div class="card">
+
 	    <!-- Gallery -->
-	    <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
+	 	<router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">
+	        <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+car.image" alt="Image Description">
+		</router-link>
+	
+		 <a class="js-fancybox u-media-viewer" href="javascript:;"
 	       data-src="../../assets/img/1920x1080/car1.jpg"
 	       data-fancybox="fancyboxGalleryExample1"
 	       data-caption="Front in frames - image #01"
 	       data-speed="700"
 	       data-is-infinite="true">
-	      <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+car.image" alt="Image Description">
-
 	      <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
 	        <span class="btn btn-icon btn-sm btn-white">
 	          <span class="fas fa-images btn-icon__inner"></span>
@@ -21,7 +23,7 @@
 	      </div>
 	    </a>
 
-
+	<!-- Gallery -->
 	    <img class="js-fancybox d-none" v-for="img in car.images" alt="Image Description"
 	         data-fancybox="fancyboxGalleryExample1"
 	         :data-src="'http://127.0.0.1:8000/storage/images/'+img.image"
@@ -30,11 +32,11 @@
 	         data-is-infinite="true">
 	  <!-- End Gallery -->
 
-	  <div class="card-body p-4">
+	  <div class="card-body shadow-soft">
 	    <!-- Location -->
 	    <div class="">
 	        <h2 class="h5">
-             <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">{{car.year}} {{car.make}} {{car.model}} <small><i>ml</i> {{car.milage}} </small></router-link>
+             <router-link tag="a" :to="{ path:'car/details/'+ car.batch_id }"><small>{{car.year}} {{car.make}} {{car.model}} </small></router-link>
             </h2>
 	    </div>
 	    <!-- End Location -->
@@ -52,6 +54,7 @@
           <a class="font-size-1" href="property-description.html">
              <span class="fas fa-list-alt mr-1"></span>
              {{car.make}} > {{car.model}}
+            
           </a>
         </div>
         <!-- Category -->
@@ -72,17 +75,6 @@
             <b>Ext.</b> Color:{{car.exterior_color}}
           </a> -->
           <!--  Car Exteriror Color-->
-          
-          <!--  -->
-          <a class="text-secondary mr-4" href="javascript:;">
-            <span class="fas fa-star mr-1"></span>
-            <b>Steering:</b> {{car.steering}}
-          </a>
-  
-          <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }" class="btn btn-sm btn-soft-primary transition-3d-hover ml-auto">
-            Details
-            <span class="fas fa-angle-right ml-1"></span>
-          </router-link>
          </div>
 	    <!-- End Contacts -->
 	  </div>

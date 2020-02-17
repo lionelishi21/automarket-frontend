@@ -38,10 +38,26 @@
           <div class="col-lg-12">
 
             <!-- List View -->
-            <list-view   class="card mb-5" v-for="car in UserCars" :car="car" v-if="car.subscribe"></list-view>
-            <!-- End List View -->
-
-
+            <div class="row">
+              <div class="col-md-3" v-for="car in UserCars" >
+                  <div class="card mb-4 mb-md-0"  v-if="car.subscribe">
+                      <img v-if="showPlaceHolder(car.image)" class="img-fluid" :src="'http://127.0.0.1:8000/storage/images/'+car.image" alt="" style="height: 180px;">
+                      <img v-else class="img-fluid" src="http://127.0.0.1:8000/public/assets/placeholder/placeholder.jpg" alt="" style="height: 180px;">
+                      <!-- Card -->
+                      <div class="card-body p-3">
+                        <h4 class="h6" >{{car.year}} {{car.make}} - <span class="btn btn-xs btn-soft-success">{{car.days}} days remain</span></h4>
+                    <!--     <p class="font-size-1 mb-0"><small>Plan Description: <span class="badge badge-primary"> {{car.subscription.plan.name}}</span></small></p>
+                        <p class="font-size-1 mb-0"><small>Cost: <span class="badge badge-primary">{{car.subscription.plan.cost}}</span></small></p>
+                        <p class="font-size-1 mb-0"><small>Placement: <span class="badge badge-primary">Premium</span></small></p>
+                        <hr>
+                        <small class="font-size-1"><i>number of views: <span class="badge badge-primary">100</span></i></small> -->
+                        <!-- <a class="btn btn-xs btn-primary btn-block" href="#" @click="">Change plan</a> -->
+                      </div>
+                      <!-- End Card -->
+                     </div>
+                </div>
+            </div>
+          <!-- End List View -->
 
             <!-- Pagination -->
         <!--     <div class="d-flex justify-content-between align-items-center">
@@ -80,9 +96,27 @@
   </div>
 
   <div class="tab-pane fade pt-6" id="pills-two-example2" role="tabpanel" aria-labelledby="pills-two-example2-tab">
-      <!-- List View -->
-      <list-view   class="card mb-5" v-for="car in UserCars" :car="car" v-if="car.subscribe == false"></list-view>
-      <!-- End List View -->
+      <!-- Grid View -->
+      <div class="row">
+          <div class="col-md-3" v-for="car in UserCars" v-if="car.subscribe == false" >
+              <div class="card mb-4 mb-md-0"  >
+                  <img v-if="showPlaceHolder(car.image)" class="img-fluid" :src="'http://127.0.0.1:8000/storage/images/'+car.image" alt="" style="height: 180px;">
+                  <img v-else class="img-fluid" src="http://127.0.0.1:8000/public/assets/placeholder/placeholder.jpg" alt="" style="height: 180px;">
+                  <!-- Card -->
+                  <div class="card-body p-3">
+                    <h4 class="h6" >{{car.year}} {{car.make}} - <span class="btn btn-xs btn-soft-success">{{car.days}} days remain</span></h4>
+                <!--     <p class="font-size-1 mb-0"><small>Plan Description: <span class="badge badge-primary"> {{car.subscription.plan.name}}</span></small></p>
+                    <p class="font-size-1 mb-0"><small>Cost: <span class="badge badge-primary">{{car.subscription.plan.cost}}</span></small></p>
+                    <p class="font-size-1 mb-0"><small>Placement: <span class="badge badge-primary">Premium</span></small></p>
+                    <hr>
+                    <small class="font-size-1"><i>number of views: <span class="badge badge-primary">100</span></i></small> -->
+                    <!-- <a class="btn btn-xs btn-primary btn-block" href="#" @click="">Change plan</a> -->
+                  </div>
+                  <!-- End Card -->
+                 </div>
+            </div>
+        </div>
+        <!-- End Grid View -->
   </div>
 </div>
 <!-- End Tab Content -->
@@ -110,7 +144,12 @@
     ])
    },
    methods: {
-
+    showPlaceHolder(image){
+      if (image == false) {
+        return false
+      }
+      return true;
+    }
    }
 
  }

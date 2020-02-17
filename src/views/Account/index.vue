@@ -161,16 +161,26 @@
 <script>
 import HeaderComponent from '@/components/header/index.vue';
 import FooterComponent from '@/components/footer/index.vue';
+import { mapGetters } from 'vuex';
+
 export default {
   components: {
     HeaderComponent,
     FooterComponent
   },
+  computed: {
+    ...mapGetters([
+       'getCurrentUser'
+    ])
+  },
   created() {
-    var userdata = localStorage.getItem('user')
-    if ( userdata != null ) {
-      this.userdata = JSON.parse(userdata);
-    }
+    this.$store.dispatch('getCurrentUser')
+       .then( resp => {
+        console.log(resp.data)
+        this.userdata = resp.data
+     }).catch( err => {
+       console.log(err.response)
+   })
   },
   mounted() {
 
@@ -225,7 +235,7 @@ export default {
   },
   data() {
     return {
-
+         userdata: {},
     }
   }
 }
@@ -251,3 +261,5 @@ export default {
   }
 }
 </style>
+
+"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'vehicle_models.car_id' in 'where clause' (SQL: select * from `vehicle_models` where `vehicle_models`.`car_id` = 1 and `vehicle_models`.`car_id` is not null limit 1)"

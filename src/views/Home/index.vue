@@ -17,7 +17,9 @@
         <h2 class="font-weight-medium">Trending Near You</h2>
         <small>Location: Kingston <a href="#">change</a></small>
       </div>
-      <rec-sys></rec-sys>
+      <div class="row">
+         <rec-sys :cars="FilteredCars"></rec-sys>
+      </div>
   </div>
   <!-- End Cards Section -->
 
@@ -128,8 +130,10 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import HeroComponent from '@/components/hero/index.vue';
-import RecSys from './components/imgView.vue';
+import RecSys from '@/components/cars/CarGrid.vue';
 import CatView from './components/categories.vue';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'home',
   data() {
@@ -178,6 +182,17 @@ export default {
     HeroComponent,
     RecSys,
     CatView
+  },
+  computed: {
+    ...mapGetters([
+       'FilteredCars'
+    ])
+  },
+  created() {
+     var params =  {
+      recomended: true
+     }
+     this.$store.dispatch('FILTER_CARS', params)
   },
   methods: {
   	goToJobs() {

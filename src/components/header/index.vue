@@ -179,7 +179,6 @@ export default {
         this.account = true
      }).catch( err => {
        console.log(err.response)
-         // this.$router,push('/')
    })
   },
 	methods: {

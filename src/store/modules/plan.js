@@ -4,10 +4,12 @@ import api from '../../api/service.js'
 const state = {
 	plan: null,
 	plans: [],
+	active_plans: [],
 	details: []
 }
 
 const getters = {
+
 	getUserPlan(state) {
 		return state.plan
 	},
@@ -16,7 +18,11 @@ const getters = {
 	},
 	getPlanDetails( state ) {
 		return state.details
+	},
+	getActivePlans( state ) {
+		return state.active_plans
 	}
+	
 }
 
 const actions = {
@@ -28,6 +34,16 @@ const actions = {
 		}, error => {
 			console.log(error.response)
 		});
+	},
+	FETCH_USER_ACTIVE_PLANS({commit}) {
+		axios.get('http://127.0.0.1:8000/api/plans/get-userplans')
+			.then( response => {
+				console.log('getting user active plans...')
+				console.log(response.data[0])
+				commit('SET_USER_ACTIVE_PLAN', response.data[0])
+			}, error => {
+				console.log(error.response)
+			})
 	},
 	USER_PLAN({commit, dispatch}){
 		console.log('getting user plan...')
@@ -85,6 +101,10 @@ const mutations = {
 	SET_PLAN_DETAILS(state, detail) {
 		console.log(detail)
 		state.details = detail
+	}, 
+	SET_USER_ACTIVE_PLAN(state, plan) {
+		console.log(plan)
+		state.active_plans = plan
 	}
 }
 
