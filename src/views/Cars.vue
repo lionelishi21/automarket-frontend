@@ -1042,8 +1042,8 @@ export default {
       this.isLoading = true
       var self = this
       setTimeout(function(){
-          self.isLoading = false;
-           this.$store.dispatch('GET_VEHICLE_MAKE', self.makesType)
+           self.isLoading = false;
+           self.$store.dispatch('GET_VEHICLE_MAKE', self.makesType)
       }, 600);
 
     },

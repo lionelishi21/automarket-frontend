@@ -48,6 +48,21 @@ const routes = [
         component: () => import('../views/Register/user.vue')
       },
       {
+        path: '/user-onboarding',
+        name: 'User-Onboard',
+        component: () => import('../views/Register/onboarding.vue')
+      },
+      {
+        path: '/dealer-register',
+        name: 'Dealer-Register',
+        component: () => import('../views/Register/dealer.vue')
+      },
+      {
+        path: '/user-filters',
+        name: 'User-Filter',
+        component: () => import('../views/Account/user-filters.vue')
+      },
+      {
         path: '/seller/sign',
         name: 'Employer-signin',
         component: () => import('../views/EmployerSign')

@@ -11,7 +11,8 @@ import VueResource from 'vue-resource';
 import VueCurrencyInput from 'vue-currency-input'
 import VueCurrencyFilter from 'vue-currency-filter'
 import * as VueGoogleMaps from "vue2-google-maps";
-
+import PrettyCheckbox from 'pretty-checkbox-vue';
+Vue.use(PrettyCheckbox);
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyBu71MBgcQ-RQjYup9H3ftk78lyHoC7eeM",

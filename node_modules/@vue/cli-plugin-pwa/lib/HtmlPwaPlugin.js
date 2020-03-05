@@ -23,6 +23,18 @@ const defaultManifest = {
       'src': './img/icons/android-chrome-512x512.png',
       'sizes': '512x512',
       'type': 'image/png'
+    },
+    {
+      'src': './img/icons/android-chrome-maskable-192x192.png',
+      'sizes': '192x192',
+      'type': 'image/png',
+      'purpose': 'maskable'
+    },
+    {
+      'src': './img/icons/android-chrome-maskable-512x512.png',
+      'sizes': '512x512',
+      'type': 'image/png',
+      'purpose': 'maskable'
     }
   ],
   start_url: '.',
@@ -75,25 +87,25 @@ module.exports = class HtmlPwaPlugin {
             rel: 'icon',
             type: 'image/png',
             sizes: '32x32',
-            href: `${publicPath}${iconPaths.favicon32}${assetsVersionStr}`
+            href: getTagHref(publicPath, iconPaths.favicon32, assetsVersionStr)
           }),
           makeTag('link', {
             rel: 'icon',
             type: 'image/png',
             sizes: '16x16',
-            href: `${publicPath}${iconPaths.favicon16}${assetsVersionStr}`
+            href: getTagHref(publicPath, iconPaths.favicon16, assetsVersionStr)
           }),
 
           // Add to home screen for Android and modern mobile browsers
           makeTag('link', manifestCrossorigin
             ? {
               rel: 'manifest',
-              href: `${publicPath}${manifestPath}${assetsVersionStr}`,
+              href: getTagHref(publicPath, manifestPath, assetsVersionStr),
               crossorigin: manifestCrossorigin
             }
             : {
               rel: 'manifest',
-              href: `${publicPath}${manifestPath}${assetsVersionStr}`
+              href: getTagHref(publicPath, manifestPath, assetsVersionStr)
             }
           ),
           makeTag('meta', {
@@ -116,18 +128,18 @@ module.exports = class HtmlPwaPlugin {
           }),
           makeTag('link', {
             rel: 'apple-touch-icon',
-            href: `${publicPath}${iconPaths.appleTouchIcon}${assetsVersionStr}`
+            href: getTagHref(publicPath, iconPaths.appleTouchIcon, assetsVersionStr)
           }),
           makeTag('link', {
             rel: 'mask-icon',
-            href: `${publicPath}${iconPaths.maskIcon}${assetsVersionStr}`,
+            href: getTagHref(publicPath, iconPaths.maskIcon, assetsVersionStr),
             color: themeColor
           }),
 
           // Add to home screen for Windows
           makeTag('meta', {
             name: 'msapplication-TileImage',
-            content: `${publicPath}${iconPaths.msTileImage}${assetsVersionStr}`
+            content: getTagHref(publicPath, iconPaths.msTileImage, assetsVersionStr)
           }),
           makeTag('meta', {
             name: 'msapplication-TileColor',
@@ -139,27 +151,29 @@ module.exports = class HtmlPwaPlugin {
       })
     })
 
-    compiler.hooks.emit.tapAsync(ID, (data, cb) => {
-      const {
-        name,
-        themeColor,
-        manifestPath,
-        manifestOptions
-      } = this.options
-      const publicOptions = {
-        name,
-        short_name: name,
-        theme_color: themeColor
-      }
-      const outputManifest = JSON.stringify(
-        Object.assign(publicOptions, defaultManifest, manifestOptions)
-      )
-      data.assets[manifestPath] = {
-        source: () => outputManifest,
-        size: () => outputManifest.length
-      }
-      cb(null, data)
-    })
+    if (!isHrefAbsoluteUrl(this.options.manifestPath)) {
+      compiler.hooks.emit.tapAsync(ID, (data, cb) => {
+        const {
+          name,
+          themeColor,
+          manifestPath,
+          manifestOptions
+        } = this.options
+        const publicOptions = {
+          name,
+          short_name: name,
+          theme_color: themeColor
+        }
+        const outputManifest = JSON.stringify(
+          Object.assign(publicOptions, defaultManifest, manifestOptions)
+        )
+        data.assets[manifestPath] = {
+          source: () => outputManifest,
+          size: () => outputManifest.length
+        }
+        cb(null, data)
+      })
+    }
   }
 }
 
@@ -169,4 +183,16 @@ function makeTag (tagName, attributes, closeTag = false) {
     closeTag,
     attributes
   }
+}
+
+function getTagHref (publicPath, href, assetsVersionStr) {
+  let tagHref = `${href}${assetsVersionStr}`
+  if (!isHrefAbsoluteUrl(href)) {
+    tagHref = `${publicPath}${tagHref}`
+  }
+  return tagHref
+}
+
+function isHrefAbsoluteUrl (href) {
+  return /(http(s?)):\/\//gi.test(href)
 }

@@ -32,7 +32,7 @@
 
             <!-- Sign In -->
             <div class="d-inline-block d-sm-none">
-              <a class="small font-weight-medium text-uppercase" @click="signin()" href="#">Sign in</a>
+              <button class="small font-weight-medium text-uppercase" @click="signin()">Sign in</button>
             </div>
             <!-- End Sign In -->
 

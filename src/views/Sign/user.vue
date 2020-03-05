@@ -48,7 +48,7 @@
         <div class="row align-items-center mb-5">
           <div class="col-6">
             <span class="small text-muted">Don't have an account?</span>
-               <router-link to="/register" tag="a">signup</router-link>
+               <router-link to="/user-onboarding" tag="a">signup</router-link>
           </div>
 
           <div class="col-6 text-right">
