@@ -15,7 +15,7 @@
       <form class="w-md-75 w-lg-50 mx-md-auto"  @submit.prevent="register(user)">
         <!-- Title -->
         <div class="mb-7">
-          <h1 class="h3 text-primary font-weight-normal mb-0">Welcome to <span class="font-weight-semi-bold">SureKeys</span></h1>
+          <h1 class="h3 text-primary font-weight-normal mb-0">Welcome to <span class="font-weight-semi-bold">AutoMarketjm</span></h1>
           <p>Fill out the form to get started.</p>
         </div>
         <!-- End Title -->
@@ -23,11 +23,10 @@
           <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Full Name</label>
-          <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
-
                  <div class="invalid-feedback">
                     {{errors.name}}
                  </div>
@@ -38,7 +37,7 @@
           <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Username</label>
-          <input type="text" class="form-control" name="name" v-model="user.username" id="signinSrEmail" placeholder="Username" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.username" id="signinSrEmail" placeholder="Username" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -54,7 +53,7 @@
                 <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Company Name</label>
-          <input type="text" class="form-control" name="name" v-model="user.company_name" id="signinSrEmail" placeholder="Company Name" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.company_name" id="signinSrEmail" placeholder="Company Name" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -67,7 +66,7 @@
 
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Phone Number</label>
-          <input type="text" class="form-control" name="name" v-model="user.phone_number" id="signinSrEmail" placeholder="Enter phone number" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.phone_number" id="signinSrEmail" placeholder="Enter phone number" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -81,7 +80,7 @@
         <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Address:</label>
-          <input type="text" class="form-control" name="name" v-model="user.address" id="signinSrEmail" placeholder="Enter Address" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.address" id="signinSrEmail" placeholder="Enter Address" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -109,7 +108,7 @@
                   <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">City / District:</label>
-          <input type="text" class="form-control" name="name" v-model="user.city" id="signinSrEmail" placeholder="Enter District Name" aria-label="Full name" required
+          <input type="text" class="form-control" name="name" v-model="user.city" id="signinSrEmail" placeholder="Enter District Name" aria-label="Full name" 
                  data-msg="Please enter a valid email address."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -142,7 +141,7 @@
         <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrEmail">Email address</label>
-          <input type="email" class="form-control" name="email" id="signinSrEmail" v-model="user.email" placeholder="Email address" aria-label="Email address" required>
+          <input type="email" class="form-control" name="email" id="signinSrEmail" v-model="user.email" placeholder="Email address" aria-label="Email address" >
 
                  <div class="invalid-feedback">
                     {{errors.email}}
@@ -153,7 +152,7 @@
         <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrPassword">Password</label>
-          <input type="password" class="form-control" name="password" v-model="user.password" id="signinSrPassword" placeholder="********" aria-label="********" required
+          <input type="password" class="form-control" name="password" v-model="user.password" id="signinSrPassword" placeholder="********" aria-label="********" 
                  data-msg="Your password is invalid. Please try again."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -168,7 +167,7 @@
         <!-- Form Group -->
         <div class="js-form-message form-group">
           <label class="form-label" for="signinSrConfirmPassword">Confirm password</label>
-          <input type="password" class="form-control" name="confirmPassword" v-model="user.password_confimation" id="signinSrConfirmPassword" placeholder="********" aria-label="********" required
+          <input type="password" class="form-control" name="confirmPassword" v-model="user.password_confimation" id="signinSrConfirmPassword" placeholder="********" aria-label="********" 
                  data-msg="Password does not match the confirm password."
                  data-error-class="u-has-error"
                  data-success-class="u-has-success">
@@ -183,7 +182,7 @@
         <!-- Checkbox -->
         <div class="js-form-message mb-5">
           <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
-            <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" required
+            <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" 
                    data-msg="Please accept our Terms and Conditions."
                    data-error-class="u-has-error"
                    data-success-class="u-has-success">
@@ -222,10 +221,15 @@ export default {
        coordinates: null,
        loading: false,
 			 user: {
-				name: null,
-				email: null,
-				password: null,
-        password_confimation: null
+    			name: null,
+    			email: null,
+          username: null,
+          company_name: null,
+          phone_number: null,
+          address: null,
+          city: null,
+    			password: null,
+          password_confimation: null
 			},
       errors: {
         name: [],

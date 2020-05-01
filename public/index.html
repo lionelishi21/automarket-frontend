@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <link rel="icon" href="<%= BASE_URL %>assets/favicon.png">
       <!-- Google Fonts -->
-  <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
- 
- 
+
+
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/animate.css/animate.min.css">
@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.min.css">
 
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/ion-rangeslider/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendor/dzsparallaxer/dzsparallaxer.css">
+
     <!-- CSS Front Template -->
-    <title>SureKeys Online</title>
+    <title>AutoMarket</title>
   </head>
   <body>
     <noscript>
@@ -50,13 +53,15 @@
   <script src="<%= BASE_URL %>assets/vendor/gmaps/gmaps.min.js"></script>
   <script src="<%= BASE_URL %>assets/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
   <script src="<%= BASE_URL %>assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
-  <script src="<%= BASE_URL %>assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+
   <script src="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.min.js"></script>
   <script src="<%= BASE_URL %>assets/vendor/custombox/dist/custombox.legacy.min.js"></script>
+  <script src="<%= BASE_URL %>assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+
   <!-- JS Front -->
 
 <!-- JS Front -->
-  <script src="<%= BASE_URL %>assets/js/components/hs.validation.js"></script>
+  <!-- <script src="<%= BASE_URL %>assets/js/components/hs.validation.js"></script> -->
   <script src="<%= BASE_URL %>assets/js/hs.core.js"></script>
   <script src="<%= BASE_URL %>assets/js/components/hs.header.js"></script>
   <script src="<%= BASE_URL %>assets/js/components/hs.selectpicker.js"></script>
@@ -72,8 +77,14 @@
   <script src="<%= BASE_URL %>assets/js/components/hs.g-map.js"></script>
   <script src="<%= BASE_URL %>assets/js/components/hs.go-to.js"></script>
   <script src="<%= BASE_URL %>assets/js/components/hs.sticky-block.js"></script>
-
+  <script src="<%= BASE_URL %>assets/js/components/hs.range-slider.js"></script>
   <!-- JS Plugins Init. -->
+
+
+  <!-- JS Implementing Plugins -->
+
+<!-- JS Implementing Plugins -->
+
   <script>
     $(window).on('load', function () {
       // initialization of svg injector module
@@ -81,20 +92,18 @@
     });
 
     $(document).on('ready', function () {
-      
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // initialization of forms
+      $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+     
+
       // initialization of unfold component
       $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
        // initialization of form validation
-      $.HSCore.components.HSValidation.init('.js-validate');
-      
-
-      // initialization of unfold component
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function () {
-          $(this).find('input[type="search"]').focus();
-        }
-      });
-
 
      // initialization of header
       $.HSCore.components.HSHeader.init($('#header'));
@@ -110,7 +119,7 @@
 
         // initialization of select picker
        $.HSCore.components.HSSelectPicker.init('.js-select');
-    
+
           // initialization of forms
       $.HSCore.components.HSFocusState.init();
 
@@ -151,5 +160,5 @@
     $.HSCore.components.HSGMap.init('.js-g-map');
   }
 </script>
-  </body>
+</body>
 </html>

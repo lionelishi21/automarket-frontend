@@ -11,6 +11,11 @@
         </div>
         <!-- End Title -->
 
+        <div class="alert alert-success" role="alert" v-show="successMsg">
+          <h4 class="alert-heading">Well done!</h4>
+          <p class="alert-text">Thank you for registering.</p>
+          <p class="alert-text mb-0">Check your email for verification code.</p>
+        </div>
         <!-- Form Group -->
          <div class="js-form-message form-group">
           <input 
@@ -23,7 +28,8 @@
                  data-success-class="u-has-success" required>
               
                  <div class="invalid-feedback">
-                    {{error.message}}
+                    {{error.message['error']}}
+                    <a href="#"> resend verification code</a>
                  </div>
         </div>
         <!-- End Form Group -->
@@ -61,18 +67,42 @@
     <!-- End Login Form -->
 </template>
 <script>
+import { Plugins } from "@capacitor/core";
+const { PushNotifications } = Plugins;
+ 
+//
+// with type support
+import { FCM } from "capacitor-fcm";
+const fcm = new FCM();
+ 
+//
+// alternatively - without types
+const { FCMPlugin } = Plugins;
+ 
+
 export default {
     data() {
     	return {
     		user: {
     			email: '',
     			password: '',
+          fcmToken: '',
     		},
+        successMsg: false,
+        validationErr: '',
         is_valid: '',
         error: {
           message: ''
         }
     	}
+    },
+    created() {
+      this.successMsg = false
+      if (this.$route.query.user != undefined ) {
+         this.successMsg = true
+      }
+
+      // this.getUserToken()
     },
     mounted() {
       // initialization of form validation
@@ -86,14 +116,17 @@ export default {
 
         this.$store.dispatch('login', user)
           .then( response => {
+           
             console.log(response)
             console.log('getting user..')
+             
              this.$store.dispatch('getCurrentUser')
                .then( resp => {
                  this.$router.push('/')
                }).catch( err => {
-                
+                  console.log( err.response)
                })
+               
           })
           .catch( error => {
              console.log(error.response)
@@ -101,7 +134,21 @@ export default {
              this.is_valid = 'is-invalid'
              this.error.message = error.response.data
           })
-      }
+      },
+      getUserToken() {
+         PushNotifications.register()
+          .then(() => {
+
+            fcm
+               .getToken()
+               .then(r => {
+                  alert(`Token ${r.token}`)
+                  this.user.fcmToken = r.token
+               })
+               .catch( err => console.log(err));
+         })
+      },
+
     }
 }
 </script>

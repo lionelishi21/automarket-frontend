@@ -36,23 +36,23 @@
                   <!-- End Title -->
                   <div class="border-bottom">
                     <div class="media align-items-center mb-3">
-                      <h3 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3"> {{getPlanDetails.name}}</h3>
+                      <h3 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3"> Available Credit </h3>
                       <div class="media-body text-right">
-                        <span class="font-weight-medium">{{getPlanDetails.cost}}</span>
+                        <span class="font-weight-medium">{{GetCredits.unactive}} Credit</span>
                       </div>
                     </div>
                   </div>
 
                   <div class="media align-items-center mb-4">
-                    <h4 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3">Total</h4>
+                    <h4 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3">Cost</h4>
                     <div class="media-body text-right">
-                      <span class="font-weight-medium">{{getPlanDetails.cost}}</span>
+                      <span class="font-weight-medium">1 Credit</span>
                     </div>
                   </div>
 
                   <div class="ml-lg-auto">
                       <!-- Button -->
-                      <button type="button" class="btn btn-sm btn-primary text-nowrap transition-3d-hover">Upgrade Plan</button>
+                      <button type="button" class="btn btn-sm btn-primary text-nowrap transition-3d-hover">Add Credit</button>
                       <!-- End Button -->
                   </div>
               </div>
@@ -166,6 +166,25 @@
                           </span>
                         </div>
                         <input type="text" class="form-control" v-model="formData.main.milage"  placeholder="Enter Milage (optional)">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Input -->
+                </div>
+               <div class="col-md-6 mb-3">
+                  <!-- Input -->
+                  <div class="form-group">
+                    <div class="js-form-message js-focus-state">
+                      <label class="form-label">Body Style:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <span class="fas fa-car"></span>
+                          </span>
+                        </div>
+                           <select class="custom-select" v-model="formData.main.body_type">
+                              <option v-for="body in getBodystyles" :value="body.id">{{body.name}}</option>
+                            </select>
                       </div>
                     </div>
                   </div>
@@ -321,7 +340,7 @@
                                 </span>
                               </div>
                                <select class="custom-select" v-model="formData.main.drive_type">
-                                  <option value="">Select a Drive Type</option>}
+                                  <option value="">Select a Drive Type</option>
                                   <option value="4x2/2-wheel drive<">4x2/2-wheel drive</option>
                                   <option value="4x4/4-wheel drive">4x4/4-wheel drive</option>
                                   <option value="AWD">AWD</option>
@@ -994,7 +1013,9 @@ export default {
         'AllModels',
         'AllMakes',
         'AllYears',
-        'getPlanDetails'
+        'getPlanDetails',
+        'getBodystyles',
+        'GetCredits'
     ]),
   },
   mounted() {
@@ -1007,6 +1028,7 @@ export default {
      this.slug = slug
      this.$store.dispatch('PLAN_DETAILS', slug)
      this.$store.dispatch('GET_VEHICLE_MAKE')
+     this.$store.dispatch('GET_BODYSTYLES');
 
   },
   methods: {
@@ -1035,7 +1057,7 @@ export default {
 
        formData.append('main', JSON.stringify(this.formData.main));
        formData.append('car_safety', this.formData.car_safety);
-       formData.append('car_others', this.formData.car_others);
+       formData.append('car_others', this.formData.others);
        formData.append('car_features', this.formData.car_features);
        formData.append('car_seats', this.formData.car_seats);
        formData.append('profile', this.formData.profile);
@@ -1043,7 +1065,7 @@ export default {
 
        axios.post('http://127.0.0.1:8000/api/cars/post', formData,
           {
-              headers: {
+             headers: {
               'content-type': `multipart/form-data`,
             },
           })
@@ -1054,10 +1076,10 @@ export default {
             let responseData = response.data.response
             console.log(responseData)
             setTimeout(function() {
-                 var url = '/checkout/'+responseData.batch_id+'/'+self.slug +'/car'
+                 var url = '/order-complete'
                  self.loading = false
                  self.$router.push(url)
-            }, 2000);
+            }, 1000);
 
           }, error => {
             console.log(error.response)

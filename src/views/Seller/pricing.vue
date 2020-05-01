@@ -1,9 +1,9 @@
 <template>
 
   <!-- ========== MAIN ========== -->
-  <main id="content" role="main">
+  <main id="content" role="main" >
 
-          <!-- Page Preloader -->
+      <!-- Page Preloader -->
       <div id="jsPreloader" class="page-preloader" v-show="loading">
         <div class="page-preloader__content-centered">
           <div class="spinner-grow text-primary" role="status">
@@ -12,11 +12,12 @@
         </div>
       </div>
       <!-- End Page Preloader -->
+    <div v-if="isCredit" >
     <!-- Hero Section -->
-    <div id="SVGwave1BottomSMShape" class=" position-relative bg-dark">
-      <div class="container space-top-2 space-top-md-4 space-bottom-4">
+    <div id="SVGwave1BottomSMShape" class=" position-relative bg-primary">
+      <div class="container space-top-2 space-bottom-2">
         <div class="w-md-80 w-lg-60 text-center mx-auto">
-          <div class="mb-6">
+          <div class="">
             <h1 class="text-white">Sell your Car Fast and Easy - Online Listing</h1>
           </div>
         </div>
@@ -32,367 +33,260 @@
     <!-- End Hero Section -->
 
     <!-- Pricing Section -->
-    <div class="position-relative mt-n23 z-index-2">
-      <div class="container">
-        <div class="space-bottom-2 space-bottom-md-3">
-          <!-- Pricing Carousel -->
-          <div id="pricingMonthly" data-target-group="idPricing">
-            <div class="js-slick-carousel u-slick u-slick--gutters-2 z-index-2"
-                 data-slides-show="4"
-                 data-adaptive-height="true"
-                 data-slides-scroll="1"
-                 data-pagi-classes="d-lg-none text-center u-slick__pagination mt-7 mb-0"
-                 data-responsive='[{
-                   "breakpoint": 1200,
-                   "settings": {
-                     "slidesToShow": 3
-                   }
-                 }, {
-                   "breakpoint": 992,
-                   "settings": {
-                     "slidesToShow": 2
-                   }
-                 }, {
-                   "breakpoint": 768,
-                   "settings": {
-                     "slidesToShow": 1
-                   }
-                 }, {
-                   "breakpoint": 554,
-                   "settings": {
-                     "slidesToShow": 1
-                   }
-                 }]'>
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h2 class="h6 text-primary mb-3">Starter</h2>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        Free
-                      </span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
+       <div class="position-relative mt-23 z-index-2 space-bottom-2 space-bottom-md-3">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                      <!-- Pricing Section -->
+                    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll bg-white" data-options='{direction: "normal"}'>
+                      <!-- Apply your Parallax background image here -->
+                      <div class="container space-2">
+                        <!-- Card Group -->
+                        <div class="card-group card-group-md-break rounded shadow-soft">
+                          <div class="card">
+                            <div class="card-body text-center pt-9 px-7">
+                              <!-- Button Group -->
+                      
+                              <!-- End Button Group -->
 
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">1 Listing</li>
-                      <li class="list-group-item">Up to 5 Photos</li>
-                      <li class="list-group-item">20 Days of Run Time</li>
-                    </ul>
+                              <!-- Monthly Plans -->
+                              <div id="pricingMonthly">
+                                <!-- Range Slider -->
+                                <div class="text-secondary font-weight-semi-bold mb-4">
+                                   <span class="mr-2"> <img src="@/assets/automarket.png" width="50">Credits </span>
+                                  <span class="ml-n2"> <b>{{credits}} </b></span>
+                                </div>
+                                <div class="display-4 text-primary font-weight-semi-bold mb-5">
+                                  <span>$</span>
+                                  {{cost}}
+                                </div>
+                                
+                                  <range-slider
+                                        style="width: 100%"
+                                        class="slider js-range-slider u-range-slider"
+                                        min="1"
+                                        max="10"
+                                        step="1"
+                                        v-model="credits">
+                                      </range-slider>
+                                <!-- End Range Slider -->
+                              </div>
+                              <!-- End Monthly Plans -->
+                            </div>
+                            <div class="card-footer border-0 pt-0 px-7">
+                              <!-- Icon Blocks -->
+                              <div class="media align-items-center">
+                                <figure id="icon13" class="svg-preloader ie-height-56 w-100 max-width-8 mr-4">
+                                  <img class="js-svg-injector" src="../../assets/svg/icons/icon-13.svg" alt="SVG"
+                                       data-parent="#icon13">
+                                </figure>
+                                <div class="media-body">
+                                  <h4 class="h6 mb-1">Info</h4>
+                                  <p class="small mb-0"><a class="font-size-1" href="../pages/contacts-start-up.html">Contact us</a> for information regarding our credits system</p>
+                                </div>
+                              </div>
+                              <!-- End Icon Blocks -->
+                            </div>
+                          </div>
 
-                    <button type="button" @click="selectPlan('starter-plan')" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Starter</button>
-                  </div>
-                  <!-- End Content -->
+                          <div class="card">
+                            <div class="card-body py-9 px-7">
+                              <!-- Icon Blocks -->
+                              <div class="media align-items-center border-bottom pb-4 mb-4">
+                                <figure id="icon21" class="svg-preloader ie-height-56 w-100 max-width-8 mr-4">
+                                  <img class="js-svg-injector" src="../../assets/svg/icons/icon-21.svg" alt="SVG"
+                                       data-parent="#icon21">
+                                </figure>
+                                <div class="media-body">
+                                  <h3 class="h5">Buy AutoMarket Credit</h3>
+                                  <p class="mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                  </p>
+                                </div>
+                              </div>
+                              <!-- End Icon Blocks -->
+
+                              <!-- Icon Blocks -->
+                              <div class="media align-items-center">
+                                <div class="media-body">
+                                <button @click="buyCredits()" type="button" class="btn btn-soft-twitter mb-1 btn-block">Buy {{credits}} Credits</button>
+                                </div>
+                              </div>
+                              <!-- End Icon Blocks -->
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Card Group -->
+                      </div>
+                    </div>
+                    <!-- End Pricing Section -->           
                 </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h3 class="h6 text-warning mb-3">Basic</h3>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        <span class="align-top font-size-2">$</span>1000
-                      </span>
-                      <span class="d-block text-secondary font-size-1">per month</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Up to 3 Listing</li>
-                      <li class="list-group-item">Premium Placement</li>
-                      <li class="list-group-item">30 Days Run Time</li>
-                      <li class="list-group-item">Up to 15 Photos</li>
-                    </ul>
-                    <button  @click="selectPlan('basic-plan')"  type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Basic</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-success mb-3">Dealer Plan</h4>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        <span class="align-top font-size-2">$</span>5000
-                      </span>
-                      <span class="d-block text-secondary font-size-1">per month</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-             <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Up to 10 Listing</li>
-                      <li class="list-group-item">Premium Placement</li>
-                      <li class="list-group-item">40 Days Run Time</li>
-                      <li class="list-group-item">Up to 40 Photos</li>
-                    </ul>
-
-                    <button  @click="selectPlan('dealer-plan')" type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Dealer</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-danger mb-3">Premium</h4>
-                    <span class="d-block">
-                      <span class="h2 text-dark font-weight-normal">
-                        Contact Us
-                      </span>
-                      <span class="d-block text-secondary font-size-1">no user limit</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Unlimited listing</li>
-                      <li class="list-group-item">Premium Placement</li>
-                      <li class="list-group-item">60 Days Run Time</li>
-                      <li class="list-group-item">Up to 100 Photos</li>
-                    </ul>
-
-                    <button  @click="selectPlan('premium-dealer-plan')"  type="button" class="btn btn-sm btn-block btn-success transition-3d-hover">Contact Us</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
             </div>
           </div>
-          <!-- End Pricing Carousel -->
-
-          <!-- Pricing Carousel -->
-          <div id="pricingYearly" style="display: none; opacity: 0;" data-target-group="idPricing">
-            <div class="js-slick-carousel u-slick u-slick--gutters-2 z-index-2"
-                 data-slides-show="4"
-                 data-slides-scroll="1"
-                 data-pagi-classes="d-lg-none text-center u-slick__pagination mt-7 mb-0"
-                 data-responsive='[{
-                   "breakpoint": 1200,
-                   "settings": {
-                     "slidesToShow": 3
-                   }
-                 }, {
-                   "breakpoint": 992,
-                   "settings": {
-                     "slidesToShow": 2
-                   }
-                 }, {
-                   "breakpoint": 768,
-                   "settings": {
-                     "slidesToShow": 1
-                   }
-                 }, {
-                   "breakpoint": 554,
-                   "settings": {
-                     "slidesToShow": 1
-                   }
-                 }]'>
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-primary mb-3">Starter</h4>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        <span class="align-top font-size-2">$</span>242
-                      </span>
-                      <span class="d-block text-secondary font-size-1">per year</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Community support</li>
-                      <li class="list-group-item">400+ pages</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Starter</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-warning mb-3">Basic</h4>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        <span class="align-top font-size-2">$</span>442
-                      </span>
-                      <span class="d-block text-secondary font-size-1">per year</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Community support</li>
-                      <li class="list-group-item">400+ pages</li>
-                      <li class="list-group-item">100+ header variations</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Basic</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-success mb-3">Company</h4>
-                    <span class="d-block">
-                      <span class="display-4 text-dark font-weight-normal">
-                        <span class="align-top font-size-2">$</span>1089
-                      </span>
-                      <span class="d-block text-secondary font-size-1">per year</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Community support</li>
-                      <li class="list-group-item">400+ pages</li>
-                      <li class="list-group-item">100+ header variations</li>
-                      <li class="list-group-item">20+ home page options</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Start Free Trial</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-
-              <div class="js-slide">
-                <!-- Pricing -->
-                <div class="card transition-3d-hover mt-1">
-                  <!-- Header -->
-                  <header class="card-header text-center p-5">
-                    <h4 class="h6 text-danger mb-3">Enterprise</h4>
-                    <span class="d-block">
-                      <span class="h2 text-dark font-weight-normal">
-                        Contact Us
-                      </span>
-                      <span class="d-block text-secondary font-size-1">no user limit</span>
-                    </span>
-                  </header>
-                  <!-- End Header -->
-
-                  <!-- Content -->
-                  <div class="card-body p-5">
-                    <ul class="list-group list-group-flush list-group-borderless mb-4">
-                      <li class="list-group-item">Community support</li>
-                      <li class="list-group-item">400+ pages</li>
-                      <li class="list-group-item">100+ header variations</li>
-                      <li class="list-group-item">20+ home page options</li>
-                      <li class="list-group-item">Priority Support</li>
-                      <li>{{getPlans}}</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-sm btn-block btn-success transition-3d-hover">Contact Us</button>
-                  </div>
-                  <!-- End Content -->
-                </div>
-                <!-- End Pricing -->
-              </div>
-            </div>
-          </div>
-          <!-- End Pricing Carousel -->
-        </div>
-
         <!-- Divider -->
         <div class="w-80 mx-auto">
           <hr class="my-0">
         </div>
         <!-- End Divider -->
+       </div>
+    </div>
+  </div>
+    <!-- End Pricing Section -->
+         <!-- Checkout Section -->
+    <div  v-else class="container" v-else style="height: 100vh;">
+      <div class="row">
+        <div class="col-md-6 p-10">
+          <!-- Item -->
+              <div class="content-centered p-3 mb-0">
+
+
+              <div class="mb-5">
+                <i class="fa fa-arrow-left"></i>
+                <a href="#" @click.prevent="isCredit = false"> Back</a>
+              </div>
+              <!-- Name -->
+                <div class="mb-10">
+                    <h5 class="h6">
+                      <a href="property-description.html"></a>
+                    </h5>
+                    <h2> 
+                      <b>{{cost}} JMD</b>
+                    </h2>
+                </div>
+                <!-- End Name -->
+                <div class="mb-1 mt-10">
+                  <div class="card shadow-lg text-center mt-10">
+                   <h1 class="pt-5">{{credits}}<br> <small>Credit(s)</small> </h1> 
+                  </div>
+                </div>
+              </div>
+            <!-- End Car Item -->
+        </div>
+        <div class="col-md-6 shadow" style="height: 100vh;">
+          <div class="row">
+              <div class="p-5" style="margin-top: 20%;">
+
+                
+                  <!-- TODO add invoice id -->
+                 <button type="button" class="btn btn-dark btn-block mb-1">GPay</button>
+                  <PayPal
+                     currency="USD"
+                     env="sandbox"
+                     :button-style="myStyle"
+                     :amount="cost"
+                     :client="paypal"
+                     :experience="experience"
+                     v-on:payment-authorized="paymentAuthorized"
+                     v-on:payment-completed="paymentCompleted"
+                     v-on:payment-cancelled="paymentCancelled">
+
+                  </PayPal>
+             <!--     <div class="text-center mt-2">
+                    <span class="divider divider-xs divider-text">Bank Deposite</span>
+                </div>
+
+                 <div class="form-row mt-10">
+                      <p>Bank Name: NCB</p>
+                 </div> -->
+
+
+                <div class="text-center mt-2">
+                    <span class="divider divider-xs divider-text">Or pay with card</span>
+                </div>
+
+               <!-- Input Group -->
+                    <div class="form-row mt-10">
+                     
+                       <div class="col-md-12">
+                         <label>Card informaton</label>
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="number" name="cardNumber" placeholder="1234 1234 1234 1234">
+                         </div>
+                       </div> 
+                       <div class="col-md-6">
+                           <div class="input-group input-group-sm">
+                             <input class="form-control" type="number" name="cardNumber" placeholder="MM / YY" aria-label="Card number" aria-describedby="cardNumberLabel">
+                           </div>
+                       </div>
+                      <div class="col-md-6">
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="number" name="cardNumber" placeholder="CVC" aria-label="Card number" aria-describedby="cardNumberLabel">
+                         </div>
+                      </div>
+
+                      <div class="col-md-12 mt-5">
+                         <label><small>Name on card</small></label>
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="text" name="cardNumber">
+                         </div>
+                      </div>
+
+                      <button type="button" class="btn btn-dark btn-block mt-10">Pay {{cost}} JMD </button>
+                 </div>
+                 <div class="form-row">
+
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
-    <!-- End Pricing Section -->
-  
+    <!-- End Checkout Section -->
   </main>
   <!-- ========== END MAIN ========== -->
 
 </template>
 <script>
- import { mapGetters } from 'vuex';
+import axios from 'axios'
+import PayPal from 'vue-paypal-checkout'
+import braintree from 'braintree-web'
+import RangeSlider from 'vue-range-slider'
+import { StripeCheckout } from 'vue-stripe-checkout';
+// you probably need to import built-in style
+import 'vue-range-slider/dist/vue-range-slider.css'
+import { mapGetters } from 'vuex';
+
  export default {
+  components: {
+      RangeSlider,
+        PayPal,
+   StripeCheckout
+  },
   data() {
     return {
-        loading: false,
-         cars: [
-           {
-              id: 1,
-              milage: 'N/A',
-              make: 'Subaru',
-              model: 'G4',
-              year: '2015',
-              location: 'Half Way Tree, Kingston, Jamaica',
-              extcolor: 'Black',
-              intcolor: 'Black',
-              desc: 'THis is a description for buyers',
-              name: 'Subaru',
-              transmission: 'Automatic',
-              price: '1,000,000.00', 
-              img: '../../assets/img/480x320/car1.jpg',
-              lrgimg: '../../assets/img/1920x1080/car1.jpg'
-            },{
-              id: 2,
-              name: 'Honda Fit',
-              milage: '20,123 mi',
-              make: 'Honda',
-              model: 'Fit',
-              year: '2017',
-              location: 'Half Way Tree, Kingston, Jamaica',
-              extcolor: 'Black',
-              intcolor: 'Black',
-              desc: 'THis is a description for buyers',
-              transmission: 'Automatic',
-              price: '2,000,000.00', 
-              img: '../../assets/img/480x320/car2.jpg',
-              lrgimg: '../../assets/img/1920x1080/car2.jpg'
-            }
+      isCompleted: false,
+      isCredit: true,
+      loading: false,
+      credits: 1,
+      isCompleted: false,
+      isLoading: false,
+      creditcard_method: false,
+      paymentmethod: 'card',
+       braintreeSdk: braintree,
+      experience: {
+        input_fields: {
+          no_shipping: 1,
+        },
+      },
+      myStyle: {
+          label: 'checkout',
+          size:  'responsive',
+          shape: 'rect',
+          color: 'black'
+      },
+      paypal: {
+        sandbox: 'AbUMmsT4JJSCUg86MP4SV1-iA3jjCtPYpqkrV3xrU2ZrAZ17FkFHA_AuI2LVe2xhu-nYBZB5ezKN2Y9z',
+        production: 'AVZhosFzrnZ5Mf3tiOxAD0M6NHv8pcB2IFNHAfp_h69mmbd-LElFYkJUSII3Y0FPbm7S7lxBuqWImLbl'
+      },
+      publishableKey: 'pk_test_Yfe8V58F3Kw8aZUWqLtXqNnl00Bv7eXD7P',
+      items: [
+        {
+          sku: 'sk_test_Yha4F4mAhvGfsvZSvvCDgbBy00nMLLAhkJ',
+          quantity: 1
+        }
       ],
+      successUrl: 'http://working',
+      cancelUrl: 'http://working',
     }
   },
   created(){
@@ -401,29 +295,73 @@
   computed: {
     ...mapGetters([
       'getPlans',
-     ])
+     ]),
+    cost: function() {
+
+      if (this.credits >= 5 && this.credits < 8) {
+         return this.credits * 1000 - 1000
+      }
+
+      if (this.credits >= 8) {
+         return this.credits * 1000 - 2000
+      }
+
+      return this.credits * 1000
+    }
   },
   mounted() {
      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
      $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
   },
   methods: {
-    selectPlan(plan) {
-      this.loading = true
-       var self = this
-       setTimeout(function(){
-          self.$router.push('/build/'+plan)
-       }, 1500);
+    buyCredits() {
 
-      // this.$store.dispatch('SELECT_USER_PLAN', plan_id)
-      //   .then( response => {
-      //       this.loading = false
-      //       this.$router.push('/payment-methods')
-      //   }, error => {
-      //     this.loading = false
-      //     // console.log(error.message)
-      //   })
-    }
+      this.loading = true
+      
+      var self = this
+      
+      setTimeout(function(){ 
+       
+        self.isCredit = false
+      
+        self.loading = false
+     
+      }, 1000);
+
+    },
+    paymentAuthorized: function (data) {
+      // console.log(data);
+    },
+    paymentCompleted: function (data) {
+     
+      this.isLoading = true;
+      console.log(data);
+
+      if (data['state'] == 'approved') {
+
+        let form = {
+          payments: data,
+          amount: this.credits,
+          cost: this.cost
+        }
+
+        this.$store.dispatch('BUY_CREDIT', form)
+          .then( res => {
+            console.log(res)
+             // Alert message must goes here
+              this.isLoading = false
+              var self = this
+              setTimeout(function() {
+                self.$router.go('/order-complete')
+              }, 1000)
+          }, error => {
+            console.log(error.response)
+          })
+      }
+    },
+    paymentCancelled: function (data) {
+      // console.log(data);
+    },
   }
  }
 </script>

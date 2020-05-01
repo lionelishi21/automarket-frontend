@@ -7,7 +7,7 @@
               <div class="card col-md-4 d-md-flex align-items-md-start flex-md-column mb-5 mb-md-0">
                 <!-- Gallery -->
                 <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">
-                    <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+car.image" alt="Image Description">
+                    <img class="img-fluid w-100" :src="showCarThumbnail(car.image)" alt="Image Description">
                 </router-link>
 
 
@@ -27,7 +27,7 @@
 
                 <img class="js-fancybox d-none" v-for="img in car.images" alt="Image Description"
                      data-fancybox="fancyboxGalleryExample1"
-                     :data-src="'http://127.0.0.1:8000/storage/images/'+img.image"
+                     :data-src="showCarImage(img.image)"
                      data-caption="Front in frames - image #02"
                      data-speed="700"
                      data-is-infinite="true">
@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="col-12">
                     <h2 class="h5">
-                       <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">{{car.year}} {{car.make}} {{car.model}} | <small><i>ml</i> {{car.milage}} </small></router-link>
+                       <!-- <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">{{car.year}} {{car.make}} {{car.model}} | <small><i>ml</i> {{car.milage}} </small></router-link> -->
                     </h2>
                   </div>
                   <div class="col-12">

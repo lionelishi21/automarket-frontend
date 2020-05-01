@@ -17,292 +17,103 @@
       </div>
     </div>
     <!-- End Cart Section -->
-    <!-- End Cart Section -->
+
+
     <!-- Checkout Section -->
-    <div class="container sp" v-else>
+    <div class="container" v-else style="height: 100vh;">
       <div class="row">
-        <div class="col-lg-4 order-lg-2 mb-7 mb-lg-0">
-          <div class="pl-lg-4">
-            <!-- Order Summary -->
-            <div class="border shadow-soft rounded p-5 mb-4 mt">
-              <!-- Title -->
-              <div class="border-bottom pb-4 mb-4 mt-5 mt-5">
-                <h2 class="h5 mb-0">Order summary</h2>
+        <div class="col-md-6 p-10">
+          <!-- Item -->
+              <div class="content-centered p-3 mb-0">
+              <div class="mb-5">
+                <i class="fa fa-arrow-left"></i>
+                <a href="#" @click.prevent="goToPricing"> Back</a>
               </div>
-              <!-- End Title -->
+              <!-- Name -->
+                <div class="mb-5">
+                    <h5 class="h6">
+                      <a href="property-description.html"></a>
+                    </h5>
+                    <h2> 
 
-              <!-- Product Content -->
-              <div class="">
-                <div class="">
-					<div class="card-sm-columns">
-						<!-- Item -->
-						<div class="card mb-3" >
-					        <!-- Car Item -->
-					    <!-- Gallery -->
-					        <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
-					           :data-src="'http://127.0.0.1:8000/storage/thumbnail/'+CarDetails.image" 
-					           data-fancybox="fancyboxGalleryExample1"
-					           data-caption="Front in frames - image #01"
-					           data-speed="700"
-					           data-is-infinite="true">
-					          <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+CarDetails.image" alt="Image Description">
+                       {{getPlanDetails}}
 
-					          <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
-					            <span class="btn btn-icon btn-sm btn-white">
-					              <span class="fas fa-images btn-icon__inner"></span>
-					            </span>
-					          </div>
-					        </a>
-
-
-					        <img class="js-fancybox d-none" v-for="img in CarDetails.images" alt="Image Description"
-					             data-fancybox="fancyboxGalleryExample1"
-					             :data-src="'http://127.0.0.1:8000/storage/images/'+img.image"
-					             data-caption="Front in frames - image #02"
-					             data-speed="700"
-					             data-is-infinite="true">
-
-						    <div class="card-body p-4">
-							 
-							  <!-- Name -->
-						      <div class="mb-1">
-					     		 <h2 class="h5">
-					              <a href="property-description.html">{{CarDetails.year}} {{CarDetails.make}} {{CarDetails.model}} | <small>{{CarDetails.milage}}</small></a>
-					            </h2>
-						      </div>
-						      <!-- End Name -->
-
-						      <!-- Location -->
-						      <div class="mb-1">
-						        <a class="font-size-1" href="property-description.html">
-						          <span class="fas fa-map-marker-alt mr-1"></span>
-						          {{CarDetails.location}}
-						        </a>
-						      </div>
-						      <!-- End Location -->
-						        <!-- Category -->
-						        <div>
-						          <a class="font-size-1" href="property-description.html">
-						          	 <span class="fas fa-list-alt mr-1"></span>
-						             {{CarDetails.make}} > {{CarDetails.model}}
-						          </a>
-						        </div>
-						        <!-- Category -->
-					      <!-- End Options -->
-						    </div>
-						  <!-- End Car Item -->
-						</div>
-						<!-- End Item -->
-					</div>
+                      <b>{{getPlanDetails.cost}} JMD</b>
+                    </h2>
                 </div>
-              </div>
-              <!-- End Product Content -->
-
-
-              <!-- Fees -->
-              <div class="border-bottom pb-4 mb-4">
-                <div class="media align-items-center mb-3">
-                  <h3 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3">Item subtotal</h3>
-                  <div class="media-body text-right">
-                    <span class="font-weight-medium">{{getPlanDetails.cost}}</span>
+                <!-- End Name -->
+                <div class="mb-1 mt-10">
+                  <div class="card shadow-lg text-center mt-10">
+                   <h1 class="pt-5">{{getPlanDetails.credit}}<br> <small>Credit(s)</small> </h1> 
+                  <!-- <img class="card-img-top" :src="''http://18.206.230.202/api//storage/thumbnail/'+CarDetails.image"> -->
                   </div>
                 </div>
+               
               </div>
-              <!-- End Fees -->
-
-              <!-- Total -->
-              <div class="media align-items-center">
-                <h4 class="text-secondary font-size-1 font-weight-normal mb-0 mr-3">Total</h4>
-                <div class="media-body text-right">
-                  <span class="font-weight-semi-bold">{{getPlanDetails.cost}}</span>
-                </div>
-              </div>
-              <!-- End Total -->
-            </div>
-            <!-- End Order Summary -->
-
-            <!-- Accordion -->
-            <div id="shopCartAccordion" class="accordion rounded shadow-soft mb-4">
-              <!-- Card -->
-              <div class="card rounded">
-                <div class="card-header card-collapse" id="shopCartHeadingOne">
-                  <h3 class="mb-0">
-                  	  <!-- <button type="submit" ">Place order</button> -->
-                	   <PayPal
-                	        v-if="paymentmethod == 'paypal'"
-                	        class="btn btn-link btn-block card-btn font-weight-medium"
-						    env="sandbox"
-						    :amount="getPlanDetails.cost"
-						    currency="JMD"
-						    v-bind:client="paypal">
-						</PayPal>
-					     <button type="button" v-if="getPlanDetails.cost == 'free'" @click="checkout(getPlanDetails.id, getPlanDetails.id)" class="btn btn-block btn-primary font-weight-medium ">
-	                      Checkout
-	                    </button>
-                  </h3>
-                </div>
-            
-              </div>
-              <!-- End Card -->
-            </div>
-            <!-- End Accordion -->
-
-            <!-- End Help Link -->
-          </div>
+            <!-- End Car Item -->
         </div>
+        <div class="col-md-6 shadow" style="height: 100vh;">
+          <div class="row">
+              <div class="p-5" style="margin-top: 20%;">
 
-        <div class="col-lg-8 order-lg-1">
-          <form class="js-validate">
-            <!-- Payment -->
-            <div class="mb-7">
-              <!-- Title -->
-              <div class="mb-4 mt-5">
-                <h2 class="h4">Select Payment method</h2>
+                
+                  <!-- TODO add invoice id -->
+                 <button type="button" class="btn btn-dark btn-block mb-1">GPay</button>
+                  <PayPal
+                     currency="USD"
+                     env="sandbox"
+                     :button-style="myStyle"
+                     :amount="getPlanDetails.price"
+                     :client="paypal"
+                     :experience="experience"
+                     v-on:payment-authorized="paymentAuthorized"
+                     v-on:payment-completed="paymentCompleted"
+                     v-on:payment-cancelled="paymentCancelled">
+
+                  </PayPal>
+
+                <div class="text-center mt-2">
+                    <span class="divider divider-xs divider-text">Bank Deposite/Transfer</span>
+                </div>
+                
+                 <div class="text-center mt-2">
+                    <span class="divider divider-xs divider-text">Or pay with card</span>
+                </div>
+
+               <!-- Input Group -->
+                    <div class="form-row mt-10">
+                     
+                       <div class="col-md-12">
+                         <label>Card informaton</label>
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="number" name="cardNumber" placeholder="1234 1234 1234 1234">
+                         </div>
+                       </div> 
+                       <div class="col-md-6">
+                           <div class="input-group input-group-sm">
+                             <input class="form-control" type="number" name="cardNumber" placeholder="MM / YY" aria-label="Card number" aria-describedby="cardNumberLabel">
+                           </div>
+                       </div>
+                      <div class="col-md-6">
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="number" name="cardNumber" placeholder="CVC" aria-label="Card number" aria-describedby="cardNumberLabel">
+                         </div>
+                      </div>
+
+                      <div class="col-md-12 mt-5">
+                         <label><small>Name on card</small></label>
+                         <div class="input-group input-group-sm">
+                           <input class="form-control" type="text" name="cardNumber">
+                         </div>
+                      </div>
+
+                      <button type="button" class="btn btn-dark btn-block mt-10">Pay {{getPlanDetails.cost}} JMD </button>
+                 </div>
+                 <div class="form-row">
+
+                </div>
               </div>
-              <!-- End Title -->
-			  <div class="row"">
-			  	  <div class="col-md-6">
-			  	  	 <div class="custom-control custom-radio custom-control-inline checkbox-outline bg-white">
-		              <input v-model="paymentmethod" value="debit" type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input checkbox-outline__input">
-		              <label class="checkbox-outline__label rounded p-1 mb-0" for="customRadioInline2">
-		               <div class="">
-						    <div class="card-body">
-					    	      <span class="d-inline-block bg-white border rounded pb-4">
-						              <img class="max-width-8" src="../../assets/img/100x60/img1.jpg" alt="Image Description">
-						           </span>
-						           <span class="d-inline-block bg-white border rounded pb-4">
-						              <img class="max-width-8" src="../../assets/img/100x60/img2.jpg" alt="Image Description">
-						           </span>
-						           <p class="card-text">Choose this if yuo want to pay with your Debit/Credit card</p>
-						    </div>
-						  </div>
-		              </label>
-		            </div>
-			  	 </div>
-			  	  <div class="col-md-6">
-			  	  	 <div class="custom-control custom-radio custom-control-inline checkbox-outline bg-white">
-		              <input v-model="paymentmethod" value="paypal" type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input checkbox-outline__input">
-		              <label class="checkbox-outline__label rounded p-1 mb-0" for="customRadioInline1">
-		                  <div class="">
-							    <div class="card-body">
-						    	     <img class="max-width-9 pb-4" src="@/assets/img/100x60/img5.jpg" alt="Image Description">
-							          <p class="card-text">Choose this if yuo want to pay with your PayPal Account</p>
-							    </div>
-					      </div>
-		              </label>
-		            </div>
-			  	 </div>
-			 
-			  </div>
-			  <div class="row" v-if="paymentmethod == 'paypal'">
-
-			  	<div class="mb-7">
-			  		  	<!-- Payment -->
-		            <div class="mb-7">
-		            
-		              <!-- Title -->
-		              <div class="mb-4">
-		                 <h2 class="h4">Payment method</h2>
-		              </div>
-		              <!-- End Title -->
-
-		              <div class="col-md-12 mb-6">
-		              
-		                <label class="form-label">
-		                  Paypal Email Address
-		                </label>
-		              
-		                <input type="text" class="form-control" name="cardNumber" 
-		                       placeholder="**** **** **** ***" 
-		                       aria-label="**** **** **** ***" required
-		                       data-msg="Please enter a valid card number."
-		                       data-error-class="u-has-error"
-		                       data-success-class="u-has-success">
-		              </div>
-		            </div>
-		            <!-- End Payment -->
-			    </div>
-			  </div>
-			  <div class="row" v-if="paymentmethod == 'debit'">
-					<!-- Payment -->
-		            <div class="mb-7">
-		            
-		              <!-- Title -->
-		              <div class="mb-4">
-		                 <h2 class="h4">Payment method</h2>
-		              </div>
-		              <!-- End Title -->
-
-		              <div class="js-form-message mb-6">
-		              
-		                <label class="form-label">
-		                  Card number
-		                </label>
-		              
-		                <input type="text" class="form-control" name="cardNumber" 
-		                       placeholder="**** **** **** ***" 
-		                       aria-label="**** **** **** ***" required
-		                       data-msg="Please enter a valid card number."
-		                       data-error-class="u-has-error"
-		                       data-success-class="u-has-success">
-		              </div>
-		              <div class="row">
-		                <div class="col-md-8">
-		                  <!-- Input -->
-		                  <div class="js-form-message mb-6">
-		                    <label class="form-label">
-		                      Card holder
-		                    </label>
-		                    <input type="text" class="form-control" name="cardHolder" placeholder="Jack Wayley" aria-label="Jack Wayley" required
-		                           data-msg="Please enter a valid card holder."
-		                           data-error-class="u-has-error"
-		                           data-success-class="u-has-success">
-		                  </div>
-		                  <!-- End Input -->
-		                </div>
-
-		                <div class="col-md-2">
-		                  <!-- Input -->
-		                  <div class="js-form-message mb-6">
-		                    <label class="form-label">
-		                      Expiration
-		                    </label>
-		                    <input type="text" class="form-control" name="cardExpirationDate" placeholder="MM/YY" aria-label="MM/YY" required
-		                           data-msg="Please enter a valid date."
-		                           data-error-class="u-has-error"
-		                           data-success-class="u-has-success">
-		                  </div>
-		                  <!-- End Input -->
-		                </div>
-
-		                <div class="col-md-2">
-		                  <!-- Input -->
-		                  <div class="js-form-message mb-6">
-		                    <label class="form-label">
-		                      CVC
-		                    </label>
-		                    <input type="text" class="form-control" name="cardCVC" placeholder="***" aria-label="***" required
-		                           data-msg="Please enter a valid CVC number."
-		                           data-error-class="u-has-error"
-		                           data-success-class="u-has-success">
-		                  </div>
-		                  <!-- End Input -->
-		                </div>
-		              </div>
-		            </div>
-		            <!-- End Payment -->
-			  </div>
-
-		<!-- 	
-          
-              <!-- Button -->
-           <!--    <div class="d-flex justify-content-between align-items-center">
-                <button type="submit" class="btn btn-primary btn-sm-wide btn-pill transition-3d-hover">Place order</button>
-              </div> -->
-              <!-- End Button -->
             </div>
-            <!-- End Payment -->
-          </form>
         </div>
       </div>
     </div>
@@ -312,23 +123,48 @@
 </template>
 <script>
 import PayPal from 'vue-paypal-checkout'
+import braintree from 'braintree-web'
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+import { StripeCheckout } from 'vue-stripe-checkout';
 
 export default {
 components: {
-  PayPal
+  PayPal,
+   StripeCheckout
 },
 data() {
 	return {
-		isCompleted: false,
-		isLoading: false,
-		paymentmethod: '',
-	    paypal: {
-	      sandbox: 'AWi18rxt26-hrueMoPZ0tpGEOJnNT4QkiMQst9pYgaQNAfS1FLFxkxQuiaqRBj1vV5PmgHX_jA_c1ncL',
-          production: 'AVZhosFzrnZ5Mf3tiOxAD0M6NHv8pcB2IFNHAfp_h69mmbd-LElFYkJUSII3Y0FPbm7S7lxBuqWImLbl'
-	    }
-	}
+  		isCompleted: false,
+  		isLoading: false,
+      creditcard_method: false,
+  		paymentmethod: 'card',
+       braintreeSdk: braintree,
+      experience: {
+        input_fields: {
+          no_shipping: 1,
+        },
+      },
+      myStyle: {
+          label: 'checkout',
+          size:  'responsive',
+          shape: 'rect',
+          color: 'black'
+      },
+    	paypal: {
+        sandbox: 'AbUMmsT4JJSCUg86MP4SV1-iA3jjCtPYpqkrV3xrU2ZrAZ17FkFHA_AuI2LVe2xhu-nYBZB5ezKN2Y9z',
+        production: 'AVZhosFzrnZ5Mf3tiOxAD0M6NHv8pcB2IFNHAfp_h69mmbd-LElFYkJUSII3Y0FPbm7S7lxBuqWImLbl'
+    	},
+      publishableKey: 'pk_test_Yfe8V58F3Kw8aZUWqLtXqNnl00Bv7eXD7P',
+      items: [
+        {
+          sku: 'sk_test_Yha4F4mAhvGfsvZSvvCDgbBy00nMLLAhkJ',
+          quantity: 1
+        }
+      ],
+      successUrl: 'http://working',
+      cancelUrl: 'http://working',
+    }
   },
   computed: {
   	...mapGetters([
@@ -337,10 +173,90 @@ data() {
   	])
   },
   created() {
-  	this.$store.dispatch('GET_CAR_DETAILS', this.$route.params.batch_id)
-	this.$store.dispatch('PLAN_DETAILS', this.$route.params.plan)
-  }, 
+	 this.$store.dispatch('PLAN_DETAILS', this.$route.params.plan)
+  },
   methods: {
+    checkoutstripe () {
+       this.$refs.checkoutRef.redirectToCheckout();
+    },
+    paymentAuthorized: function (data) {
+      // console.log(data);
+    },
+    paymentCompleted: function (data) {
+     
+      this.isLoading = true;
+      console.log(data);
+
+      if (data['state'] == 'approved') {
+
+        let details = {
+          plan_id: this.getPlanDetails.id
+        }
+
+
+        let formData = new FormData()
+        formData.append('payments', data)
+        formData.append('car', JSON.stringify(details))
+
+               // formData.append('main', JSON.stringify(this.formData.main));
+
+        console.log(formData)
+        let form = {
+          payments: data,
+          car: details
+        }
+
+        let token = localStorage.getItem('access_token')
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+
+        this.$store.dispatch('BUY_CREDIT', form)
+          .then( res => {
+            console.log(res)
+             // Alert message must goes here
+              this.isLoading = false
+       				var self = this
+       				setTimeout(function() {
+       					// self.isCompleted = true
+       				}, 1000)
+          }, error => {
+            console.log(error.response)
+          })
+      }
+    },
+    paymentCancelled: function (data) {
+      // console.log(data);
+    },
+    placeorder() {
+
+      this.isLoading = true;
+      let checkout = {
+        car_id: this.CarDetails.id,
+        plan_id: this.getPlanDetails.id
+      }
+
+      if (this.paymentmethod == 'card'){
+        // do something else
+      }
+      if (this.paymentmethod == 'paypal') {
+        console.log(checkout)
+
+        let token = localStorage.getItem('access_token')
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+         axios.post('http://18.206.230.202/api//api/payment', checkout)
+          .then ( res => {
+            console.log(res)
+            this.isLoading = false
+            window.location = res.data.paypal_link
+          }, error => {
+            console.log(error.response)
+          })
+      }
+    },
+    goToPricing() {
+      this.$router.push('/credits')
+    },
   	checkout(car_id, plan_id) {
   		this.isLoading = true
   		let checkout = {
@@ -348,20 +264,19 @@ data() {
   			plan_id: plan_id
   		}
 
-		axios.post('http://127.0.0.1:8000/api/subscriptions/create', checkout)
+		axios.post('http://18.206.230.202/api//api/subscriptions/create', checkout)
 			.then(response => {
 				console.log(response)
 				this.isLoading = false
-				
+
 				var self = this
 				setTimeout(function() {
-					self.isCompleted = true
+					// self.isCompleted = true
 				}, 1000)
 			}, error => {
 				console.log(error.response)
 			})
   		}
   	}
-  
 }
 </script>

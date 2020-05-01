@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Action Ann Job Bank</string>
-    <string name="title_activity_main">Action Ann Job Bank</string>
-    <string name="package_name">com.jamaicajobbank.ann</string>
-    <string name="custom_url_scheme">com.jamaicajobbank.ann</string>
+    <string name="app_name">AutoMarket</string>
+    <string name="title_activity_main">AutoMarket</string>
+    <string name="package_name">com.automarket.app</string>
+    <string name="custom_url_scheme">com.automarket.app</string>
 </resources>

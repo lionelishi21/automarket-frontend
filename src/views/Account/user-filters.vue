@@ -27,19 +27,16 @@
                 <div class="form-group">
                     <h4>Car Makes:</h4>
                     <span v-for="make in AllMakes">
-                         <button v-if="make.filter" @click="saveFilters(make.id)" type="button" class="btn    btn-soft-success btn-sm mr-1 mb-1">{{make.name}}</button>
-
+                         <button v-if="make.filter" @click="saveFilters(make.id)" type="button" class="btn btn-success btn-sm mr-1 mb-1">{{make.name}}</button>
                          <button v-else @click="saveFilters(make.id)" type="button" class="btn btn-soft-success btn-sm mr-1 mb-1">{{make.name}}</button>
                     </span>
                 </div>
                 <div class="form-group">
                    <h4>Location</h4>
-                    <div v-for="parish in parishes" class="custom-control custom-radio custom-control-inline checkbox-outline bg-grey">
-                          <input type="radio" :id="'parish1'+parish.name" :name="'parish1'+parish.name" class="custom-control-input checkbox-outline__input" v-model="filters.parishes" :value="parish.name">
-                          <label class="checkbox-outline__label rounded p-1 mb-0" :for="'parish1'+parish.name">
-                          {{parish.name}}
-                          </label>
-                        </div>
+                    <div v-for="parish in getParishes" class="custom-control custom-radio custom-control-inline checkbox-outline bg-grey">
+                        <button @click="saveLocationFilter()" type="button" v-if="parish.fitler == null" class="btn btn-soft-success btn-sm mr-1 mb-1">{{parish.name}}</button>
+                        <button v-else @click="saveLocationFilter()" type="button" class="btn btn-success btn-sm mr-1 mb-1">{{parish.name}}</button>
+                    </div>
                 </div>
                 <div class="form-group">
                     <h4>Year: </h4>
@@ -48,7 +45,7 @@
                                 <div class="border-bottom ">
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
-                                      <select class="form-control form-control" v-model="filters.min_year">
+                                      <select class="form-control form-control">
                                         <option value="2000" selected>2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -81,7 +78,7 @@
                                 <div class="border-bottom">
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
-                                     <select class="form-control form-control" v-model="filters.max_year">
+                                     <select class="form-control form-control">
                                         <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -117,7 +114,7 @@
                                       
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
-                                      <select class="form-control form-control" v-model="filtersMin_price">
+                                      <select class="form-control form-control">
                                         <option value="100000" selected>100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
@@ -156,7 +153,7 @@
                                 <div class="border-bottom">
                                          <!-- Select -->
                                      <label for=""><small>Max</small></label>
-                                     <select class="form-control form-control" v-model="filtersMax_price">
+                                     <select class="form-control form-control">
                                         <option value="100000" selected>100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
@@ -191,12 +188,9 @@
                 </div>
                 <div class="form-group">
                         <h4>Body Style: </h4>
-                           <div v-for="body in bodystyles" class="custom-control custom-radio custom-control-inline checkbox-outline bg-grey">
-                          <input type="radio" :id="'parish1'+body.name" :name="'parish1'+body.name" class="custom-control-input checkbox-outline__input">
-                          <label class="checkbox-outline__label rounded p-1 mb-0" :for="'parish1'+body.name">
-                          {{body.name}}
-                          </label>
-                        </div>
+                          <div v-for="body in getBodystyles" class="custom-control custom-radio custom-control-inline checkbox-outline bg-grey">
+                              <button @click="saveLocationFilter()" type="button" class="btn btn-soft-success btn-sm mr-1 mb-1">{{body.name}}</button>
+                          </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -248,7 +242,7 @@ export default {
             { name: 'Truck'},
             { name: 'Wagon'},
             { name: 'Coupe'},
-            { name:  'Bus'},
+            { name: 'Bus'},
             { name: 'Mini Bus'},
             { name: 'Pickup'},
             { name: 'Convertible'},
@@ -259,23 +253,35 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'AllMakes'
+			'AllMakes',
+      'getParishes',
+      'getBodystyles'
 		])
 	},
 	created() {
 		this.makesType = 'custom'
 		this.$store.dispatch('GET_VEHICLE_MAKE', this.makesType)
+    this.$store.dispatch('GET_PARISHES');
+    this.$store.dispatch('GET_BODYSTYLES');
+    // this.$store.dispatch('GET_USER_FILTER')
 	},
 	methods: {
 		saveFilters(make_id) {
+        
+        let formData = new FormData()
+        formData.append('makes', make_id )
 
-            var params = {
-                id: make_id
-            }
-            let formData = new FormData()
-            formData.append('makes', JSON.stringify(params) )
-            this.$store.dispatch('SAVE_USER_FILTER', formData);
-        }
+        var payload = { form: formData, make: this.makesType}
+        this.$store.dispatch('SAVE_USER_FILTER', payload);
+        this.$store.dispatch('GET_VEHICLE_MAKE', this.makesType)
+     },
+     saveLocationFilter( parish_id ) {
+        let formData = new FormData()
+        formData.append('parish_id', parish_id)
+
+        this.$store.dispatch('SAVE_USER_PARISH_FILTER', parish_id)
+     }
+    
 	}
 }
 </script>

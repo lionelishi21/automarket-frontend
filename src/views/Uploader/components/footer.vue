@@ -29,7 +29,6 @@
 
       <div class="col-sm-6 col-lg-4 order-sm-1">
         <!-- Logo -->
-          <img src="@/assets/logo.png">
         </a>
         <!-- End Logo -->
 

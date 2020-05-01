@@ -42,7 +42,7 @@
 
                 <h3 class="h4 mb-3">I'm a Seller</h3>
                 <p class="mb-4">Discover how easy it is to sell your car right away</p>
-                <button @click="goToDealerSignUp()" class="btn btn-sm btn-soft-danger transition-3d-hover">
+                <button @click="goToBuyerSignUp()" class="btn btn-sm btn-soft-danger transition-3d-hover">
                   Sell my Car(s)
                   <span class="fas fa-angle-right ml-2"></span>
                 </button>

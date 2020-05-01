@@ -8,12 +8,12 @@
           <div class="row">
             <!-- Gallery -->
             <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
-               :data-src="'http://127.0.0.1:8000/storage/images/'+CarDetails.image"
+               :data-src="'http://18.206.230.202/storage/images/'+CarDetails.image"
                data-fancybox="fancyboxGalleryExample1"
                data-caption="image #01"
                data-speed="700"
                data-is-infinite="true">
-              <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+CarDetails.image" alt="Image Description">
+              <img class="img-fluid w-100" :src="showCarThumbnail(CarDetails.image)" alt="Image Description">
 
               <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
                 <span class="btn btn-icon btn-sm btn-white">
@@ -22,27 +22,28 @@
               </div>
             </a>
             <img class="js-fancybox d-none" v-for="img in CarDetails.images" alt="Image Description"
+
                  data-fancybox="fancyboxGalleryExample1"
-                 :data-src="'http://127.0.0.1:8000/storage/images/'+img.image"
+                 :data-src="showCarImage(img.image)"
                  data-caption="Front in frames - image #02"
                  data-speed="700"
                  data-is-infinite="true">
          </div>
        </div>
          <div class="row">
-           <div class="col-md-3 d-none d-sm-block" v-for="image in CarDetails.images">
+           <div class="col-md-3 col-xs-3 col-sm-3 d-none d-sm-block" v-for="image in CarDetails.images">
                <!-- Gallery -->
             <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
-               :data-src="'http://127.0.0.1:8000/storage/images/'+image.image"
+               :data-src="showCarImage(image.image)"
                data-fancybox="fancyboxGalleryExample1"
                data-caption="Front in frames - image #01"
                data-speed="700"
                data-is-infinite="true">
-              <img class="img-fluid w-100" :src="'http://127.0.0.1:8000/storage/thumbnail/'+image.image" alt="Image Description">
+              <img class="img-fluid w-100" :src="showCarThumbnail(image.image)" alt="Image Description">
 
                     <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
-                      <span class="btn btn-icon btn-sm btn-white">
-                        <span class="fas fa-images btn-icon__inner"></span>
+                      <span class="btn btn-icon btn-xs btn-white">
+                         <span class="fas fa-images  btn-icon__inner"></span>
                       </span>
                     </div>
                   </a>
@@ -90,8 +91,8 @@
         </div>
       <!--  -->
       <div class="mb-4">
-        <textarea  class="form-control mb-4  transition-3d-hover"">I am interested in  {{CarDetails.year}} {{CarDetails.make}} {{CarDetails.model}} </textarea>
-        <button @click="show_modal = true" type="button" class="btn btn-block btn-primary btn-pill transition-3d-hover">Contact Seller</button>
+        <textarea  class="form-control mb-4  transition-3d-hover">I am interested in  {{CarDetails.year}} {{CarDetails.make}} {{CarDetails.model}} </textarea>
+        <button @click="showModal()" type="button" class="btn btn-block btn-primary btn-pill transition-3d-hover">Contact Seller</button>
       </div>
 
       <!-- Should be in a seperate component- Contact Modal -->
@@ -210,21 +211,7 @@ export default {
 	data() {
 		return {
       show_modal: false,
-      slickOptions: {
-        slidesToShow: 3,
-        // Any other options that can be got from plugin documentation
-      },
-			details: {
-				id: 2,
-			 	img: '@/assets/companies_logos/generalaccident.jpg',
-			 	title: 'Sales Rep',
-			 	company: 'General Accident',
-			 	desc: 'The role is responsible for designing, coding and modifying websites',
-			 	location: 'Portland, Buffbay',
-			 	salary: '25k - 60k',
-			 	type: 'Fulltime'
-			}
-		}
+ 		}
 	},
   computed: {
     ...mapGetters([
@@ -233,24 +220,22 @@ export default {
   },
   beforeUpdate() {
      $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
-     // initialization of slick carousel
-     $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
   },
   created() {
+
       var batch_id = this.$route.params.id;
       this.$store.dispatch('GET_CAR_DETAILS', batch_id);
-  },
-  mounted() {
-      // initialization of autonomous popups
-    $.HSCore.components.HSModalWindow.init('[data-modal-target]', '.js-subscribe-window', {
-      autonomous: true
-    });
+      this.$store.dispatch('COUNT_PAGE_VISTS', batch_id);
   },
 	methods: {
 		company_profile() {
 			var id = 1
 			this.$router.push('/company/details/'+id)
 		},
+    showModal() {
+      this.show_modal = false
+      this.show_modal = true
+    }
 
 	}
 }

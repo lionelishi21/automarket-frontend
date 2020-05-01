@@ -5,22 +5,22 @@
 /* Disable content revealing on page load */
 .u-sidebar {
   &[aria-labelledby] {
-    opacity: 0;
+    // opacity: 0;
   }
 
   &[aria-labelledby][role="tabpanel"] {
-    opacity: 1;
+    // opacity: 1;
   }
 
   &[aria-labelledby].u-unfold--css-animation,
   &[aria-labelledby].u-unfold--jquery-slide {
-    opacity: 1;
+    // opacity: 1;
   }
 
   &.u-unfold--css-animation.u-unfold--hidden {
-    display: none;
-    opacity: 0;
-    visibility: hidden;
+    // display: none;
+    // opacity: 0;
+    // visibility: hidden;
   }
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import api from '../../api/service.js'
+import api from '../../api/services/plan-services.js';
+
 
 const state = {
 	plan: null,
@@ -26,67 +27,111 @@ const getters = {
 }
 
 const actions = {
+
+	/**
+	 * **********************************************
+	 * Get all user plans
+	 * @param {[type]} options.commit   [description]
+	 * @param {[type]} options.dispatch [description]
+	 * **********************************************
+	 */
 	GET_ALL_PLANS({commit, dispatch}) {
-		axios.get('http://127.0.0.1:8000/api/plans')
-		.then( response => {
-			console.log(response)
+
+		let token = localStorage.getItem('access_token')
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+		
+		api.fetchPlans().then( response => {
 			commit('SET_PLAN', response.data)
 		}, error => {
 			console.log(error.response)
 		});
+
 	},
+
+	/**
+	 * ************************************************
+	 * This function get user active plan
+	 * @param {[type]} options.commit [description]
+	 * ************************************************
+	 */
 	FETCH_USER_ACTIVE_PLANS({commit}) {
-		axios.get('http://127.0.0.1:8000/api/plans/get-userplans')
-			.then( response => {
-				console.log('getting user active plans...')
-				console.log(response.data[0])
+
+		let token = localStorage.getItem('access_token')
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+		api.fetchUserActivePlan().then( response => {
+				console.log(response)
 				commit('SET_USER_ACTIVE_PLAN', response.data[0])
-			}, error => {
+		}, error => {
 				console.log(error.response)
-			})
+		})
+
 	},
+
+	/**
+	 * ***********************************************
+	 * this functio get use plan
+	 * @param {[type]} options.commit   [description]
+	 * @param {[type]} options.dispatch [description]
+	 * ************************************************
+	 */
 	USER_PLAN({commit, dispatch}){
-		console.log('getting user plan...')
+
 		 return new Promise((resolve, reject) => {
-	  		axios.get('http://127.0.0.1:8000/api/user-plan')
-			.then( response => {
+	  		
+	  		api.fetchUserPlan().then( response => {
+				
 				let responseData = response.data
 				commit('SET_USER_PLAN', responseData)
 				resolve(response)
+			
 			}, error => {
-				console.log(error.response)
 				reject(error)
 			})
 	      });
 	},
 
+	/**
+	 * *************************************************
+	 * this function select user plan
+	 * @param {[type]} options.commit   [description]
+	 * @param {[type]} options.dispatch [description]
+	 * @param {[type]} plan_id          [description]
+	 * *************************************************
+	 */
 	SELECT_USER_PLAN({ commit, dispatch}, plan_id) {
-		 console.log('selecting user plans...')
+
 		  return new Promise((resolve, reject) => {
-	  		axios.get('http://127.0.0.1:8000/api/plans/select-plan/'+plan_id)
-			.then( response => {
-				console.log(response)
+	  		api.selectUserPlan(plan_id).then( response => {
+				
 				let responseData = response.data
 				commit('SET_USER_PLAN', responseData)
+				
 				resolve(response)
 			}).catch( err => { 
-				console.log(err.response)
 				reject(err)
 			})
 		})
+	
 	},
 
+	/**
+	 * ************************************************
+	 * This function get plan details
+	 * @param {[type]} options.commit   [description]
+	 * @param {[type]} options.dispatch [description]
+	 * @param {[type]} slug             [description]
+	 * ************************************************
+	 */
 	PLAN_DETAILS ({ commit, dispatch}, slug ) {
-		console.log(slug)
-		console.log('geeting plan details')
-		axios.get('http://127.0.0.1:8000/api/plan-details/'+slug)
-			.then( response => {
-				console.log(response)
-				let responseData = response.data
-				commit('SET_PLAN_DETAILS', responseData)
-			}, error => {
-				console.log(error.response)
-			})
+
+		 api.fetchPlanDetails(slug).then( response => {
+			let responseData = response.data
+			commit('SET_PLAN_DETAILS', responseData)
+		 }, error => {
+			console.log(error.response)
+		 })
+
 	}
 }
 

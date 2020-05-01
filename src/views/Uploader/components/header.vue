@@ -10,7 +10,6 @@
 	        <div class="u-header--center-aligned__inner">
 	          <!-- Logo -->
 	          <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="/" aria-label="Front">
-	      			   <img src="@/assets/logo.png">
 	          </a>
 	          <!-- End Logo -->
 

@@ -1,106 +1,30 @@
 <template>
-  <!-- Hero Section -->
-    <div class="position-relative">
-      <!-- Slick Carousel -->
-      <div class="js-slick-carousel u-slick"
-           data-fade="true"
-           data-autoplay="true"
-           data-speed="5000"
-           data-infinite="true">
-        <div class="js-slide">
-          <div class="bg-img-hero" style="height: 350px; background-image: url(../../assets/img/1920x800/img1.jpg);"></div>
-        </div>
-        <div class="js-slide">
-          <div class="bg-img-hero" style="height: 350px; background-image: url(,,./../assets/img/1920x800/img17.jpg);"></div>
-        </div>
-      </div>
+<!-- Hero Section -->
+<div class="bg-img-hero" style="background-image: url(../../assets/img/1920x800/img17.jpg);">
+  <div class="container space-2 space-md-3">
+    <div class="row justify-content-end">
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="shadow-sm text-center">
 
-      <!-- End Slick Carousel -->
-      <div class="container position-absolute right-0 bottom-0 left-0 space-bottom-2 " style="margin-bottom: -7%">
-
-
-        <div class="card border-0">
-          <!-- Info Link -->
-          <a class="" href="#">
-            <span class="btn btn-xs btn-soft-white btn-pill font-weight-semi-bold mr-3 text-primary">Advance Search <i class=" fa fa-arrow-right"></i></span>
-            <span class="d-block d-sm-inline-block">
-            </span>
-          </a>
-          <!-- End info link -->
-
-          <div class="card-body  p-3">
-          
-
-               <!-- Search for cars-->
-              <div class="col-lg-12">
-                  <div class="row">
-                         <div class="col-lg-4 mb-lg-0">
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>New & Used Cars</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-lg-0">
-                          <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>All Makes</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                            </div>
-                         </div>
-                        <div class="col-lg-4 mb-lg-0">
-                          <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>All Models</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                            </div>
-                         </div>
-                  </div>
-                  <div class="row">
-                         <div class="col-lg-4 mb-lg-0">
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>No Max Price</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                            </div>
-                          </div>
-                          <div class="col-lg-4 mb-lg-0">
-                              <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>Locations / Parish</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                          <button type="button" class="btn btn-block btn-success">Search</button>
-                        </div>
-                  </div>
-              </div>
-              <!-- Search for cars ended -->
+            <p class="text-white">Welcome to AutoMarket JM ( Jamaica ) </p>
+             <!-- Content -->
+            <div class="card-body pt-0 px-5 pb-1">
+                 <button type="button" @click="goToRegister()" class="btn btn-block btn-primary transition-3d-hover">Sell my Car</button>
             </div>
-        </div>
+            <!-- End Content -->
+            <small class="text-white ">or</small>
+            <!-- Content -->
+            <div class="card-body pt-0 px-5 pb-1">
+                 <button type="button" @click="goToCars()" class="btn btn-danger btn-block  transition-3d-hover">Buy my Car</button>
+            </div>
+            <!-- End Content -->
+          </div>
+          <!-- End Pricing -->
       </div>
     </div>
+  </div>
+</div>
+<!-- End Hero Section -->
     <!-- End Hero Section -->
 </template>
 <script>
@@ -119,6 +43,17 @@
 
       // initialization of google map
       $.HSCore.components.HSGMap.init('.js-g-map');
+    },
+    created() {
+
+    },
+    methods: {
+      goToRegister() {
+        this.$router.push('/dealer-register')
+      },
+      goToCars() {
+        this.$router.push('/cars')
+      }
     }
   }
 </script>

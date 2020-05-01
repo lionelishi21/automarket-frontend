@@ -13,7 +13,6 @@
       </div>
     </div>
  <!-- End Preloader -->
-
     <!-- Content Section -->
     <div class="bg-light">
       <div class="container space-2">
@@ -21,6 +20,10 @@
         <div class="alert alert-success" role="alert" v-show="isComplete" @click="isComplete = false">
           Update successfully  
         </div>
+        <div class="alert alert-danger" v-if="GetUserProfile.isVerify === null" role="alert">
+          Please verify your account <a href="#" @click="verifyAccount()">Resend Verification</a>
+        </div>
+        
         <!-- Update Avatar Form -->
         <form class="media align-items-center mb-7">
           <div class="u-lg-avatar mr-3">
@@ -320,6 +323,10 @@ export default {
       })
   },
   methods: {
+    
+    verifyAccount() {
+      this.$store.dispatch('VERIFY_USER')
+    },
        // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
@@ -352,10 +359,9 @@ export default {
       formData.append('profile', JSON.stringify(this.GetUserProfile))
       // formData.append('profile', this.GetUserProfile)
 
-      axios.post('http://127.0.0.1:8000/api/update-profile', formData)
+      axios.post('http://18.206.230.202/api/update-profile', formData)
         .then( response => {
           console.log( response )
-        alert('working')
 
           var self = this
           setTimeout(function() {

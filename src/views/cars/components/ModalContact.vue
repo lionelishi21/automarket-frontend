@@ -1,6 +1,6 @@
 <template>
-<modal v-show="show" modalClasses="js-modal-window u-modal-window u-modal-window--payment rounded">
-  <form class="card mb-9">
+<modal v-show="show" modalClasses="js-modal-window u-modal-window u-modal-window--payment">
+  <form class="card">
       
       <!-- Header -->
       <header class="card-header bg-light py-3 px-5">
@@ -14,34 +14,35 @@
         </div>
       </header>
       <!-- End Header -->
-    
-      <div class="card-body pt-3 pb-5 px-5">
+    <br>
 	  <!-- Agents List -->
 	      <div class="row mb-3">
 	        <div class="col-sm-12 col-md-12">
 	          <!-- Agent -->
-	          <div class="media">
+	          <div class="media ml-5 ">
 	            <span class="btn btn-icon btn-lg btn-soft-danger rounded-circle mr-3">
 	              <span class="btn-icon__inner">
-	              	KP
+	              	AV
 	              </span>
 	            </span>
 	            <div class="media-body">
 	              <h4 class="h6 mb-1">{{details.name}}</h4>
 	              <p class="font-size-1 mb-2">
-	                <span class="fas fa-phone mr-1"></span>
-	                {{contact_number}}
+	                  <span class="fas fa-phone mr-1"></span>
+	                   {{contact_number}}
 	              </p>
-	             <a href="https://api.whatsapp.com/send?phone=27768483016" class="btn btn-xs btn-soft-primary">Contact Seller</a>
+	             <a :href="'https://api.whatsapp.com/send?phone=1'+contact_number" class="btn btn-xs btn-soft-primary">
+	             	<img src="@/assets/whatsapp.svg" width="24px">
+	             	Contact Seller
+	             </a>
 	            </div>
 	          </div>
 	          <!-- End Agent -->
 	        </div>
-	      </div>
       <!-- End Agents List -->
+
         <hr class="my-4">
 	    <form :action="'mailto:'+details.email"  v-if="contact_number == 'N/A'" method="post" enctype="text/plain">
-		    
 		    <!-- Comments -->
 	        <div class="mb-3">
 		          <div class="media">
@@ -51,7 +52,6 @@
 		          </div>
 	        </div>
 	        <!-- End Comments -->
-
 		    <!-- Comments -->
 	        <div class="mb-3">
 		          <div class="media">
@@ -61,7 +61,6 @@
 		          </div>
 	        </div>
 	        <!-- End Comments -->
-
 	        <!-- Comments -->
 	        <div class="mb-3">
 		          <div class="media">
@@ -71,7 +70,6 @@
 		          </div>
 	        </div>
 	        <!-- End Comments -->
-
 	        <!-- Buttons -->
 	        <div class="d-flex justify-content-end">
 	          <button  type="submit" class="btn btn-sm btn-primary transition-3d-hover mr-1">Send Email</button>
@@ -81,6 +79,14 @@
 	    </form>
 	    <!-- End Buttons -->
       </div>
+
+	     <!-- Card Footer -->
+      <div class="card-footer py-3 px-5">
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-sm btn-soft-secondary transition-3d-hover" @click="show = false">Close</button>
+        </div>
+      </div>
+      <!-- End Card Footer -->
   </form>
 </modal>  
 </template>

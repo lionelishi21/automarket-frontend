@@ -8,6 +8,7 @@ import plan from './modules/plan.js';
 import vehicles from './modules/vehicles.js'
 import car from './modules/car.js'
 import filters from './modules/filters.js'
+import payments from './modules/payment.js'
 // import carMake from './modules/carMake.js'
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     	plan,
     	vehicles,
     	car,
-    	filters
+    	filters,
+    	payments
     	// carMake
     },
 });

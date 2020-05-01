@@ -1,5 +1,5 @@
 
-import api from '../../api/service.js'
+import api from '../../api/services/service.js'
 
 const state = {
 	models: {},

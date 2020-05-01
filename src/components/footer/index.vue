@@ -6,7 +6,7 @@
       <div class="col-lg-3 mb-5 mb-lg-0">
         <a class="d-inline-flex align-items-center mb-2" href="index.html" aria-label="Front">
       <!--  -->
-          <span class="brand brand-light">SureKeys</span>
+      <img src="@/assets/automarket.png" width="200px">
         </a>
       </div>
 
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <p class="small text-white-70 mb-0">© 2020 surekeys. All rights reserved.</p>
+    <p class="small text-white-70 mb-0">© 2020 automarketjm. All rights reserved.</p>
   </div>
 </footer>
 <!-- ========== END FOOTER ========== -->

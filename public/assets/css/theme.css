@@ -18444,32 +18444,32 @@ label.btn {
 ------------------------------------*/
 /* Disable content revealing on page load */
 .u-sidebar[aria-labelledby] {
-  opacity: 0;
+  /*opacity: 0;*/
 }
 
 .u-sidebar[aria-labelledby][role="tabpanel"] {
-  opacity: 1;
+  /*opacity: 1;*/
 }
 
 .u-sidebar[aria-labelledby].u-unfold--css-animation, .u-sidebar[aria-labelledby].u-unfold--jquery-slide {
-  opacity: 1;
+  /*opacity: 1;*/
 }
 
 .u-sidebar.u-unfold--css-animation.u-unfold--hidden {
-  display: none;
+/*  display: none;
   opacity: 0;
-  visibility: hidden;
+  visibility: hidden;*/
 }
 
 .u-sidebar {
-  position: fixed;
+/*  position: fixed;
   top: 0;
   right: 0;
   z-index: 1002;
   width: 23.4375rem;
   height: 100%;
   background-color: #fff;
-  box-shadow: -13px 0 20px rgba(119, 131, 143, 0.08);
+  box-shadow: -13px 0 20px rgba(119, 131, 143, 0.08);*/
 }
 
 .u-sidebar__body, .u-sidebar__content {

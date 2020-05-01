@@ -67,7 +67,7 @@
                           <!-- Dashboard -->
                           <li class="nav-item">
                             <router-link tag="a" to="/my-account" id="generalDropdown" active-class="active" class="nav-link u-header__nav-link">
-                             <i class="fa fa-home"></i>
+                             <i class="fas fa-home"></i>
                              Dashboard
                             </router-link>
                           </li>
@@ -76,19 +76,11 @@
                           <!-- General -->
                          <li class="nav-item">
                             <router-link tag="a" to="/my-ads" class="nav-link u-header__nav-link active">
-                             <i class="fa fa-car"></i>
+                             <i class="fas fa-car"></i>
                               My ads
                             </router-link>
                         </li>
                           <!-- General -->
-
-                          <!-- Account Settings -->
-                     <!--      <li class="nav-item">
-                               <router-link tag="a" id="accountSettingsDropdown" active-class="active" class="nav-link ">
-                               My Garage
-                            </router-link>
-                          </li> -->
-                          <!-- Account Settings -->
 
                           <!-- Billing -->
                           <li class="nav-item hs-has-sub-menu u-header__nav-item"
@@ -101,6 +93,7 @@
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                     aria-labelledby="billingDropdownMenu">
+                                     <i class="fas fa-money-bill-alt"></i>
                                   Billing
                                 </a>
 
@@ -114,14 +107,31 @@
                         <!-- General -->
                          <li class="nav-item">
                             <router-link tag="a" to="/edit-profile"  active-class="active" id="generalDropdown" class="nav-link u-header__nav-link">
-                             <i class="fa fa-person"></i>
+                             <i class="fas fa-user"></i>
                               Edit profile
                             </router-link>
                         </li>
 
+                        
+                          <router-link tag="li" active-class="active" to="/credits" class="nav-item u-header__nav-item">
+                             <a class="nav-link u-header__nav-link" href="#">
+                               <i class="fas fa-credit-card"></i>
+                             Credits</a>
+                          </router-link>
+
                           <!-- Others -->
-                         <router-link to="/plans" class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="plans.html">Plans</a>
+                         <router-link tag="li" active-class="active" to="/plans" class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#l">
+                             <i class="fas fa-handshake"></i>
+                            Plans</a>
+                          </router-link>
+                          <!-- Others -->
+
+                             <!-- Others -->
+                         <router-link tag="li" active-class="active" to="/invites" class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#l">
+                             <i class="fas fa-user-friends"></i>
+                            Invites</a>
                           </router-link>
                           <!-- Others -->
                         </ul>
@@ -132,11 +142,12 @@
                 <!-- End Navbar -->
 
                 <div class="ml-lg-auto">
+                
                   <!-- Button -->
-                  <router-link tag="a" to="/build" class="btn btn-sm btn-soft-white text-nowrap transition-3d-hover"
+                  <router-link tag="a" to="/pricing-and-packages" class="btn btn-sm btn-soft-white text-nowrap transition-3d-hover"
                      data-modal-target="#requestPaymentModal">
                     <span class="fas fa-plus small mr-2"></span>
-                   Post an Ad
+                   Buy Credit
                   </router-link>
                   <!-- End Button -->
                 </div>
@@ -153,7 +164,6 @@
           </div>
           <!-- End Content Section -->
 
-         
     </main>
    <footer-component></footer-component>
   </div>

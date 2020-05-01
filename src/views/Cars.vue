@@ -1,7 +1,179 @@
 <template>
   <!-- ========== MAIN CONTENT ========== -->
   <main id="content" role="main">
-        <!-- Page Preloader -->
+
+    <!-- Filter Dialog -->
+    <modal  name="filter" width="100%" height="auto" class="js-modal-window u-modal-window">
+      <div class="card-body">
+
+          <h3>
+            Car Filter
+           <span class="text-secondary font-size-1">Showing {{FilteredCars.length}} vehicles</span>
+          </h3>
+          <div class="form-group">
+                <!-- Select -->
+              <select class="form-control form-control-sm" v-model="filterParish">
+                 <option value="null">Select Parish</option>
+                 <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
+              </select>
+              <!-- End Select -->
+          </div>
+          <div class="form-group bg-soft-dark p-2">
+              <select class="form-control form-control-sm" v-model="filterMin_year">
+                  <option value="null">Select min year</option>
+                  <option value="2001">2001</option>
+                  <option value="2002">2002</option>
+                  <option value="2003">2003</option>
+                  <option value="2004">2004</option>
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                </select>
+                 <select class="form-control form-control-sm" v-model="filterMax_year">
+                  <option value="null">Select max year</option>
+                  <option value="2000">2000</option>
+                  <option value="2001">2001</option>
+                  <option value="2002">2002</option>
+                  <option value="2003">2003</option>
+                  <option value="2004">2004</option>
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019" selected>2019</option>
+                </select>
+          </div>
+          
+          <div class="form-group bg-soft-dark p-2">
+                <div class="">
+                     <label>Car makes</label>
+                </div>
+                 <div class="custom-control custom-control-inline custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes">
+                      <input class="custom-control-input col-sm-2"
+                         type="checkbox"
+                         :value="make.id"
+                         :id="'makeRadio_'+make.id"
+                         @click="check($event)"
+                         v-model="filterMake">
+                      <label class="custom-control-label" :for="'makeRadio_'+make.id">
+                        {{make.name}}<small>({{make.count}})</small>
+                      </label>
+                    </div>
+                   <!--  <a v-show="makesType == 'popular'" @click="changeMakes('all')" class="btn btn-link"><small> Choose from A - z </small></a>
+                    <a v-show="makesType == 'all'" @click="changeMakes('popular')" class="btn btn-link"><small> Choose from popular makes </small></a> -->
+          </div>
+          <div class="form-group bg-soft-dark p-2">
+               <!-- Select -->
+              <select class="form-control form-control-sm" v-model="filterMin_price">
+                <option value="null">Select min price</option>
+                <option value="100000">100,000 JA$</option>
+                <option value="150000">150,000 JA$</option>
+                <option value="250000">250,000 JA$</option>
+                <option value="300000">300,000 JA$</option>
+                <option value="400000">400,000 JA$</option>
+                <option value="500000">500,000 JA$</option>
+                <option value="600000">600,000 JA$</option>
+                <option value="700000">700,000 JA$</option>
+                <option value="800000">800,000 JA$</option>
+                <option value="900000">900,000 JA$</option>
+                <option value="1000000">1,000,000 JA$</option>
+                <option value="1250000">1,250,000 JA$</option>
+                <option value="1500000">1,500,000 JA$</option>
+                <option value="1700000">1,700,000 JA$</option>
+                <option value="2000000">2,000,000 JA$</option>
+                <option value="2250000">2,250,000 JA$</option>
+                <option value="2500000">2,500,000 JA$</option>
+                <option value="3500000">3,500,000 JA$</option>
+                <option value="4000000">4,000,000 JA$</option>
+                <option value="4500000">4,500,000 JA$</option>
+                <option value="5000000">5,000,000 JA$</option>
+                <option value="6000000">6,000,000 JA$</option>
+                <option value="7000000">7,000,000 JA$</option>
+                <option value="8000000">8,000,000 JA$</option>
+                <option value="9000000">9,000,000 JA$</option>
+               <option value="10000000">10,000,000 JA$</option>
+              </select>
+              <!-- End Select -->
+
+               <select class="form-control form-control-sm" v-model="filterMax_price">
+                    <option value="null">Select max price</option>
+                    <option value="100000">100,000 JA$</option>
+                    <option value="150000">150,000 JA$</option>
+                    <option value="250000">250,000 JA$</option>
+                    <option value="300000">300,000 JA$</option>
+                    <option value="400000">400,000 JA$</option>
+                    <option value="500000">500,000 JA$</option>
+                    <option value="600000">600,000 JA$</option>
+                    <option value="700000">700,000 JA$</option>
+                    <option value="800000">800,000 JA$</option>
+                    <option value="900000">900,000 JA$</option>
+                    <option value="1000000">1,000,000 JA$</option>
+                    <option value="1250000">1,250,000 JA$</option>
+                    <option value="1500000">1,500,000 JA$</option>
+                    <option value="1700000">1,700,000 JA$</option>
+                    <option value="2000000">2,000,000 JA$</option>
+                    <option value="2250000">2,250,000 JA$</option>
+                    <option value="2500000">2,500,000 JA$</option>
+                    <option value="3500000">3,500,000 JA$</option>
+                    <option value="4000000">4,000,000 JA$</option>
+                    <option value="4500000">4,500,000 JA$</option>
+                    <option value="5000000">5,000,000 JA$</option>
+                    <option value="6000000">6,000,000 JA$</option>
+                    <option value="7000000">7,000,000 JA$</option>
+                    <option value="8000000">8,000,000 JA$</option>
+                    <option value="9000000">9,000,000 JA$</option>
+                   <option value="10000000">10,000,000 JA$</option>
+              </select>
+             <!-- End Select -->
+          </div>
+          <div class="form-group bg-soft-dark p-2">
+              <div>
+                <label>Body Style</label>
+              </div>
+              <div v-for="body in getBodystyles" class="custom-control custom-control-inline custom-checkbox font-size-1 text-lh-md mb-2">
+                  <input class="custom-control-input"
+                     type="checkbox"
+                     value="body.id"
+                     id="styleRadio_1"
+                     @click="check($event)"
+                     v-model="filterBodyStyle">
+                    <label class="custom-control-label" for="styleRadio_1">
+                    </label>
+                    {{body.name}} <small>(100)</small>
+              </div>
+          </div>
+          <div class="form-group">
+              <button @click="saveFilter()" class="btn btn-success btn-block">Save</button>
+              <button @click="hideFilter()" class="btn btn btn-secondary btn-block">Close</button>
+          </div>
+      </div>
+    </modal>
+    <!-- End Filter Dialog -->
+    
+
+    <!-- Page Preloader -->
     <div id="jsPreloader" v-show="isLoading" class="page-preloader" style="background: rgba(0,0,0,0.5);">
       <div class="page-preloader__content-centered">
         <div class="spinner-grow text-warning" role="status">
@@ -34,7 +206,29 @@
     <!-- End Title Section -->
     
     <div class="container space-1">
-        
+         <div class="row bg-light d-none d-sm-block d-md-none d-block d-sm-none
+">
+              <div class="col-sm-auto ml-md-auto mb-3 mb-lg-0">
+                <!-- Filter -->
+                <div class="position-relative">
+                  <a class="btn btn-block btn-sm btn-soft-secondary dropdown-toggle" href="javascript:;">
+                    <span class="fas fa-search dropdown-item-icon"></span>
+                    New Search
+                  </a>
+                </div>
+                <!-- End Filter -->
+            </div>
+           <div class="col-sm-auto ml-md-auto mb-3 mb-lg-0">
+                 <!-- Filter -->
+                      <div class="position-relative">
+                        <a @click="showFilter()" class="btn btn-block btn-sm btn-soft-secondary dropdown-toggle" href="javascript:;">
+                          <span class="fas fa-sliders-h dropdown-item-icon"></span>
+                          Filter
+                        </a>
+                      </div>
+                 <!-- End Filter -->
+            </div>
+        </div>
         <!-- Top Filters -->
           <div class="row align-items-center">
             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -91,45 +285,14 @@
         <!-- End Top Filters -->
    </div>
 
-    <div class="container space-top-1 space-bottom-2">
-        
+    <div class="container space space-bottom-2">
         <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 d-none d-lg-block">
               <div class="">
                   <!-- Sidebar Filter -->
                   <div class="card p-4">
-               
                     <!-- Location Type -->
-                    <div class="border-bottom">
-                      <label class="form-label mb-2"><b>Location</b></label>
-                           <div class="row">
-                              <div class="col-sm-6">
-                                <div class="border-bottom mb-4 ">
-                                      <!-- Select -->
-                                      <select class="form-control form-control-sm" v-model="filterMiles">
-                                        <option value="10" selected>10 miles</option>
-                                        <option value="20">20 miles</option>
-                                        <option value="30">30 miles</option>
-                                        <option value="40">40 miles</option>
-                                        <option value="50">50 miles</option>
-                                        <option value="70">70 miles</option>
-                                        <option value="100">100 miles</option>
-                                        <option value="150">150 miles</option>
-                                        <option value="200">200 miles</option>
-                                        <option value="250">250 miles</option>
-                                        <option value="300">300 miles</option>
-                                      </select>
-                                      <!-- End Select -->
-                                 </div>
-                              </div>
-                               <div class="col-sm-6">
-                                <div class="border-bottom">
-                                      <input type="number" class="form-control  form-control-sm" placeholder="60606" >
-                                 </div>
-                              </div>
-                          </div>
-                        
-                    </div>
+              
                     <!-- End LocationType -->
                     
                    <div class="border-bottom">
@@ -139,6 +302,7 @@
                                 <div class="border-bottom mb-4 ">
                                       <!-- Select -->
                                       <select class="form-control form-control-sm" v-model="filterParish">
+                                          <option value="null">Select parish</option>
                                          <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
                                       </select>
                                       <!-- End Select -->
@@ -148,7 +312,36 @@
                         
                     </div>
                     <!-- End LocationType -->
+                    <div class="text-center">
+                      <span class="u-divider u-divider--text"></span>
+                    </div>
+                    <!-- Car Make -->
+                    <div class="border-bottom">
+                      <label class="form-label mb-2"> <b>Make</b></label>
+                      <div class="row" style="overflow-y: scroll;  max-height:250px;">
+                        <div class="col-12">
+                         
+                          <!-- Radio Checkbox -->
+                          <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes">
+                            <input class="custom-control-input"
+                               type="checkbox"
+                               :value="make.id"
+                               :id="'makeRadio_'+make.id"
+                               @click="check($event)"
+                               v-model="filterMake">
+                            <label class="custom-control-label" :for="'makeRadio_'+make.id">
+                              {{make.name}} <span class="badge badge-primary badge-pill ml-1">{{make.count}}</span>
+                            </label>
+                          </div>
+                          <!-- End Radio Checkbox -->
+                        </div>
+                      </div>
+                      <a v-show="makesType == 'popular'" @click="changeMakes('all')" class="btn btn-link"><small> Choose from A - z </small></a>
+                      <a v-show="makesType == 'all'" @click="changeMakes('popular')" class="btn btn-link"><small> Choose from popular makes </small></a>
+                    </div>
+                    <!-- End Car Make -->
 
+                    <hr>
                     <!-- Year -->
                     <div class="border-bottom">
                       <label class="form-label mb-2"><b>Year</b></label>
@@ -159,7 +352,8 @@
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
                                       <select class="form-control form-control-sm" v-model="filterMin_year">
-                                        <option value="2000" selected>2000</option>
+                                        <option value="null">Min year</option>
+                                        <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
                                         <option value="2003">2003</option>
@@ -192,6 +386,7 @@
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
                                      <select class="form-control form-control-sm" v-model="filterMax_year">
+                                        <option value="null">Max price</option>
                                         <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -220,36 +415,6 @@
                           </div>
                     </div>
                     <!-- End Year -->
-
-                   <div class="text-center">
-                      <span class="u-divider u-divider--text"></span>
-                    </div>
-
-                    <!-- Car Make -->
-                    <div class="border-bottom">
-                      <label class="form-label mb-2"> <b>Make</b></label>
-                      <div class="row" style="overflow-y: scroll;  max-height:250px;">
-                        <div class="col-12">
-                         
-                          <!-- Radio Checkbox -->
-                          <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes">
-                            <input class="custom-control-input"
-                               type="checkbox"
-                               :value="make.id"
-                               :id="'makeRadio_'+make.id"
-                               @click="check($event)"
-                               v-model="filterMake">
-                            <label class="custom-control-label" :for="'makeRadio_'+make.id">
-                              {{make.name}} <span class="badge badge-primary badge-pill ml-1">{{make.count}}</span>
-                            </label>
-                          </div>
-                          <!-- End Radio Checkbox -->
-                        </div>
-                      </div>
-                      <a v-show="makesType == 'popular'" @click="changeMakes('all')" class="btn btn-link"><small> Choose from A - z </small></a>
-                      <a v-show="makesType == 'all'" @click="changeMakes('popular')" class="btn btn-link"><small> Choose from popular makes </small></a>
-                    </div>
-                    <!-- End Car Make -->
                     <hr>  
                     <!-- Year -->
                     <div class="border-bottom mb-2 pb-2">
@@ -261,7 +426,8 @@
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
                                       <select class="form-control form-control-sm" v-model="filterMin_price">
-                                        <option value="100000" selected>100,000 JA$</option>
+                                        <option value="null">Min price</option>
+                                        <option value="100000">100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
                                         <option value="300000">300,000 JA$</option>
@@ -298,7 +464,8 @@
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
                                      <select class="form-control form-control-sm" v-model="filterMax_price">
-                                        <option value="100000" selected>100,000 JA$</option>
+                                        <option value="null">Max price</option>
+                                        <option value="100000">100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
                                         <option value="300000">300,000 JA$</option>
@@ -482,7 +649,6 @@
                     </div>
                     <!-- End Accordion -->
 
-
                     <!-- Accordion -->
                     <div id="transmission" class="accordion">
                       <!-- Card -->
@@ -577,7 +743,6 @@
                    </div>
                     <!-- End Accordion -->
                         
-
                     <!-- Accordion -->
                     <div id="cyclinder" class="accordion">
                       <!-- Card -->
@@ -658,73 +823,74 @@
                           </div>
                         </div>
                             <!-- Accordion -->
-                    <div id="cyclinder" class="accordion">
-                      <!-- Card -->
-                      <div class="card">
-                        <div class="card-header card-collapse" id="transmission">
-                          <h5 class="mb-0">
-                            <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
-                                    data-toggle="collapse"
-                                    data-target="#cardFour"
-                                    aria-expanded="false"
-                                    aria-controls="cardOne">
-                              <span class="row align-items-center">
-                                <span class="col-md-12 mb-2 mb-md-0">
-                                  <span class="media align-items-center">
-                                    <span class="media-body">
-                                      <span class="font-size-1"><strong> Seller Type</strong></span>
+                        <div id="cyclinder" class="accordion">
+                          <!-- Card -->
+                          <div class="card">
+                            <div class="card-header card-collapse" id="transmission">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link btn-block card-btn collapsed p-3" role="button"
+                                        data-toggle="collapse"
+                                        data-target="#cardFour"
+                                        aria-expanded="false"
+                                        aria-controls="cardOne">
+                                  <span class="row align-items-center">
+                                    <span class="col-md-12 mb-2 mb-md-0">
+                                      <span class="media align-items-center">
+                                        <span class="media-body">
+                                          <span class="font-size-1"><strong> Seller Type</strong></span>
+                                        </span>
+                                      </span>
                                     </span>
                                   </span>
-                                </span>
-                              </span>
-                            </button>
-                          </h5>
-                        </div>
-                          <div id="cardFour" class="collapse mb-5" aria-labelledby="sellertype" data-parent="#sellertype">
-                          <div class="card-body px-4">
-                            <!-- Card Details -->
-                            <div class="row">
-                              <div class="col-sm-12 mb-2 mb-sm-0">
-                                
-                                <!-- Radio Checkbox -->
-                                  <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
-                                    <input class="custom-control-input"
-                                       type="checkbox"
-                                       value="dealership"
-                                       id="stRadio_1"
-                                       @click="check($event)"
-                                       v-model="filterSellerType">
-                                    <label class="custom-control-label" for="cyRadio_1">
-                                    </label>
-                                    Dealership
+                                </button>
+                              </h5>
+                            </div>
+                              <div id="cardFour" class="collapse mb-5" aria-labelledby="sellertype" data-parent="#sellertype">
+                              <div class="card-body px-4">
+                                <!-- Card Details -->
+                                <div class="row">
+                                  <div class="col-sm-12 mb-2 mb-sm-0">
+                                    
+                                    <!-- Radio Checkbox -->
+                                      <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                        <input class="custom-control-input"
+                                           type="checkbox"
+                                           value="dealership"
+                                           id="stRadio_1"
+                                           @click="check($event)"
+                                           v-model="filterSellerType">
+                                        <label class="custom-control-label" for="cyRadio_1">
+                                        </label>
+                                        Dealership
+                                      </div>
+                                    <!-- End Radio Checkbox -->
+                                    
+                                    <!-- Radio Checkbox -->
+                                       <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
+                                          <input class="custom-control-input"
+                                             type="checkbox"
+                                             value="automatic"
+                                             id="stRadio_2"
+                                             @click="check($event)"
+                                             v-model="filterSellerType">
+                                          <label class="custom-control-label" for="cyRadio_2">
+                                          </label>
+                                          Individual
+                                       </div>
+                                    <!-- End Radio Checkbox -->
+                                <!-- End Radio Checkbox -->
                                   </div>
-                                <!-- End Radio Checkbox -->
-                                
-                                <!-- Radio Checkbox -->
-                                   <div class="custom-control custom-checkbox font-size-1 text-lh-md mb-2">
-                                      <input class="custom-control-input"
-                                         type="checkbox"
-                                         value="automatic"
-                                         id="stRadio_2"
-                                         @click="check($event)"
-                                         v-model="filterSellerType">
-                                      <label class="custom-control-label" for="cyRadio_2">
-                                      </label>
-                                      Individual
-                                   </div>
-                                <!-- End Radio Checkbox -->
-                            <!-- End Radio Checkbox -->
+                                </div>
+                                <!-- End Card Details -->
                               </div>
                             </div>
-                            <!-- End Card Details -->
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                   </div>
                       <!-- End Card -->
                    </div>
                     <!-- End Accordion -->
+
                     <!-- Buttons -->
                     <div class="row mx-gutters-2 mt-5">
                       <div class="col-6">
@@ -739,9 +905,15 @@
                   <!-- End Sidebar Filter -->
               </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+
+                <premium-placement :cars="FilteredCars"></premium-placement>
+
                 <!-- List and Grid view -->
-                <car-list v-if="list"  v-for="car in FilteredCars" :car="car" ></car-list>
+                <ul v-if="list" class="list-unstyled">
+                  <car-list v-for="car in FilteredCars" :car="car" class="mb-2" ></car-list>
+                </ul>
+                <!-- End List Grid View=z -->
                 <car-grid  v-if="grid" :cars="FilteredCars"></car-grid>
                 <!-- End List Grid View -->
             </div>
@@ -755,6 +927,8 @@
   <!-- ========== END MAIN CONTENT ========== -->
 </template>
 <script>
+
+import PremiumPlacement from './Account/components/cars/premium.vue';
 import CarList from './Account/components/cars/list.vue';
 import CarGrid from './Account/components/cars/grid.vue';
 
@@ -763,7 +937,8 @@ import { mapGetters } from 'vuex';
 export default {
 	components: {
 		CarList,
-		CarGrid
+		CarGrid,
+    PremiumPlacement
 	},
 	data() {
 		return {
@@ -846,7 +1021,8 @@ export default {
         'AllModels',
         'AllMakes',
         'AllYears',
-        'FilteredCars'
+        'FilteredCars',
+        'getBodystyles'
     ]),
   },
   watch:{
@@ -941,7 +1117,8 @@ export default {
           minYear: this.filterMin_year,
           maxYear: value,
           minPrice: this.filterMin_price,
-          maxPrice: this.filterMax_price
+          maxPrice: this.filterMax_price,
+          bodyStyle: this.filterBodyStyle,
       }
 
       this.$store.distpatch('FILTER_CARS', params)
@@ -962,7 +1139,8 @@ export default {
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
           minPrice: this.filterMin_price,
-          maxPrice: this.filterMax_price
+          maxPrice: this.filterMax_price,
+          bodyStyle: this.filterBodyStyle,
       }
 
       this.isLoading = true
@@ -980,6 +1158,7 @@ export default {
           parish: this.filterParish,
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
+          bodyStyle: this.filterBodyStyle,
           minPrice: value,
           maxPrice: this.filterMax_price
       }
@@ -1000,24 +1179,51 @@ export default {
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
           minPrice: this.filterMin_price,
+          bodyStyle: this.filterBodyStyle,
           maxPrice: value
       }
+
       this.isLoading = true
       var self = this
+
       setTimeout(function(){
           self.isLoading = false;
           self.$store.dispatch('FILTER_CARS', params)
       }, 1000);
-    } 
+    },
+
+    filterBodyStyle: function( value ) {
+        var params = {
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          minPrice: this.filterMin_price,
+          maxPrice: this.filterMax_price,
+          bodyStyle: value
+       }
+
+      this.isLoading = true
+      var self = this
+
+      setTimeout(function(){
+          self.isLoading = false;
+          self.$store.dispatch('FILTER_CARS', params)
+      }, 1000);
+    }
   },
 	created() {
 
+    if (this.$route.query.bodystyle != undefined ) {
+        this.filterBodyStyle = this.$route.query.bodystyle
+    }
 
    // Pass make list tyoe popular or A-z
     this.makesType = 'popular';
+    
     // Make type can be popular or
     this.$store.dispatch('GET_VEHICLE_MAKE', this.makesType)
-
+    this.$store.dispatch('GET_BODYSTYLES');
     var params = {
         miles: this.filterMiles,
         parish: this.filterParish,
@@ -1035,18 +1241,26 @@ export default {
 		// }, 2000)
 	},
 	methods: {
-
-    changeMakes(string) {
-      this.makesType = string
-
-      this.isLoading = true
-      var self = this
-      setTimeout(function(){
-           self.isLoading = false;
-           self.$store.dispatch('GET_VEHICLE_MAKE', self.makesType)
-      }, 600);
-
+    showFilter() {
+       this.$modal.show('filter')
     },
+     hideFilter() {
+       this.$modal.toggle('filter')
+     },
+     saveFilter() {
+
+     },
+     changeMakes(string) {
+        this.makesType = string
+
+        this.isLoading = true
+        var self = this
+        setTimeout(function(){
+             self.isLoading = false;
+             self.$store.dispatch('GET_VEHICLE_MAKE', self.makesType)
+        }, 600);
+
+     },
 
 		change_view_type() {
 			this.list = !this.list

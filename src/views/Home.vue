@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-     <!-- Page Preloader -->
-<!--       <div id="jsPreloader" class="page-preloader" v-show="preloader">
-        <div class="page-preloader__content-centered">
-          <div class="spinner-grow text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-      </div> -->
-      <!-- End Page Preloader -->
     <header-component></header-component>
     <vue-page-transition name="fade">
         <router-view/>
@@ -19,15 +10,41 @@
 <script>
 import HeaderComponent from '@/components/header/index.vue';
 import FooterComponent from '@/components/footer/index.vue';
+
+import { Plugins } from "@capacitor/core";
+const { PushNotifications } = Plugins;
+ 
+// with type support
+import { FCM } from "capacitor-fcm";
+const fcm = new FCM();
+ 
+// alternatively - without types
+const { FCMPlugin } = Plugins;
+
 export default {
   components: {
     HeaderComponent,
     FooterComponent,
   },
+  mounted() {
+    // this.subscribe()
+  },
   data() {
     return {
-
+      info: 'Tesint info'
     }
+  },
+  methods: {
+     subscribe() {
+        PushNotifications.register()
+        .then(() => {
+
+        fcm
+          .subscribeTo({ topic: "test"})
+          .then(r => alert(`subscrib to topic`))
+          .catch(err => console.log(err));  
+       })
+     } 
   }
 }
 </script>

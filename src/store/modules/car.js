@@ -1,12 +1,18 @@
 import axios from 'axios';
-import api from '../../api/service.js'
+import api from '../../api/services/car-services.js'
 
 const state = {
-	car_details_view: {}
+	car_details_view: {},
+	hot_cars: {},
+	inactive_cars: {},
+	active_cars: {}
 }
 
 const getters = {
-   CarDetails: state => state.car_details_view
+   CarDetails: state => state.car_details_view,
+   HotCars: state => state.hot_cars,
+   InactiveCars: state => state.inactive_cars,
+   ActiveCars: state => state.active_cars
 }
 
 const actions = {
@@ -22,7 +28,7 @@ const actions = {
 
 	GET_CAR_DETAILS({commit, dispatch}, batchId) {
 		console.log('detail loading....')
-
+		
 		api.fetchCarDetails( batchId )
 			.then( res => {
 				console.log('details loaded')
@@ -31,12 +37,69 @@ const actions = {
 			}, error => {
 				console.log(error.response)
 			})
+	},
+
+	COUNT_PAGE_VISTS({commit},car_id) {
+		console.log('hit counter....')
+		api.fetchPage(car_id)
+		   .then( res => {
+				console.log(res)
+				console.log('hit confirmed...')
+			}, error => {
+				console.log('error')
+				console.log(error.response);
+			})
+	},
+
+	GET_HOT_CARS({commit}) {
+
+		console.log('...getting hot cars')
+		api.fetchHotCar()
+			.then( res => {
+				console.log( res )
+				commit('SET_HOT_CARS', res.data)	
+				console.log('...getting cars')
+			}, error => {
+				console.log('error')
+				console.log(error.response)
+			})
+	},
+
+	GET_INACTIVE_CARS( { commit }) {
+		
+		console.log('...getting inactive cars')
+		api.fetchInactiveCar()
+			.then( res => {
+				commit('SET_INACTIVE_CARS', res.data)
+			}, error => {
+				console.log(error.response)
+			})
+	},
+
+	GET_ACTIVE_CARS ({ commit }) {
+		console.log('...getting active car details')
+		api.fetchActiveCar()
+			.then ( res => {
+				console.log(res)
+				commit('SET_ACTIVE_CARS', res.data)
+			}, error => {
+				console.log(error.response)
+			})
 	}
 }
 
 const mutations = {
 	SET_CAR_DETAILS(state, detail) {
-		state.car_details_view  = detail
+		state.car_details_view = detail
+	},
+	SET_HOT_CARS(state, car) {
+		state.hot_cars = car
+	}, 
+	SET_INACTIVE_CARS(state, car) {
+		state.inactive_cars = car
+	},
+	SET_ACTIVE_CARS(state, car) {
+		state.active_cars = car
 	}
 }
 
