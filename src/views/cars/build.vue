@@ -1063,7 +1063,7 @@ export default {
        formData.append('profile', this.formData.profile);
        formData.append('car_entertainment', this.formData.car_seats);
 
-       axios.post('http://127.0.0.1:8000/api/cars/post', formData,
+       axios.post('http://18.206.230.202/api/cars/post', formData,
           {
              headers: {
               'content-type': `multipart/form-data`,
