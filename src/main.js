@@ -57,9 +57,11 @@ Vue.mixin({
    methods: {
     showCarImage(image) {
        return 'http://18.206.230.202/storage/images/'+image
+       // return 'http://127.0.0.1:8000/storage/images/'+image
     },
     showCarThumbnail(thumbnail) {
        return 'http://18.206.230.202/storage/thumbnail/'+thumbnail
+      // return 'http://127.0.0.1:8000/storage/thumbnail/'+thumbnail
     },
     avatar(value) {
       var name = value.split(" ");

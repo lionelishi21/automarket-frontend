@@ -1,6 +1,7 @@
 <template>
   <div class="container space-2  min-height-95vh" >
     <div class="row">
+
     <div class="col-md-12">
         <!-- Stats -->
         <div class="card-deck d-block d-lg-flex card-lg-gutters-3 mb-6">

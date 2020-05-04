@@ -14,7 +14,7 @@
         <div class="alert alert-success" role="alert" v-show="successMsg">
           <h4 class="alert-heading">Well done!</h4>
           <p class="alert-text">Thank you for registering.</p>
-          <p class="alert-text mb-0">Check your email for verification code.</p>
+          <p class="alert-text mb-0">Check your email for verification.</p>
         </div>
         <!-- Form Group -->
          <div class="js-form-message form-group">
@@ -97,12 +97,12 @@ export default {
     	}
     },
     created() {
+
       this.successMsg = false
       if (this.$route.query.user != undefined ) {
          this.successMsg = true
       }
 
-      // this.getUserToken()
     },
     mounted() {
       // initialization of form validation

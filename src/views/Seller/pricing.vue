@@ -54,13 +54,8 @@
                                 <!-- Range Slider -->
                                 <div class="text-secondary font-weight-semi-bold mb-4">
                                    <span class="mr-2"> <img src="@/assets/automarket.png" width="50">Credits </span>
-                                  <span class="ml-n2"> <b>{{credits}} </b></span>
+                                  <span class="ml-n2"> <b>{{credits}} <span class="text-primary">{{free}}</span> </b></span>
                                 </div>
-                                <div class="display-4 text-primary font-weight-semi-bold mb-5">
-                                  <span>$</span>
-                                  {{cost}}
-                                </div>
-                                
                                   <range-slider
                                         style="width: 100%"
                                         class="slider js-range-slider u-range-slider"
@@ -69,6 +64,12 @@
                                         step="1"
                                         v-model="credits">
                                       </range-slider>
+                                <div class="display-4 text-primary font-weight-semi-bold mb-5">
+                                  <span>$</span>
+                                  {{cost}}
+                                </div>
+                                
+                                
                                 <!-- End Range Slider -->
                               </div>
                               <!-- End Monthly Plans -->
@@ -100,7 +101,7 @@
                                 <div class="media-body">
                                   <h3 class="h5">Buy AutoMarket Credit</h3>
                                   <p class="mb-0">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    Buy 5 credits and get one free, buy 10 credits  and get 2 free 
                                   </p>
                                 </div>
                               </div>
@@ -298,15 +299,24 @@ import { mapGetters } from 'vuex';
      ]),
     cost: function() {
 
-      if (this.credits >= 5 && this.credits < 8) {
-         return this.credits * 1000 - 1000
-      }
+      // if (this.credits >= 5 && this.credits < 8) {
+      //    return this.credits * 1000 - 1000
+      // }
 
-      if (this.credits >= 8) {
-         return this.credits * 1000 - 2000
-      }
+      // if (this.credits >= 8) {
+      //    return this.credits * 1000 - 2000
+      // }
 
       return this.credits * 1000
+    },
+    free: function() {
+      if (this.credits >= 5 && this.credits < 10) {
+        return '+ 1 Free Credits'
+      }
+
+      if (this.credits >= 10) {
+       return '+ 2 Free Credits'
+      }
     }
   },
   mounted() {

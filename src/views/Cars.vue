@@ -3,7 +3,7 @@
   <main id="content" role="main">
 
     <!-- Filter Dialog -->
-    <modal  name="filter" width="100%" height="auto" class="js-modal-window u-modal-window">
+    <modal  name="filter" width="100%" height="auto" class="js-modal-window u-modal-window" style="z-index: 1000;  overflow-y: auto;">
       <div class="card-body">
 
           <h3>
@@ -20,7 +20,7 @@
           </div>
           <div class="form-group bg-soft-dark p-2">
               <select class="form-control form-control-sm" v-model="filterMin_year">
-                  <option value="null">Select min year</option>
+                  <option value="null">year</option>
                   <option value="2001">2001</option>
                   <option value="2002">2002</option>
                   <option value="2003">2003</option>
@@ -42,7 +42,7 @@
                   <option value="2019">2019</option>
                 </select>
                  <select class="form-control form-control-sm" v-model="filterMax_year">
-                  <option value="null">Select max year</option>
+                  <option value="null">year</option>
                   <option value="2000">2000</option>
                   <option value="2001">2001</option>
                   <option value="2002">2002</option>
@@ -352,7 +352,7 @@
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
                                       <select class="form-control form-control-sm" v-model="filterMin_year">
-                                        <option value="null">Min year</option>
+                                        <option value="null">Year</option>
                                         <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -386,7 +386,7 @@
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
                                      <select class="form-control form-control-sm" v-model="filterMax_year">
-                                        <option value="null">Max price</option>
+                                        <option value="null">Year</option>
                                         <option value="2000">2000</option>
                                         <option value="2001">2001</option>
                                         <option value="2002">2002</option>
@@ -426,7 +426,7 @@
                                        <label for=""><small>Min</small></label>
                                       <!-- Select -->
                                       <select class="form-control form-control-sm" v-model="filterMin_price">
-                                        <option value="null">Min price</option>
+                                        <option value="null">Price</option>
                                         <option value="100000">100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
@@ -464,7 +464,7 @@
                                          <!-- Select -->
                                       <label for=""><small>Max</small></label>
                                      <select class="form-control form-control-sm" v-model="filterMax_price">
-                                        <option value="null">Max price</option>
+                                        <option value="null">Price</option>
                                         <option value="100000">100,000 JA$</option>
                                         <option value="150000">150,000 JA$</option>
                                         <option value="250000">250,000 JA$</option>
@@ -1030,6 +1030,24 @@ export default {
     makeCheckbox: function() {
         this.$store.dispatch('GET_VEHICLE_MODEL', this.filter.make )
         this.$store.distpatch('FILTER_CARS', this.makeCheckbox)
+    },
+    filterSorting: function(value) {
+
+      var params = {
+        
+          miles: this.filterMiles,
+          parish: this.filterParish,
+          minYear: this.filterMin_year,
+          maxYear: this.filterMax_year,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
+          bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType,
+          sorting: value
+      }
     },
     filterMake: function( value ) {
      

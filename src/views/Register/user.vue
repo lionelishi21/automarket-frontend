@@ -60,13 +60,13 @@
             <hr class="opacity-md my-4">
 
             <div class="mb-5">
-              <p class="text-light">Sign up and get one AutoMarketJM Credit free.</p>
+              <p class="text-light">Sign up and get one AutoMarketJM Credit for free.</p>
             </div>
 
 
             <div class="mb-5">
-              <p class="text-light">What is a credit?</p>
-               <p class="text-light">A credit is use to create premium adds that will ensure that your vehilces are solid fast and seasy</p>
+              <p class="text-light"> What is a credit?</p>
+               <p class="text-light">A credit is use to create premium adds that will ensure that your vehilces are solid fast and easy</p>
             </div>
             </div>
 
@@ -102,7 +102,6 @@
             <p>Fill out the form to get started.</p>
           </div>
           <!-- End Title -->
-          {{validationErrors}}
           <validation-error :errors="validationErrors"></validation-error>
             <!-- Form Group -->
           <div class="js-form-message form-group">
@@ -162,32 +161,16 @@
           </div>
           <!-- End Form Group -->
 
-          <!-- Checkbox -->
-          <div class="js-form-message mb-5">
-            <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
-              <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" 
-                     data-msg="Please accept our Terms and Conditions."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-              <label class="custom-control-label" for="termsCheckbox">
-                <small>
-                  I agree to the
-                  <a class="link-muted" href="#">Terms and Conditions</a>
-                </small>
-              </label>
-            </div>
-          </div>
-          <!-- End Checkbox -->
 
           <!-- Button -->
           <div class="row align-items-center mb-5">
             <div class="col-5 col-sm-6">
               <span class="small text-muted">Already have an account?</span>
-              <router-link to="/signin" tag="a" class="small">Login</router-link>
+              <router-link to="/signin" tag="a" class="small"> Login</router-link>
             </div>
 
             <div class="col-7 col-sm-6 text-right">
-              <button type="submit" class="btn btn-primary transition-3d-hover">Get Started</button>
+              <button type="submit" class="btn btn-primary transition-3d-hover">Sign up</button>
             </div>
           </div>
           <!-- End Button -->

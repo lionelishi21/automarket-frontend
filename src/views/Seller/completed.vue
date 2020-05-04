@@ -8,10 +8,10 @@
                data-parent="#iconChecked">
         </figure>
         <div class="mb-5">
-          <h1 class="h3 font-weight-medium">Your order is completed!</h1>
-          <p>Thank you for your order! your order is completed.</p>
+          <h1 class="h3 font-weight-medium">Your vechiles is completed!</h1>
+          <p>Thank you for using AutoMarketJm, </p>
         </div>
-        <router-link to="/my-account" class="btn btn-primary btn-pill transition-3d-hover px-5" href="classic.html">Continue Browsing</router-link>
+        <router-link to="/my-account" class="btn btn-primary btn-pill transition-3d-hover px-5" href="#">Continue Browsing</router-link>
       </div>
     </div>
     <!-- End Cart Section -->

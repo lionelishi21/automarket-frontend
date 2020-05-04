@@ -22,6 +22,22 @@ const routes = [
 
         },
         {
+          path: '/privacy',
+          name: 'Privacy',
+          component: () => import('../views/Privacy.vue'),
+          meta: {
+            allowAnonymous: true
+          }
+        },
+        {
+          path: '/terms',
+          name: 'Terms',
+          component: () => import('../views/Terms.vue'),
+          meta: {
+            allowAnonymous: true
+          }
+        },
+        {
           path: '/about',
           name: 'about',
           component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
@@ -30,11 +46,14 @@ const routes = [
           }
         },
         {
+          path: '/invoice/:invoiceId',
+          name: 'user-invoice',
+          component: () => import('../views/Invoice.vue')
+        },
+        {
           path: '/order-complete',
           name: 'Order-Complete',
           component: () => import( '../views/Seller/completed.vue'),
-          
-
         },
         {
           path: '/cars',
@@ -76,7 +95,10 @@ const routes = [
         {
           path: '/dealer-register',
           name: 'Dealer-Register',
-          component: () => import('../views/Register/dealer.vue')
+          component: () => import('../views/Register/dealer.vue'),
+          meta: {
+            allowAnonymous: true
+          }
         },
         {
           path: '/user-filters',

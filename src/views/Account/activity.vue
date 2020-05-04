@@ -274,15 +274,11 @@ export default {
     ShowInvoice(params) {
 
         this.isLoading = true
-       
         this.details = params
 
-        var self = this
-        setTimeout(function(){
-            self.isLoading = false
-            self.$modal.show('invoice');
-         }, 1500);
-       
+        
+        this.$router.push('/invoice/1');
+
     }
 	}
 }	

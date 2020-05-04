@@ -27,9 +27,11 @@ const actions = {
 	
 	 GET_PAYMENT_INVOICE({commit}, id) {
 	 	
-	 	fetchPaymentInvoice(id).then( res => {
+	 	api.fetchPaymentInvoice(id).then( res => {
+	 		console.log(res)
 	 		commit('SET_INVOICE_DETAILS', res.data)
-	 	}, error => {
+	 	})
+	 	.catch( error => {
 	 		console.log(error.response)
 	 	})
 
@@ -73,8 +75,7 @@ const actions = {
 	 		.catch( error => {
 	 			console.log(error.response)
 	 		})
-	 }
-
+	 },
 }
 
 const mutations = {

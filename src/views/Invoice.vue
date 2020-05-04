@@ -9,21 +9,21 @@
             <div class="col-sm-6 col-lg-4 order-sm-2 text-sm-right mb-5 mb-sm-0">
               <h1 class="h2 font-weight-medium mb-0">
                 Invoice #
-                <small class="d-block">0043128641</small>
+                <small class="d-block">{{Invoice.reference}}</small>
               </h1>
             </div>
 
             <div class="col-sm-6 col-lg-4 order-sm-1">
               <!-- Logo -->
-              <img class="mb-2" src="../../assets/svg/logos/logo-short.svg" alt="Logo">
-              <h2 class="h1 text-primary font-weight-semi-bold">Front Inc.</h2>
+              <img src="@/assets/automarket.png" width="150">
+              <h2 class="h1 text-primary font-weight-semi-bold">AutoMarket</h2>
               <!-- End Logo -->
 
               <!-- Address -->
               <address>
-                153 Williamson Plaza, Maggieberg, MT 09514, United States
+                153 automarket road , MT 09514, Jamaica
               </address>
-              <small class="d-block text-muted">tel: +1 (062) 109-9222</small>
+              <small class="d-block text-muted">tel: +1 (876) 109-9222</small>
               <!-- End Address -->
             </div>
           </div>
@@ -32,20 +32,16 @@
           <div class="row justify-content-md-between mb-7">
             <div class="col-md-5 col-lg-4">
               <h3 class="h5">Bill to:</h3>
-              <span class="d-block">Sara Williams</span>
+              <span class="d-block">{{Invoice.user.name}}</span>
               <address class="text-secondary mb-0">
-                280 Suzanne Throughway, Breannabury, OR 45801, United States
+               No Billing address
               </address>
             </div>
 
             <div class="col-md-5 col-lg-4 mt-6">
               <dl class="row mb-0">
                 <dt class="col-5 col-md-6 font-weight-normal text-secondary">Invoice date:</dt>
-                <dd class="col-7 col-md-6 font-weight-medium">03/10/2018</dd>
-              </dl>
-              <dl class="row mb-0">
-                <dt class="col-5 col-md-6 font-weight-normal text-secondary">Due date:</dt>
-                <dd class="col-7 col-md-6 font-weight-medium">03/11/2018</dd>
+                <dd class="col-7 col-md-6 font-weight-medium">{{Invoice.created_at}}</dd>
               </dl>
             </div>
           </div>
@@ -56,35 +52,20 @@
             <thead>
               <tr class="text-uppercase text-secondary">
                 <th scope="col" class="font-weight-medium">Description</th>
-                <th scope="col" class="font-weight-medium">Hour</th>
-                <th scope="col" class="font-weight-medium">Quantity</th>
                 <th scope="col" class="font-weight-medium text-right">Price</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" class="font-weight-normal">Design UX and UI</th>
-                <td>5</td>
-                <td>1</td>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th scope="row" class="font-weight-normal">Web project</th>
-                <td>24</td>
-                <td>1</td>
-                <td class="text-right">$1250</td>
-              </tr>
-              <tr>
-                <th scope="row" class="font-weight-normal">SEO</th>
-                <td>6</td>
-                <td>1</td>
-                <td class="text-right">$2000</td>
+              <tr v-for="line in Invoice.line">
+
+                <th scope="row" class="font-weight-normal">{{line.title}}</th>
+                <td class="text-right">{{line.unitPrice}}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr class="h6">
                 <td scope="row">Total</td>
-                <td colspan="3" class="text-right">$3,750</td>
+                <td colspan="3" class="text-right">${{totalItem}}</td>
               </tr>
             </tfoot>
           </table>
@@ -98,14 +79,14 @@
 
               <span class="d-block">
                 <small class="font-weight-medium">email:</small>
-                <small class="text-muted">support@htmlstream.com</small>
+                <small class="text-muted">info@automarketjm.com</small>
               </span>
               <small class="font-weight-medium">telephone:</small>
-              <small class="text-muted">+1 (062) 109-9222</small>
+              <small class="text-muted">+1 (876) 109-9222</small>
             </div>
 
             <div class="col-md-4 col-lg-3 order-md-1 align-self-end">
-              <p class="small text-muted mb-0">&copy; 2019 Htmlstream.</p>
+              <p class="small text-muted mb-0">&copy; 2020 automarketjm.com</p>
             </div>
           </div>
           <!-- End Contacts -->
@@ -123,3 +104,32 @@
   </main>
   <!-- ========== END MAIN ========== -->
 </template>
+<script>
+  import { mapGetters } from 'vuex'
+  export default {
+     data() {
+      return {
+        name: 'Invoice',
+      }
+     },
+     computed: {
+       ...mapGetters([
+          'Invoice'
+        ]),
+       totalItem: function() {
+           let sum = 0;
+              for(let i = 0; i < this.Invoice.line.length; i++){
+                sum += (parseFloat(this.Invoice.line[i].unitPrice))
+              }
+           return sum
+       }
+     },
+     created() {
+        var invoice_id = this.$route.params.invoiceId;
+        this.$store.dispatch('GET_PAYMENT_INVOICE', invoice_id)
+     },
+     methods: {
+
+     }
+  }
+</script>
