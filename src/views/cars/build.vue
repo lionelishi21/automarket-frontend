@@ -61,7 +61,6 @@
           </nav>
           <!-- End Nav -->
         </div>
-
           <div class="col-lg-9" v-if="isComplete == false">
             <!-- Title -->
               <div class="text-center mb-9">
@@ -71,7 +70,7 @@
             <!-- End Title -->
               <form id="uploadForm" @submit.prevent="uploadCar()" enctype="multipart/form-data">
                   <!--Section 1 -->
-                  <div class="mb-7">
+                  <div class="">
                     <!-- Title -->
                     <div class="border-bottom pb-3 mb-5">
                       <h2 class="h6 mb-0 text-primary">Basic Vehicle Information</h2>
@@ -79,28 +78,29 @@
                     <!-- End Title -->
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                  <div class="form-group">
-                    <div class="js-form-message js-focus-state">
-                      <label class="form-label" for="listingAgentPhoneNumber">Make</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <span class="fas fa-car"></span>
-                          </span>
+                        <div class="form-group" :class="{ 'u-has-error' : makeIsInvalid, 'u-has-success' : !makeIsInvalid }">
+                          <div class="js-form-message js-focus-state">
+                            <label class="form-label" for="listingAgentPhoneNumber">Make <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <span class="fas fa-car"></span>
+                                </span>
+                              </div>
+                                 <select class="custom-select" v-model="formData.main.make_id" >
+                                  <option v-for="(make, key, index) in AllMakes" :value="make.id">{{make.name}}</option>
+                                </select>
+                            </div> 
+                            <span class="helper-block text-danger" v-if="makeIsInvalid">Please select vehicle make</span>
+                          </div>
                         </div>
-                           <select class="custom-select" v-model="formData.main.make_id" >
-                            <option v-for="(make, key, index) in AllMakes" :value="make.id">{{make.name}}</option>
-                          </select>
-                      </div>
-                    </div>
                   </div>
-                </div>
                 <div class="col-md-6 mb-3">
                   <!-- Input -->
-                  <div class="form-group">
+                  <div class="form-group" :class="{ 'u-has-error' : modelIsInvalid, 'u-has-success' : !modelIsInvalid }">
                     <div class="js-form-message js-focus-state">
-                      <label class="form-label" for="listingAgentAgentName">Model</label>
-                      <div class="input-group">
+                      <label class="form-label" for="listingAgentAgentName">Model <span class="text-danger">*</span></label>
+                      <div class="input-group ">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="listingAgentAgentNameLabel">
                             <span class="fas fa-car"></span>
@@ -110,6 +110,7 @@
                              <option v-for="(model, key, index) in AllModels" :value="model.id">{{model.name}} - {{model.class}}</option>
                           </select>
                       </div>
+                      <span class="helper-block text-danger" v-if="modelIsInvalid">Please select vehicle model</span>
                     </div>
                   </div>
                   <!-- End Input -->
@@ -117,9 +118,8 @@
 
                 <div class="col-md-6 mb-3">
                   <!-- End Input -->
-                  <div class="form-group">
-                    <div class="js-form-message js-focus-state">
-                      <label class="form-label " for="listingAgentAgentName">Years</label>
+                  <div class="form-group" :class="{ 'u-has-error' : yearIsInvalid, 'u-has-success' : !yearIsInvalid }">
+                      <label class="form-label " for="listingAgentAgentName">Years <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -130,16 +130,15 @@
                              <option v-for="(year, key, index) in AllYears" :value="year.id">{{year.year}}</option>
                           </select>
                       </div>
-                    </div>
                   </div>
+                 <span class="helper-block text-danger" v-if="yearIsInvalid">Please select vehicle year</span>
                   <!-- End Input -->
                </div>
 
                <div class="col-md-6 mb-3">
                   <!-- Input -->
-                  <div class="form-group">
-                    <div class="js-form-message js-focus-state">
-                      <label class="form-label">Transimition</label>
+                  <div class="form-group" :class="{ 'u-has-error' : transmissionIsInvalid, 'u-has-success' : !transmissionIsInvalid }">
+                      <label class="form-label">Transimition <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -150,32 +149,30 @@
                              <option v-for="(detail, key, index) in AllDetails" :value="detail.transmission" >{{detail.transmission}}</option>
                           </select>
                       </div>
-                    </div>
                   </div>
+                <span class="helper-block text-danger" v-if="transmissionIsInvalid">Please select vehicle transimition</span>
                   <!-- End Input -->
                </div>
                 <div class="col-md-6 mb-3">
                   <!-- Input -->
-                  <div class="form-group">
-                    <div class="js-form-message js-focus-state">
-                      <label class="form-label">Milage</label>
+                  <div class="form-group" :class="{ 'u-has-error' : milageIsInvalid, 'u-has-success' : !milageIsInvalid }">
+                      <label class="form-label">Milage <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <span class="fas fa-car"></span>
                           </span>
                         </div>
-                        <input type="text" class="form-control" v-model="formData.main.milage"  placeholder="Enter Milage (optional)">
+                        <input type="number" class="form-control" v-model="formData.main.milage"  placeholder="Enter Milage (optional)">
                       </div>
-                    </div>
                   </div>
+                  <span class="helper-block text-danger"  v-if="milageIsInvalid">Please enter vehicle milage</span>
                   <!-- End Input -->
                 </div>
                <div class="col-md-6 mb-3">
                   <!-- Input -->
-                  <div class="form-group">
-                    <div class="js-form-message js-focus-state">
-                      <label class="form-label">Body Style:</label>
+                  <div class="form-group" :class="{ 'u-has-error' : bodyTypeIsInvalid, 'u-has-success' : !bodyTypeIsInvalid }">
+                      <label class="form-label">Body Style <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -186,8 +183,8 @@
                               <option v-for="body in getBodystyles" value="body.id">{{body.name}}</option>
                             </select>
                       </div>
-                    </div>
                   </div>
+                   <span class="helper-block text-danger"  v-if="bodyTypeIsInvalid">Please select vehicle body style</span>
                   <!-- End Input -->
                 </div>
               </div>
@@ -195,7 +192,7 @@
             <!--End Section 1 -->
 
             <!-- Section 2 -->
-            <div class="mb-7">
+            <div class="">
               <div class="border-bottom pb-3 mb-5">
               <h2 class="h6 text-primary mb-0">Colors</h2>
               </div>
@@ -205,9 +202,8 @@
                 <div class="col-md-6 mb-3">
                     
                       <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-form-message js-focus-state">
-                          <label class="form-label">Exterior Color</label>
+                      <div class="form-group" :class="{ 'u-has-error' : colorIsInvalid, 'u-has-success' : !colorIsInvalid }" >
+                          <label class="form-label">Exterior Color <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">
@@ -218,16 +214,15 @@
                                  <option v-for="color in colors" :value="color.color" >{{ color.color}}</option>
                               </select>
                           </div>
-                        </div>
                       </div>
+                      <span class="helper-block text-danger"  v-if="colorIsInvalid">Please select vehicle exterior color</span>
                       <!-- End Input -->
                     </div>
 
                    <div class="col-md-6 mb-3">
                       <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-form-message js-focus-state">
-                          <label class="form-label">Interior Color</label>
+                      <div class="form-group"  :class="{ 'u-has-error' : incolorIsInvalid, 'u-has-success' : !incolorIsInvalid }"   >
+                          <label class="form-label">Interior Color <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">
@@ -238,8 +233,8 @@
                                  <option v-for="color in colors" :value="color.color" >{{ color.color}}</option>
                               </select>
                           </div>
-                        </div>
                       </div>
+                       <span class="helper-block text-danger"  v-if="incolorIsInvalid">Please select vehicle interior color</span>
                       <!-- End Input -->
                     </div>
               </div>
@@ -248,7 +243,7 @@
             
 
             <!-- Location Section -->
-               <div class="mb-7">
+               <div class="">
                     <div class="border-bottom pb-2 mb-3">
                     <h2 class="h6 text-primary mb-0">Location</h2>
                     </div>
@@ -258,9 +253,8 @@
                       <div class="col-md-6 mb-2">
                           
                             <!-- Input -->
-                            <div class="form-group">
-                              <div class="js-form-message js-focus-state">
-                                <label class="form-label">Parish District</label>
+                            <div class="form-group" :class="{ 'u-has-error' : parishIsInvalid, 'u-has-success' : !parishIsInvalid }">
+                                <label class="form-label">Parish District <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -271,16 +265,15 @@
                                        <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
                                     </select>
                                 </div>
-                              </div>
                             </div>
+                             <span class="helper-block text-danger"  v-if="parishIsInvalid">Please select parish</span>
                             <!-- End Input -->
                           </div>
 
                          <div class="col-md-6 mb-2">
                             <!-- Input -->
-                            <div class="form-group">
-                              <div class="js-form-message js-focus-state">
-                                <label class="form-label">District</label>
+                            <div class="form-group"  :class="{ 'u-has-error' : districtIsInvalid, 'u-has-success' : !districtIsInvalid }" >
+                                <label class="form-label">District <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                   <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -289,17 +282,77 @@
                                   </div>
                                      <input type="text" class="form-control" v-model="formData.main.district"  placeholder="Vehicle District">
                                 </div>
-                              </div>
                             </div>
+                             <span class="helper-block text-danger"  v-if="districtIsInvalid">Please select district</span>
                             <!-- End Input -->
                           </div>
                     </div>
+               </div>
+              <!-- End Location Section -->
+             <!-- Section 8-->
+            <div class="mb-7">
+               
+                  <!-- Price and description -->
+                  <div class="border-bottom pb-2 mb-3">
+                    <h2 class="h6 text-primary  mb-0">Price and Description</h2>
                   </div>
-                  <!-- End Location Section -->
+                  <!-- End Price and description-->
 
+                  <!-- Input -->
+                  <div class="form-group" :class="{ 'u-has-error' : priceIsInvalid, 'u-has-success' : !priceIsInvalid }">
+                    <div class="js-focus-state">
+                      <label class="form-label" for="listingPrice">Price <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="listingPriceLabel">
+                            <span class="fas fa-dollar-sign"></span>
+                          </span>
+                        </div>
+              
+                        <input 
+                         class="form-control" 
+                         name="price" 
+                         v-model="formData.main.price" 
+                         id="listingPrice" 
+                         placeholder="Price"
+                         v-currency="{currency: 'JMD', locale: 'en'}">
+
+                      </div>
+                    </div>
+                     <span class="helper-block text-danger"  v-if="priceIsInvalid">Please enter vehicle price</span>
+                  </div>
+                 
+                  <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="negotiable" name="negotiable" value="true" v-model="formData.negotiable" class="custom-control-input">
+                          <label class="custom-control-label" for="negotiable">Negotiable</label>
+                       </div>
+                  </div>
+
+
+                  <!-- End Input -->
+                  <div class="row">
+                    <div class="col-lg-12 mb-3">
+                      <!-- Input -->
+                      <div class="js-form-message mb-3">
+                        <label class="form-label">
+                          Seller Notes
+                          <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="input-group"  :class="{ 'u-has-error' : noteIsInvalid, 'u-has-success' : !noteIsInvalid }">
+                          <textarea class="form-control" rows="6" name="text" placeholder="Seller Notes" v-model="formData.main.description"></textarea>
+                        </div>
+                        <span class="helper-block text-danger"  v-if="noteIsInvalid">Please enter vehicle price</span>
+                      </div>
+                      <!-- End Input -->
+                    </div>
+                  </div>
+            </div>
+            <!-- End Section 8 -->
 
             <!-- Section 3 -->
-            <div class="mb-7">
+            <div class="">
               <div class="border-bottom pb-3 mb-5">
               <h2 class="h6 text-secondary mb-0">Optional Informations</h2>
               </div>
@@ -402,7 +455,7 @@
                     </div>
             </div>
             <!-- Section 3 -->
-            
+          
             <!-- Section 4 -->
            <div class="mb-5">
               <!-- Title -->
@@ -602,140 +655,6 @@
                     </div>  
                 </div>
                 <!--  End Section 7 -->
-
-                <!-- Section 8-->
-                <div class="mb-7">
-                   
-                      <!-- Price and description -->
-                      <div class="border-bottom pb-2 mb-3">
-                        <h2 class="h6 text-primary  mb-0">Price and Description</h2>
-                      </div>
-                      <!-- End Price and description-->
-
-                      <!-- Input -->
-                      <div class="form-group mb-5">
-                        <div class="js-focus-state">
-                          <label class="form-label" for="listingPrice">Price</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="listingPriceLabel">
-                                <span class="fas fa-dollar-sign"></span>
-                              </span>
-                            </div>
-                  
-                            <input class="form-control" name="price" v-model="formData.main.price" id="listingPrice" placeholder="Price" v-currency="{currency: 'JMD', locale: 'en'}">
-                          </div>
-                        </div>
-                          <div class="custom-control custom-checkbox">
-                              <input type="checkbox" id="negotiable" name="negotiable" value="true" v-model="formData.negotiable" class="custom-control-input">
-                              <label class="custom-control-label" for="negotiable">Negotiable</label>
-                           </div>
-                      </div>
-                      <!-- End Input -->
-                      <div class="row">
-                        <div class="col-lg-12 mb-3">
-                          <!-- Input -->
-                          <div class="js-form-message mb-3">
-                            <label class="form-label">
-                              Seller Notes
-                              <span class="text-danger">*</span>
-                            </label>
-
-                            <div class="input-group">
-                              <textarea class="form-control" rows="6" name="text" placeholder="Seller Notes" v-model="formData.main.description"></textarea>
-                            </div>
-                          </div>
-                          <!-- End Input -->
-                        </div>
-                      </div>
-                </div>
-                <!-- End Section 8 -->
-
-                <!-- Section 9 -->
-               <div class="mb-7">
-                  <!-- Title -->
-                  <div class="border-bottom pb-3 mb-5">
-                    <h2 class="h6 text-secondary mb-0">Your Contacts Information</h2>
-                  </div>
-                  <!-- End Title -->
-
-                  <div class="row">
-                    <div class="col-lg-6 mb-3">
-                      <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-focus-state">
-                          <label class="form-label" for="utilitiesMortgage">First Name</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="utilitiesMortgageLabel">
-                                <span class="fas fa-user"></span>
-                              </span>
-                            </div>
-                            <input type="text" class="form-control" name="first_name" v-model="formData.profile.first_name"  id="utilitiesMortgage" placeholder="First" aria-label="First Name" aria-describedby="utilitiesMortgageLabel">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Input -->
-                    </div>
-
-                    <div class="col-lg-6 mb-3">
-                      <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-focus-state">
-                          <label class="form-label" for="utilitiesEnergy">Last Name</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="utilitiesEnergyLabel">
-                                <span class="fas fa-user"></span>
-                              </span>
-                            </div>
-                            <input type="text" class="form-control" name="energy" id="utilitiesEnergy"  v-model="formData.profile.last_name"  placeholder="Last Name" aria-label="Energy" aria-describedby="utilitiesEnergyLabel">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Input -->
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-6 mb-3">
-                      <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-focus-state">
-                          <label class="form-label" for="utilitiesWater">Email Address</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="utilitiesWaterLabel">
-                                <span class="fas fa-tint"></span>
-                              </span>
-                            </div>
-                            <input type="text" class="form-control" name="water" v-model="formData.profile.email_address"  id="utilitiesWater" placeholder="Email Address" aria-label="Water" aria-describedby="utilitiesWaterLabel">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Input -->
-                    </div>
-
-                    <div class="col-lg-6 mb-3">
-                      <!-- Input -->
-                      <div class="form-group">
-                        <div class="js-focus-state">
-                          <label class="form-label" for="utilitiesHomeInsurance">Phone Number</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="utilitiesHomeInsuranceLabel">
-                                <span class="fas fa-shield-alt"></span>
-                              </span>
-                            </div>
-                            <input type="text" class="form-control" name="HomeInsurance" id="utilitiesHomeInsurance" v-model="formData.profile.phone_number"  placeholder="Home insurance" aria-label="Home insurance" aria-describedby="utilitiesHomeInsuranceLabel">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Input -->
-                    </div>
-                  </div>
-              </div>
-              <!-- End Section 9 -->
      
               <!-- Sectin 10-->
               <div class="mb-7">
@@ -874,8 +793,15 @@
                          <!-- End File Attachment Input -->
                       </div>
                     </div>
+                    <div class="row text-center mt-5">
+                          <div class="col-md-12">
+                          <!-- End uploader image input  -->
+                          <span class="helper-block text-danger text-center" v-if="isFormIsValid">Please select all required field</span>
+                          <span class="helper-block text-danger text-center" v-if="isImageValid">Please select at lease one image</span>
+                          </div>
+                    </div>
                 </div>
-                <!-- End uploader image input  -->
+              
               <button type="submit" class="btn btn-primary btn-block transition-3d-hover">Submit</button>
         </form>
       </div>
@@ -904,11 +830,11 @@ export default {
 	data() {
 		return {
       selectedPlan: '',
-      selectedFile1: null,
-      selectedFile2: null,
-      selectedFile3: null,
-      selectedFile4: null,
-      selectedFile5: null,
+      selectedFile1: false,
+      selectedFile2: false,
+      selectedFile3: false,
+      selectedFile4: false,
+      selectedFile5: false,
       isComplete: false,
       file: '',
       step: 1,
@@ -948,25 +874,25 @@ export default {
       },
       imageData: '',
 			formData: {
-         main: {
-           added_by: null,
-           make_id: null,
-           model_id: null,
-           year_id: null,
-           vehicle_id: null,
-           steering: null,
-           district: null,
-           parish: null,
-           doors: null,
-           negotiable: null,
-           drive_type: null,
-           fuel_type: null,
-           interior_color: null,
-           exterior_color: null,
-           milage: null,
-           description:null,
-           price: null,
-         },
+           main: {
+             added_by: null,
+             make_id: null,
+             model_id: null,
+             year_id: null,
+             vehicle_id: null,
+             steering: null,
+             district: null,
+             parish: null,
+             doors: null,
+             negotiable: null,
+             drive_type: null,
+             fuel_type: null,
+             interior_color: null,
+             exterior_color: null,
+             milage: null,
+             description:null,
+             price: null,
+           },
          others: [],
          images: [],
          profile: [],
@@ -984,12 +910,13 @@ export default {
           required: false,
           default: "default"
       },
-      loading: false
+      loading: false,
+      isFormIsValid: false,
+      isImageValid: false
 		}
 	 },
    watch:{
     'formData.main.make_id': function() {
-
        console.log('watching make... ')
        var payload = { make: this.formData.main.make_id,  model: this.formData.main.model_id, year: this.formData.main.year_id }
        this.$store.dispatch('GET_VEHICLE_MODEL', this.formData.main.make_id)
@@ -1006,7 +933,7 @@ export default {
         this.$store.dispatch('GET_VEHICLE_DETAILS', payload)
     }
    },
-    computed: {
+  computed: {
     ...mapGetters([
         'UserCarDetails',
         'AllDetails',
@@ -1017,14 +944,66 @@ export default {
         'getBodystyles',
         'GetCredits'
     ]),
+    makeIsInvalid() {
+      return !this.formData.main.make_id
+    },
+
+    modelIsInvalid() {
+      return !this.formData.main.model_id
+    },
+
+    yearIsInvalid() {
+      return !this.formData.main.year_id
+    },
+    transmissionIsInvalid() {
+      return !this.formData.main.transmission
+    },
+
+    milageIsInvalid() {
+      return !this.formData.main.milage
+    },
+
+    bodyTypeIsInvalid() {
+      return !this.formData.main.body_type
+    },
+
+    colorIsInvalid() {
+      return !this.formData.main.exterior_color
+    },
+
+    incolorIsInvalid() {
+      return !this.formData.main.interior_color
+    },
+
+    parishIsInvalid() {
+      return !this.formData.main.parish
+    },
+
+    districtIsInvalid() {
+      return !this.formData.main.district
+    },
+
+    priceIsInvalid() {
+      return !this.formData.main.price
+    },
+
+    noteIsInvalid() {
+      return !this.formData.main.description
+    },
+
+
   },
   mounted() {
+
       $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
       // initialization of sticky blocks
       $.HSCore.components.HSStickyBlock.init('.js-sticky-block');
+
   },
   created() {
+
      var slug = this.$route.params.id
+
      this.slug = slug
      this.$store.dispatch('PLAN_DETAILS', slug)
      this.$store.dispatch('GET_VEHICLE_MAKE')
@@ -1032,10 +1011,41 @@ export default {
 
   },
   methods: {
+
+
+   checkForm() {
+
+      if ( !this.makeIsInvalid && !this.modelIsInvalid && !this.yearIsInvalid && !this.transmissionIsInvalid &&
+          !this.milageIsInvalid && !this.bodyTypeIsInvalid && !this.colorIsInvalid && !this.incolorIsInvalid && !this.parishIsInvalid 
+          && !this.districtIsInvalid && !this.priceIsInvalid && !this.noteIsInvalid) {
+          
+          return false
+      }
+      return true
+   },
+
+
    uploadCar() {
        this.loading = true;
-       // this.formData.images = this.imgData
-       // console.log(this.formData)
+       this.formData.images = this.imgData
+       console.log(this.formData)
+
+
+       this.isFormIsValid = this.checkForm()
+
+       if (this.isFormIsValid) {
+          return
+       }
+
+
+       if ( !this.selectedFile1 && !this.selectedFile2 && !this.selectedFile3 && !this.selectedFile4 && !this.selectedFile5 ) {
+          this.isImageValid = true
+          return
+       }
+
+
+
+       debugger;
 
        let formData = new FormData()
 
@@ -1063,29 +1073,34 @@ export default {
        formData.append('profile', this.formData.profile);
        formData.append('car_entertainment', this.formData.car_seats);
 
-       // axios.post('http://127.0.0.1:8000/api/cars/post', formData,
-       axios.post('http://18.206.230.202/api/cars/post', formData,
-          {
-             headers: {
-              'content-type': `multipart/form-data`,
-            },
-          })
-          .then( response => {
-            console.log(response)
 
-            var self = this
-            let responseData = response.data.response
-            console.log(responseData)
-            setTimeout(function() {
-                 var url = '/order-complete'
-                 self.loading = false
-                 self.$router.push(url)
-            }, 1000);
 
-          }, error => {
-            console.log(error.response)
-            this.loading = false
-          })
+      axios.post('http://127.0.0.1:8000/api/cars/post', formData,
+     // axios.post('http://18.206.230.202/api/cars/post', formData,
+        {
+           headers: {
+            'content-type': `multipart/form-data`,
+          },
+        })
+        .then( response => {
+          console.log(response)
+          var self = this
+          let responseData = response.data.response
+          setTimeout(function() {
+
+
+               // var url = '/order-complete'
+               // self.loading = false
+               // self.$router.push(url)
+          }, 1000);
+
+        }, error => {
+          console.log(error.response)
+          this.loading = false
+        })
+
+
+   
     },
     onFileSelected(event) {
 

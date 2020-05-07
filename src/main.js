@@ -13,17 +13,6 @@ import VueCurrencyFilter from 'vue-currency-filter'
 import * as VueGoogleMaps from "vue2-google-maps";
 import PrettyCheckbox from 'pretty-checkbox-vue';
 
-// import vuetify from '@/plugins/vuetify' // path to vuetify export
-
-// import VueStripeCheckout from 'vue-stripe-checkout'
-
-// base/global options
-// these options can be overridden 
-// by the options in the .open(options) 
-// function.
-
-// Vue.use(VueStripeCheckout, options)
-
 
 Vue.use(PrettyCheckbox);
 Vue.use(VueGoogleMaps, {
@@ -32,7 +21,6 @@ Vue.use(VueGoogleMaps, {
     libraries: "places" // necessary for places input
   }
 });
-
 
 Vue.use(VueCurrencyFilter, {
   symbol : 'JMD $',

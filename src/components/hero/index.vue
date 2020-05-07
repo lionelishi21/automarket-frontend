@@ -139,7 +139,7 @@
                     </li>
                   </ul>
 
-                  <button type="button" @click="goToRegister('seller')" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
+                  <button type="button" @click="goToCars()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
                 </div>
                 <!-- End Content -->
               </div>
@@ -150,7 +150,7 @@
               <!-- Pricing -->
               <div class="card border-0 shadow-sm">
                 <header class="card-header border-0 position-relative bg-wanrning  p-4 text-center ">
-                  <h2 class="h2 mb-1"><strong>Sales Rep.</strong></h2>
+                  <h2 class="h2 mb-1"><strong>Earn Money</strong></h2>
                   <span class="d-block">
                       <figure class="ie-buyer">
                          <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
