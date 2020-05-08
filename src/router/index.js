@@ -51,8 +51,8 @@ const routes = [
           component: () => import('../views/Invoice.vue')
         },
         {
-          path: '/order-complete',
-          name: 'Order-Complete',
+          path: '/ads-complete',
+          name: 'Ads-Complete',
           component: () => import( '../views/Seller/completed.vue'),
         },
         {
