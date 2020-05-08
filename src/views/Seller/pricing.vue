@@ -53,8 +53,10 @@
                               <div id="pricingMonthly">
                                 <!-- Range Slider -->
                                 <div class="text-secondary font-weight-semi-bold mb-4">
+                                    <h3 class="ml-n2"> <b><span class="text-primary">{{free}}</span> </b></h3><br>
+                                    br
                                    <span class="mr-2"> <img src="@/assets/automarket.png" width="50">Credits </span>
-                                  <span class="ml-n2"> <b>{{credits}} <span class="text-primary">{{free}}</span> </b></span>
+                                  <span class="ml-n2"> <b>{{credits}}</b></span>
                                 </div>
                                   <range-slider
                                         style="width: 100%"
@@ -299,23 +301,31 @@ import { mapGetters } from 'vuex';
      ]),
     cost: function() {
 
-      // if (this.credits >= 5 && this.credits < 8) {
-      //    return this.credits * 1000 - 1000
-      // }
+      if (this.credits < 5 ) {
+         return this.credits * 800
+      }
 
-      // if (this.credits >= 8) {
-      //    return this.credits * 1000 - 2000
-      // }
-
-      return this.credits * 1000
-    },
-    free: function() {
       if (this.credits >= 5 && this.credits < 10) {
-        return '+ 1 Free Credits'
+        return this.credits * 600
       }
 
       if (this.credits >= 10) {
-       return '+ 2 Free Credits'
+         return this.credits * 400
+      }
+    },
+    free: function() {
+
+
+      if (this.credits < 5 ) {
+         return ' 800 per credit'
+      }
+
+      if (this.credits >= 5 && this.credits < 10) {
+        return ' 600 per credit'
+      }
+
+      if (this.credits >= 10) {
+       return ' $400 per credit'
       }
     }
   },

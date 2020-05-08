@@ -9,7 +9,7 @@
             <p class="text-white">Welcome to AutoMarket JM ( Jamaica ) </p>
              <!-- Content -->
             <div class="card-body pt-0 px-5 pb-1">
-                 <button type="button" @click="goToRegister()" class="btn btn-block btn-primary transition-3d-hover">Sell my Car</button>
+                 <button type="button" @click="goToOnboarding()" class="btn btn-block btn-primary transition-3d-hover">Sell my Car</button>
             </div>
             <!-- End Content -->
             <small class="text-white ">or</small>
@@ -87,7 +87,7 @@
 
                   <button 
                     type="button" 
-                    @click="goToRegister()" 
+                    @click="goToOnboarding()" 
                     class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">
                         Get Started
                    </button>
@@ -239,6 +239,9 @@ import { isMobile } from 'mobile-device-detect';
       goToRegister(value = null) {
 
         this.$router.push('/dealer-register?user='+value)
+      },
+      goToOnboarding() {
+         this.$router.push('/user-onboarding')
       },
       goToCars() {
         this.$router.push('/cars')

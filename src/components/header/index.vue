@@ -145,7 +145,7 @@
     </div>
   </div>
     
-    <!-- TODO: to be place in a component by itself  -->
+    <!-- TODO: to be anace in a component by itself  -->
     <!-- Account Sidebar Navigation -->
     <transition name="slide">
        <aside v-show="sidebarContent" class="u-sidebar">
@@ -239,12 +239,12 @@
                       </router-link>
                     </li>
 
-                    <li class="u-sidebar--account__list-item">
+                <!--     <li class="u-sidebar--account__list-item">
                       <router-link to="/plans" class="u-sidebar--account__list-link" href="#">
                         <span class="fas fa-cubes u-sidebar--account__list-icon mr-2"></span>
                         Plans
                       </router-link>
-                    </li>
+                    </li> -->
                     <li class="u-sidebar--account__list-item">
                       <router-link to="/credits" class="u-sidebar--account__list-link" href="#">
                         <span class="fas fa-cubes u-sidebar--account__list-icon mr-2"></span>

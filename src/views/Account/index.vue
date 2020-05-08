@@ -120,11 +120,11 @@
                           </router-link>
 
                           <!-- Others -->
-                         <router-link tag="li" active-class="active" to="/plans" class="nav-item u-header__nav-item">
+                    <!--      <router-link tag="li" active-class="active" to="/plans" class="nav-item u-header__nav-item">
                             <a class="nav-link u-header__nav-link" href="#l">
                              <i class="fas fa-handshake"></i>
                             Plans</a>
-                          </router-link>
+                          </router-link> -->
                           <!-- Others -->
 
                              <!-- Others -->

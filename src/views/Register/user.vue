@@ -38,61 +38,84 @@
     <div class="container">
       <div class="row">
       <div class="col-md-6">
-          <div id="stickyBlockStartPoint" class="col-md-12">
-        <!-- Sticky Block -->
-        <div class="js-sticky-block"
-             data-has-sticky-header="true"
-             data-offset-target="#logoAndNav"
-             data-sticky-view="md"
-             data-start-point="#stickyBlockStartPoint"
-             data-end-point="#stickyBlockEndPoint"
-             data-offset-top="24"
-             data-offset-bottom="24">
-          <!-- Pricing -->
-          <div class="position-relative bg-primary shadow-primary-lg text-white rounded z-index-2 p-7">
-            <span class="d-block">
-              <span class="align-top">$</span>
-              <span class="display-4 font-weight-semi-bold">JMD 1,000</span>
-              <span class="font-size-3">.00</span>
-              <span class="d-block">Per Credit</span>
-            </span>
+            <!-- Pricing Section -->
+            <div class="container">
+              <div class="w-lg-75 mx-lg-auto">
+                <div class="row align-items-sm-end mx-n2 mb-7">
+                  <div class="col-sm-6 col-md-4 px-2 mb-3 mb-md-0">
+                    <!-- Pricing -->
+                    <div class="card text-center shadow">
+                      <div class="card-header border-0 pt-5 px-5">
+                        <img class="mb-2" src="../../assets/svg/components/one-dot.svg" alt="Image Description" width="60px">
+                        <h4 class="h6 mb-3">Starter</h4>
+                        <span class="font-size-2 font-weight-semi-bold">Free</span>
+                      </div>
+                      <div class="card-body pt-0 pb-5 px-5">
+                        <ul class="list-group list-group-flush list-group-borderless text-secondary mb-4">
+                          <li class="list-group-item">Community support</li>
+                          <li class="list-group-item">400+ pages</li>
+                        </ul>
+                        <button type="button" class="btn btn-sm btn-block btn-outline-primary transition-3d-hover">Create Account</button>
+                      </div>
+                    </div>
+                  </div>
 
-            <hr class="opacity-md my-4">
+                  <div class="col-sm-6 col-md-4 px-2 mb-3 mb-md-0">
+                    <!-- Pricing -->
+                    <div class="card text-center shadow">
+                      <div class="card-header border-0 pt-5 px-5">
+                        <img class="mb-2" src="../../assets/svg/components/two-dots.svg" alt="Image Description" width="60px">
+                        <h4 class="h6 mb-3">Individual</h4>
+                        <span class="font-size-2 font-weight-semi-bold">$59</span>
+                      </div>
+                      <div class="card-body pt-0 pb-5 px-5">
+                        <ul class="list-group list-group-flush list-group-borderless text-secondary mb-4">
+                          <li class="list-group-item">Community support</li>
+                          <li class="list-group-item">400+ pages</li>
+                          <li class="list-group-item">100+ header variations</li>
+                        </ul>
+                        <button type="button" class="btn btn-sm btn-block btn-primary transition-3d-hover">Try Free for 14 days</button>
+                      </div>
+                    </div>
+                    <!-- End Pricing -->
+                  </div>
 
-            <div class="mb-5">
-              <p class="text-light">Sign up and get one AutoMarketJM Credit for free.</p>
+                  <div class="col-sm-6 col-md-4 px-2">
+                    <!-- Pricing -->
+                    <div class="card text-center shadow">
+                      <div class="card-header border-0 pt-5 px-5">
+                        <img class="mb-2" src="../../assets/svg/components/three-dots.svg" alt="Image Description" width="60px">
+                        <h4 class="h6 mb-3">Enterprise</h4>
+                        <span class="font-size-2 font-weight-semi-bold">$599</span>
+                      </div>
+                      <div class="card-body pt-0 pb-5 px-5">
+                        <ul class="list-group list-group-flush list-group-borderless text-secondary mb-4">
+                          <li class="list-group-item">Community support</li>
+                          <li class="list-group-item">400+ pages</li>
+                          <li class="list-group-item">100+ header variations</li>
+                          <li class="list-group-item">20+ home page options</li>
+                        </ul>
+                        <button type="button" class="btn btn-sm btn-block btn-primary transition-3d-hover">Try Free for 14 days</button>
+                      </div>
+                    </div>
+                    <!-- End Pricing -->
+                  </div>
+                </div>
+
+                <!-- Link -->
+                <div class="text-center">
+                  <a href="../pages/careers.html">
+                    <span class="text-secondary">Contact us for</span>
+                    <span class="btn btn-icon btn-sm btn-soft-primary rounded-circle mx-2">
+                      <span class="fas fa-angle-right btn-icon__inner"></span>
+                    </span>
+                    <span class="text-secondary">custom plans</span>
+                  </a>
+                </div>
+                <!-- End Link -->
+              </div>
             </div>
-
-
-            <div class="mb-5">
-              <p class="text-light"> What is a credit?</p>
-               <p class="text-light">A credit is use to create premium adds that will ensure that your vehilces are solid fast and easy</p>
-            </div>
-            </div>
-
-              <div class="mb-5">
-             
-
-            <!-- <a class="btn btn-white btn-pill transition-3d-hover mb-2" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/">
-              Get Started
-              <span class="fas fa-arrow-right text-primary font-size-1 ml-2"></span>
-            </a> -->
-
-            <p class="small text-white-70">No credit card required.</p>
-
-            <!-- SVG Shape -->
-            <div class="position-absolute bottom-0 right-0 w-100 max-width-15 z-index-n1">
-              <figure class="ie-abstract-shapes-11">
-                <img class="js-svg-injector rounded-bottom" src="../../assets/svg/components/abstract-shapes-11.svg" alt="Image Description"
-                     data-parent="#pricingSection">
-              </figure>
-            </div>
-            <!-- End SVG Shape -->
-          </div>
-          <!-- End Pricing -->
-        </div>
-        <!-- End Sticky Block -->
-      </div>
+            <!-- End Pricing Section -->
       </div>
       <div class="col-md-6">
         <form class=""  @submit.prevent="register(user)">
@@ -103,13 +126,10 @@
           </div>
           <!-- End Title -->
           <validation-error :errors="validationErrors"></validation-error>
-            <!-- Form Group -->
+           <!-- Form Group -->
           <div class="js-form-message form-group">
             <label class="form-label" for="signinSrEmail">Full Name</label>
-            <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name" aria-label="Full name" 
-                   data-msg="Please enter a valid email address."
-                   data-error-class="u-has-error"
-                   data-success-class="u-has-success">
+            <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name">
 
                    <div class="invalid-feedback">
                       {{errors.name}}
@@ -190,8 +210,8 @@ export default {
   },
 	data() {
 		return {
-       loading: false,
-			 user: {
+      loading: false,
+		  user: {
 				name: null,
 				email: null,
 				password: null,

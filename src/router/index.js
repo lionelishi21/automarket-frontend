@@ -90,7 +90,10 @@ const routes = [
         {
           path: '/user-onboarding',
           name: 'User-Onboard',
-          component: () => import('../views/Register/onboarding.vue')
+          component: () => import('../views/Register/onboarding.vue'),
+          meta: {
+            allowAnonymous: true
+          }
         },
         {
           path: '/dealer-register',
