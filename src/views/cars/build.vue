@@ -1087,11 +1087,9 @@ export default {
           var self = this
           let responseData = response.data.response
           setTimeout(function() {
-
-
-               // var url = '/order-complete'
-               // self.loading = false
-               // self.$router.push(url)
+               var url = '/order-complete'
+               self.loading = false
+               self.$router.push(url)
           }, 1000);
 
         }, error => {
