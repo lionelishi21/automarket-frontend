@@ -273,11 +273,10 @@ export default {
     goToDealerSignUp() {
       
       this.loading = true
-
       let self = this
       setTimeout(function() {
         self.loading = false
-        self.$router.push('/dealer-register')
+        self.$router.push('/dealer-signup')
       }, 1000)
     },
     goToBuyerSignUp() {

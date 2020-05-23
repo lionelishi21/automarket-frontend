@@ -2,7 +2,7 @@
 <div>
 
 <!-- Page Preloader -->
-  <div id="jsPreloader" class="page-preloader" v-show="isComplete">
+  <div id="jsPreloader" class="page-preloader" v-show="loading">
       <div class="page-preloader__content-centered">
         <div class="spinner-grow text-primary" role="status">
           <span class="sr-only">Loading...</span>
@@ -802,7 +802,7 @@
                     </div>
                 </div>
               
-              <button type="submit" class="btn btn-primary btn-block transition-3d-hover">Submit</button>
+              <button type="submit" class="btn btn-primary btn-block transition-3d-hover" :disabled="disabled">Submit</button>
         </form>
       </div>
       </div>
@@ -829,6 +829,7 @@ export default {
   },
 	data() {
 		return {
+      disabled: false,
       selectedPlan: '',
       selectedFile1: false,
       selectedFile2: false,
@@ -1027,25 +1028,19 @@ export default {
 
    uploadCar() {
        this.loading = true;
+       this.disabled = true;
+
        this.formData.images = this.imgData
-       console.log(this.formData)
-
-
        this.isFormIsValid = this.checkForm()
 
        if (this.isFormIsValid) {
           return
        }
 
-
        if ( !this.selectedFile1 && !this.selectedFile2 && !this.selectedFile3 && !this.selectedFile4 && !this.selectedFile5 ) {
           this.isImageValid = true
           return
        }
-
-
-
-       debugger;
 
        let formData = new FormData()
 
@@ -1074,9 +1069,8 @@ export default {
        formData.append('car_entertainment', this.formData.car_seats);
 
 
-
-      // axios.post('http://127.0.0.1:8000/api/cars/post', formData,
-     axios.post('http://18.206.230.202/api/cars/post', formData,
+      axios.post('http://127.0.0.1:8000/api/cars/post', formData,
+     // axios.post('http://18.206.230.202/api/cars/post', formData,
         {
            headers: {
             'content-type': `multipart/form-data`,
@@ -1084,13 +1078,14 @@ export default {
         })
         .then( response => {
           console.log(response)
+
           var self = this
           let responseData = response.data.response
-          setTimeout(function() {
-               var url = '/order-complete'
-               self.loading = false
-               self.$router.push(url)
-          }, 1000);
+          var url = '/ads-complete'
+        
+          this.loading = false
+          this.disabled = false
+          this.$router.push(url)
 
         }, error => {
           console.log(error.response)

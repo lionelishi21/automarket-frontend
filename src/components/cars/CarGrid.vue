@@ -34,9 +34,9 @@
 	  <div class="card-body shadow-soft">
 	    <!-- Location -->
 	    <div class="">
-	        <h2 class="h5">
-             <router-link tag="a" :to="{ path:'car/details/'+ car.batch_id }"><small>{{car.year}} {{car.make}} {{car.model}} </small></router-link>
-            </h2>
+	        <h5>
+              <router-link tag="a" :to="{ path:'car/details/'+ car.batch_id }"><small>{{car.year}} <br> {{car.make}} {{car.model}} </small></router-link>
+            </h5>
 	    </div>
 	    <!-- End Location -->
 

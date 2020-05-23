@@ -31,4 +31,8 @@ export default {
 		return Api().post('/cars/post', params, config)
 	},
 
+	rotateAutoImage(id) {
+		return Api().get('/cars/rotate/image/'+id)
+	}
+
 }

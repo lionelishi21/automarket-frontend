@@ -1,15 +1,25 @@
 <template>
 <div class="container space-top-1 space-top-sm-2">
+	<!-- Page Preloader -->
+  	<div id="jsPreloader" class="page-preloader" v-show="loading">
+      <div class="page-preloader__content-centered">
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+<!-- End Page Preloader -->
+
 	<div class="row">
 		<div class="col-md-4">
-			   <!-- Gallery -->
+
         <a class="js-fancybox u-media-viewer mb-3" href="javascript:;"
-           :data-src="'http://18.206.230.202/storage/images/'+CarDetails.image"
+           :data-src="showCarImage(CarDetails.image)"
            data-fancybox="fancyboxGalleryExample1"
            data-caption="image #01"
            data-speed="700"
            data-is-infinite="true">
-          <img class="img-fluid w-100" :src="'http://18.206.230.202/storage/thumbnail/'+CarDetails.image" alt="Image Description">
+          <img class="img-fluid w-100" :src="showCarThumbnail(CarDetails.image)+'?'+Date.now()" alt="Image Description">
 
           <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
             <span class="btn btn-icon btn-sm btn-white">
@@ -18,12 +28,30 @@
           </div>
         </a>
         <img class="js-fancybox d-none" v-for="img in CarDetails.images" alt="Image Description"
-
              data-fancybox="fancyboxGalleryExample1"
-             :data-src="'http://18.206.230.202/storage/images/'+img.image"
+             :data-src="showCarImage(img.image)"
              data-caption="Front in frames - image #02"
              data-speed="700"
              data-is-infinite="true">
+         <div class="row">
+	         <div class="col-md-6" v-for="imge in CarDetails.images">
+
+	         	   <div class="card mb-4 mb-md-0" >
+	         		 <img class="img-fluid" :key="imge.id" alt="Image Description"
+			             :src="showCarImage(imge.image)+'?'+Date.now()">
+			          <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
+
+			            <span class="btn btn-icon btn-sm btn-white" @click="rotateImage(imge.id)">
+			              <span class="fas fa-undo btn-icon__inner"></span>
+			            </span>
+
+			             <span class="btn btn-icon btn-sm btn-white" @click="removeImage(imge.id)">
+			               <span class="fas fa-trash btn-icon__inner"></span>
+			            </span>
+			          </div>
+			       </div>
+	         </div>
+         </div>
 		</div>
 		<div class="col-md-8">
 			<div class="row">
@@ -430,28 +458,54 @@ export default {
 	 },
 	data() {
 		return {
-			formData: {
-				main: {
-					milage: ''
-				},
-		        parishes: [
-			        { name: 'Kingston' },
-			        { name: 'St. Andrew' },
-			        { name: 'Portland' },
-			        { name: 'St.Thomas' },
-			        { name: 'St. Catherine' },
-			        { name: 'St. Mary'},
-			        { name: 'St. Mary'},
-			        { name: 'St. Ann'},
-			        { name: 'Manchester'},
-			        { name: 'Clarendon'},
-			        { name: 'Hanover'},
-			        { name: 'Westmoreland'},
-			        { name: 'St. James'},
-			        { name: 'Trelawny'},
-			        { name: 'St. Elizabeth'}
-		      ],
-			}
+		   loading: false,
+		   formData: {
+	           main: {
+	             added_by: null,
+	             make_id: null,
+	             model_id: null,
+	             year_id: null,
+	             vehicle_id: null,
+	             steering: null,
+	             district: null,
+	             parish: null,
+	             doors: null,
+	             negotiable: null,
+	             drive_type: null,
+	             fuel_type: null,
+	             interior_color: null,
+	             exterior_color: null,
+	             milage: null,
+	             description:null,
+	             price: null,
+	           },
+	         others: [],
+	         images: [],
+	         profile: [],
+			 car_entertainment: [],
+	         car_safety: [],
+	         car_others: [],
+	         car_features: [],
+	         car_seats: [],
+		  },
+		  parishes: [
+		        { name: 'Kingston' },
+		        { name: 'St. Andrew' },
+		        { name: 'Portland' },
+		        { name: 'St.Thomas' },
+		        { name: 'St. Catherine' },
+		        { name: 'St. Mary'},
+		        { name: 'St. Mary'},
+		        { name: 'St. Ann'},
+		        { name: 'Manchester'},
+		        { name: 'Clarendon'},
+		        { name: 'Hanover'},
+		        { name: 'Westmoreland'},
+		        { name: 'St. James'},
+		        { name: 'Trelawny'},
+		        { name: 'St. Elizabeth'}
+	      ],
+			
 		}
 	},
 	watch: {
@@ -487,19 +541,7 @@ export default {
 	  $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
 	},
 	created() {
-		var batch_id = this.$route.params.id;
-	
-		this.$store.dispatch('GET_CAR_DETAILS', batch_id)
-		this.$store.dispatch('GET_VEHICLE_MAKE')
-        this.$store.dispatch('GET_BODYSTYLES');
-
-       
-
-        var payload = { make: this.CarDetails.make_id, model: this.CarDetails.mode_id, year: this.CarDetails.year}
-        this.$store.dispatch('GET_VEHICLE_YEARS', payload)
-
-        this.formData.main.milage = this.CarDetails.milage
-
+		this.initData()
 	},
 	mounted() {
 
@@ -511,7 +553,68 @@ export default {
 	   this.$store.dispatch('GET_VEHICLE_DETAILS', payload)
 	},
 	methods: {
+		initData() {
+			var batch_id = this.$route.params.id;
+	
+			this.$store.dispatch('GET_CAR_DETAILS', batch_id)
+			this.$store.dispatch('GET_VEHICLE_MAKE')
+	        this.$store.dispatch('GET_BODYSTYLES');
 
+	        var payload = { make: this.CarDetails.make_id, model: this.CarDetails.mode_id, year: this.CarDetails.year}
+	        this.$store.dispatch('GET_VEHICLE_YEARS', payload)
+
+	        this.formData.main.milage = this.CarDetails.milage
+
+		},
+		updateInformation() {
+			
+			this.loading = true
+
+			let formData = new FormData()
+			formData.append('main', JSON.stringify(this.formData.main))	
+			formData.append('car_safety', this.formData.car_safety);
+	        formData.append('car_others', this.formData.others);
+	        formData.append('car_features', this.formData.car_features);
+	        formData.append('car_seats', this.formData.car_seats);
+	        formData.append('profile', this.formData.profile);
+	        formData.append('car_entertainment', this.formData.car_seats);
+			
+			this.$store.dispatch('UPDATE_ADS', formData,
+			  {
+		          headers: {
+		            'content-type': `multipart/form-data`,
+		          },
+		       }
+			)
+		},
+		rotateImage(image_id) {
+
+			this.loading = true
+			this.$store.dispatch('ROTATE_IMAGE', image_id)
+				.then( response => {
+					
+					this.$nextTick(() => {
+						this.loading = false
+			          // Add the component back in
+			          this.initData()
+			        });
+					
+				})
+		},
+		removeImage(image_id) {
+
+			this.loading = true
+			this.$store.dispatch('REMOVE_IMAGE', image_id)
+
+		}
 	}
 }
 </script>
+
+
+
+
+
+
+
+

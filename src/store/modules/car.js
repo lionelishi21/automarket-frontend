@@ -85,7 +85,22 @@ const actions = {
 			}, error => {
 				console.log(error.response)
 			})
+	},
+	ROTATE_IMAGE( context , id) {
+		return new Promise((resolve, reject) => {
+			console.log('...rotating images')
+			api.rotateAutoImage(id)
+				.then( response => {
+					console.log(response)
+					resolve(response)
+				})
+				.catch(error => {
+					console.log(error.response)
+				})
+
+			}) 
 	}
+
 }
 
 const mutations = {

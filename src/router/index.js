@@ -96,9 +96,25 @@ const routes = [
           }
         },
         {
-          path: '/dealer-register',
-          name: 'Dealer-Register',
-          component: () => import('../views/Register/dealer.vue'),
+          path: '/dealer-signup',
+          name: 'Dealer-Signup',
+          component: () => import('../views/Register/dealer-register.vue'),
+          meta: {
+            allowAnonymous: true
+          }
+        },
+        {
+          path: '/autorep-register',
+          name: 'AutoRep-Register',
+          component: () => import('../views/Register/autorep-register.vue'),
+          meta: {
+            allowAnonymous: true
+          }
+        },
+        {
+          path: '/autorep',
+          name: 'AutoRep',
+          component: () => import('../views/Register/autorep.vue'),
           meta: {
             allowAnonymous: true
           }
@@ -221,7 +237,13 @@ const routes = [
           path: '/activity',
           name: 'Activity',
           component: () => import('../views/Account/activity.vue')
+         },
+         {
+             path: '/browse-dealer',
+             name: 'Browse-Dealer',
+             component: () => import('../views/Account/browse-dealer.vue')
          }
+        
       ]
   },
   {

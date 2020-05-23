@@ -173,8 +173,10 @@
                     </div>
                     <div class="ml-3">
                      {{username}}
-                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1">Pro</span></span>
-                      <span class="u-sidebar--account__holder-text">Seller Account</span>
+
+                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1">{{useraccount}}</span></span>
+
+                      <span class="u-sidebar--account__holder-text">User Account</span>
                     </div>
 
                   <!-- Settings -->
@@ -213,12 +215,23 @@
                         Dashboard
                       </router-link>
                     </li>
+
+
                      <li class="u-sidebar--account__list-item">
                       <router-link to="/build" class="u-sidebar--account__list-link">
                         <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
                         Post an Ad
                       </router-link>
                     </li>
+
+
+                     <li class="u-sidebar--account__list-item">
+                      <router-link to="/browse-dealer" class="u-sidebar--account__list-link">
+                        <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
+                       Browse Dealer
+                      </router-link>
+                    </li>
+
                     <li class="u-sidebar--account__list-item">
                       <router-link to="/edit-profile" class="u-sidebar--account__list-link"> 
                         <span class="fas fa-user-circle u-sidebar--account__list-icon mr-2"></span>
@@ -435,7 +448,12 @@ export default {
       if (this.getCurrentUser) {
           return this.getCurrentUser.name
       }
-     
+    },
+
+    useraccount: function() {
+      if (this.getCurrentUser.role_id == 3) {
+        return 'Dealer Rep.'
+      }
     }
   },
   created() {

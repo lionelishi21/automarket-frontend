@@ -45,7 +45,9 @@
               <div class="card border-0 shadow-sm">
                 <header id="SVGwave1BottomShapeID1" class="svg-preloader card-header border-0 position-relative bg-danger
                  text-white p-5 text-center">
-                  <h2 class="h2 mb-1"><strong>Sell My Car </strong></h2>
+                     <h3>
+                      Sell My Car(s)
+                    </h3>
                   <span class="d-block">
                       <!-- SVG Icon -->
                       <figure class="ie-for-sale">
@@ -66,25 +68,6 @@
 
                 <!-- Content -->
                 <div class="card-body pt-0 px-2 pb-1">
-                  <ul class="list-group list-group-flush list-group-borderless mb-4">
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                        Upload a car for free
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                        Get alerts went person view your car(s)
-                      </div>
-                    </li>
-                  </ul>
-
                   <button 
                     type="button" 
                     @click="goToOnboarding()" 
@@ -101,7 +84,9 @@
               <!-- Pricing -->
               <div class="card border-0 shadow-sm">
                 <header id="SVGwave1BottomShapeID2" class="svg-preloader card-header border-0 position-relative bg-wanrning  p-5 text-center ">
-                  <h2 class="h2 mb-1"><strong>Find My Car</strong></h2>
+                     <h3>
+                      Find My Car
+                    </h3>
                   <span class="d-block">
                       <figure class="ie-buyer">
                          <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
@@ -120,25 +105,6 @@
 
                 <!-- Content -->
                 <div class="card-body pt-0 px-2 pb-">
-                  <ul class="list-group list-group-flush list-group-borderless mb-4">
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                       Get cars alerts from your favourite dealer
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                        Get the best prices
-                      </div>
-                    </li>
-                  </ul>
-
                   <button type="button" @click="goToCars()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
                 </div>
                 <!-- End Content -->
@@ -150,7 +116,11 @@
               <!-- Pricing -->
               <div class="card border-0 shadow-sm">
                 <header class="card-header border-0 position-relative bg-wanrning  p-4 text-center ">
-                  <h2 class="h2 mb-1"><strong>Earn Money</strong></h2>
+                    <h3>
+                      Dealer Rep
+                      <small class="text-muted">(DR)</small>
+                      <!-- <small class="text-muted">Earn $$$</small> -->
+                    </h3>
                   <span class="d-block">
                       <figure class="ie-buyer">
                          <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
@@ -168,34 +138,7 @@
 
                 <!-- Content -->
                 <div class="card-body pt-0 px-2">
-                  <ul class="list-group list-group-flush list-group-borderless mb-4">
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                       Become automarker sales rep and earn cash
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                        Earn cash by referrals
-                      </div>
-                    </li>
-                      <li class="list-group-item">
-                      <div class="d-flex align-items-center">
-                        <span class="btn btn-xs btn-icon btn-soft-primary rounded-circle mr-3">
-                          <span class="fas fa-check btn-icon__inner"></span>
-                        </span>
-                        Keep track of earnings
-                      </div>
-                    </li>
-                  </ul>
-
-                  <button type="button" @click="goToRegister('sales')" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
+                  <button type="button" @click="goToDeailerRep()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
                 </div>
                 <!-- End Content -->
               </div>
@@ -245,6 +188,9 @@ import { isMobile } from 'mobile-device-detect';
       },
       goToCars() {
         this.$router.push('/cars')
+      },
+      goToDeailerRep() {
+         this.$router.push('/autorep')
       }
     }
   }

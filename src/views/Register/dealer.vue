@@ -11,11 +11,12 @@
       </div>
     </div>
         <!-- Title Section -->
-    <div class="bg-light mb-10">
+
+    <div class="bg-light">
       <div class="container py-5">
         <div class="row align-items-sm-center">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <h1 class="h4 mb-0">Register</h1>
+          <div class="col-sm-6 mb-sm-0">
+            <h1 class="h4 mb-0">Dealer <abbr> Rep </abbr> Register</h1>
           </div>
 
           <div class="col-sm-6">
@@ -23,7 +24,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-no-gutter justify-content-sm-end mb-0">
                 <li class="breadcrumb-item"><router-link tag="a" to="/">Home</router-link></li>
-                <li class="breadcrumb-item"><a href="#">Register</a></li>
+                <li class="breadcrumb-item"><a href="#">Dealer Rep Register</a></li>
               </ol>
             </nav>
             <!-- End Breadcrumb -->
@@ -33,149 +34,134 @@
     </div>
     <!-- End Title Section -->
 
-    <!-- End Page Preloader -->
-    <!-- Login Form -->
-    <div class="container">
-      <div class="row">
-      <div class="col-md-6">
-          <div id="stickyBlockStartPoint" class="col-md-12">
-        <!-- Sticky Block -->
-        <div class="js-sticky-block"
-             data-has-sticky-header="true"
-             data-offset-target="#logoAndNav"
-             data-sticky-view="md"
-             data-start-point="#stickyBlockStartPoint"
-             data-end-point="#stickyBlockEndPoint"
-             data-offset-top="24"
-             data-offset-bottom="24">
-          <!-- Pricing -->
-          <div class="position-relative bg-primary shadow-primary-lg text-white rounded z-index-2 p-7">
-            <span class="d-block">
-              <span class="align-top">$</span>
-              <span class="display-4 font-weight-semi-bold">JMD 1,000</span>
-              <span class="font-size-3">.00</span>
-              <span class="d-block">Per Credit</span>
-            </span>
+      <!-- Team Section -->
+    <div class="container space-2">
+      <!-- Title -->
+      <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-9">
+        <span class="btn btn-xs btn-soft-success btn-pill mb-2">AutoMarket (DR)</span>
+        <h2 class="text-primary">Dealer <span class="font-weight-semi-bold">Rep</span></h2>
+        <p>Earn commission from Car Dealers</p>
+      </div>
+      <!-- End Title -->
 
-            <hr class="opacity-md my-4">
+      <!-- Icon Blocks Section -->
+      <div class="row justify-content-center mx-gutters-2">
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-0">
+         
+          <!-- Icon Blocks -->
+          <div class="text-center px-5">
+            <figure id="exampleFeaturesSVG1" class="max-width-27 w-100 mx-auto mb-4">
+              <img class="js-svg-injector" src="@/assets/svg/illustrations/server-woman.svg" alt="Image Description"
+                   data-parent="#exampleFeaturesSVG1">
+            </figure>
 
-            <div class="mb-5">
-              <p class="text-light">Sign up and get one AutoMarketJM Credit for free.</p>
+            <div class="mb-4">
+              <h3 class="h5">AutoMarket Credit</h3>
+              <p class="mb-md-0">Buy Advertising Credits</p>
             </div>
 
-
-            <div class="mb-5">
-              <p class="text-light"> What is a credit?</p>
-               <p class="text-light">A credit is use to create premium adds that will ensure that your vehilces are solid fast and easy</p>
-            </div>
-            </div>
-
-              <div class="mb-5">
-             
-
-            <!-- <a class="btn btn-white btn-pill transition-3d-hover mb-2" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/">
-              Get Started
-              <span class="fas fa-arrow-right text-primary font-size-1 ml-2"></span>
-            </a> -->
-
-            <p class="small text-white-70">No credit card required.</p>
-
-            <!-- SVG Shape -->
-            <div class="position-absolute bottom-0 right-0 w-100 max-width-15 z-index-n1">
-              <figure class="ie-abstract-shapes-11">
-                <img class="js-svg-injector rounded-bottom" src="../../assets/svg/components/abstract-shapes-11.svg"
-                     data-parent="#pricingSection">
-              </figure>
-            </div>
-            <!-- End SVG Shape -->
+            <a class="btn btn-sm btn-soft-primary btn-pill transition-3d-hover" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">
+              more info
+              <span class="fas fa-angle-right ml-2"></span>
+            </a>
           </div>
-          <!-- End Pricing -->
+          <!-- End Icon Blocks -->
+
         </div>
-        <!-- End Sticky Block -->
-      </div>
-      </div>
-      <div class="col-md-6">
-        <form class=""  @submit.prevent="register(user)">
-          <!-- Title -->
-          <div class="mb-7">
-            <h1 class="h3 text-primary font-weight-normal mb-0">Welcome to <span class="font-weight-semi-bold">AutoMarketJM</span></h1>
-            <p>Fill out the form to get started.</p>
-          </div>
-          <!-- End Title -->
-          <validation-error :errors="validationErrors"></validation-error>
-           <!-- Form Group -->
-          <div class="js-form-message form-group">
-            <label class="form-label" for="signinSrEmail">Full Name</label>
-            <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name">
 
-                   <div class="invalid-feedback">
-                      {{errors.name}}
-                   </div>
-          </div>
-          <!-- End Form Group -->
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-0">
+          <!-- Icon Blocks -->
+          <div class="text-center px-5">
+            <figure id="exampleFeaturesSVG2" class="max-width-27 w-100 mx-auto mb-4">
+              <img class="js-svg-injector" src="@/assets/svg/illustrations/full-stack.svg" alt="Image Description"
+                   data-parent="#exampleFeaturesSVG2">
+            </figure>
 
-          <!-- Form Group -->
-          <div class="js-form-message form-group">
-            <label class="form-label" for="signinSrEmail">Email address</label>
-            <input type="email" class="form-control" name="email" id="signinSrEmail" v-model="user.email" placeholder="Email address" aria-label="Email address" 
-                   data-msg="Please enter a valid email address."
-                   data-error-class="u-has-error"
-                   data-success-class="u-has-success">
-
-                   <div class="invalid-feedback">
-                      {{errors.email}}
-                   </div>
-          </div>
-          <!-- End Form Group -->
-
-          <!-- Form Group -->
-          <div class="js-form-message form-group">
-            <label class="form-label" for="signinSrPassword">Password</label>
-            <input type="password" class="form-control" name="password" v-model="user.password" id="signinSrPassword" placeholder="********" aria-label="********" 
-                   data-msg="Your password is invalid. Please try again."
-                   data-error-class="u-has-error"
-                   data-success-class="u-has-success">
-
-
-                   <div class="invalid-feedback">
-                      {{errors.password}}
-                   </div>
-          </div>
-          <!-- End Form Group -->
-
-          <!-- Form Group -->
-          <div class="js-form-message form-group">
-            <label class="form-label" for="signinSrConfirmPassword">Confirm password</label>
-            <input type="password" class="form-control" name="confirmPassword" v-model="user.password_confimation" id="signinSrConfirmPassword" placeholder="********" aria-label="********" 
-                   data-msg="Password does not match the confirm password."
-                   data-error-class="u-has-error"
-                   data-success-class="u-has-success">
-
-
-                   <div class="invalid-feedback">
-                      {{errors.password_confimation}}
-                   </div>
-          </div>
-          <!-- End Form Group -->
-
-
-          <!-- Button -->
-          <div class="row align-items-center mb-5">
-            <div class="col-5 col-sm-6">
-              <span class="small text-muted">Already have an account?</span>
-              <router-link to="/signin" tag="a" class="small"> Login</router-link>
+            <div class="mb-4">
+              <h3 class="h5">Authorized</h3>
+              <p class="mb-md-0">Be an Authorized AutoMarket Rep with an AutoMarket (AM) Business Card </p>
             </div>
 
-            <div class="col-7 col-sm-6 text-right">
-              <button type="submit" class="btn btn-primary transition-3d-hover">Sign up</button>
-            </div>
+            <a class="btn btn-sm btn-soft-primary btn-pill transition-3d-hover" href="@/starter/index.html">
+              read more
+              <span class="fas fa-angle-right ml-2"></span>
+            </a>
           </div>
-          <!-- End Button -->
-        </form>
-       </div>
+          <!-- End Icon Blocks -->
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+            <!-- Icon Blocks -->
+            <div class="text-center px-5">
+              <figure id="exampleFeaturesSVG3" class="max-width-27 w-100 mx-auto mb-4">
+                <img class="js-svg-injector" src="@/assets/svg/illustrations/business-woman.svg" alt="Image Description"
+                     data-parent="#exampleFeaturesSVG3">
+              </figure>
+
+              <div class="mb-4">
+                <h3 class="h5">Post Ads</h3>
+                <p class="mb-md-0">Post auto ads on AutoMarket ( AM ) for Car Dealers Island wide</p>
+              </div>
+
+              <a class="btn btn-sm btn-soft-primary btn-pill transition-3d-hover" href="../pages/hire-us.html">
+                more info  
+                <span class="fas fa-angle-right ml-2"></span>
+              </a>
+            </div>
+            <!-- End Icon Blocks -->
+        </div>
+      <!-- End -->
      </div>
+     <!-- End Icon Blocks Section -->
+  
+     <div class="row justify-content-center mx-gutters-2 mt-10">
+       <div class="col-sm-6 col-lg-4 mb-lg-0">
+          <!-- Icon Blocks -->
+          <div class="text-center px-5">
+            <figure id="exampleFeaturesSVG1" class="max-width-27 w-100 mx-auto mb-4">
+              <img class="js-svg-injector" src="@/assets/svg/illustrations/server-woman.svg" alt="Image Description"
+                   data-parent="#exampleFeaturesSVG1">
+            </figure>
+
+            <div class="mb-4">
+              <h3 class="h5">Earn $$$</h3>
+              <p class="mb-md-0">Earn $$$ from Dealers when you have made succesfull refferal</p>
+            </div>
+
+            <a class="btn btn-sm btn-soft-primary btn-pill transition-3d-hover" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">
+              more info
+              <span class="fas fa-angle-right ml-2"></span>
+            </a>
+          </div>
+          <!-- End Icon Blocks -->
+       </div>
+       <div class="col-sm-6 col-lg-4 mb-lg-0">
+            <!-- Icon Blocks -->
+          <div class="text-center px-5">
+            <figure id="exampleFeaturesSVG1" class="max-width-27 w-100 mx-auto mb-4">
+              <img class="js-svg-injector" src="@/assets/svg/illustrations/server-woman.svg" alt="Image Description"
+                   data-parent="#exampleFeaturesSVG1">
+            </figure>
+
+            <div class="mb-4">
+              <h3 class="h5">Dealer Commission</h3>
+              <p class="mb-md-0">Visit and agree commission with car dealer</p>
+            </div>
+
+            <a class="btn btn-sm btn-soft-primary btn-pill transition-3d-hover" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">
+              more info
+              <span class="fas fa-angle-right ml-2"></span>
+            </a>
+          </div>
+          <!-- End Icon Blocks -->
+       </div>
+
+     </div>
+      <div class="row justify-content-center mx-gutters-2 mt-10">
+         <button class="btn btn-success">Sign up and get started</button>
+      </div>
     </div>
-    <!-- End Login Form -->
+    <!-- End Team Section -->
   </main>
   <!-- ========== END MAIN ========== -->
 </template>

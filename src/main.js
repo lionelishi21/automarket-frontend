@@ -12,15 +12,18 @@ import VueCurrencyInput from 'vue-currency-input'
 import VueCurrencyFilter from 'vue-currency-filter'
 import * as VueGoogleMaps from "vue2-google-maps";
 import PrettyCheckbox from 'pretty-checkbox-vue';
+import Croppa from 'vue-croppa';
 
+Vue.config.productionTip = false
 
+Vue.use(Croppa);
 Vue.use(PrettyCheckbox);
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: "AIzaSyBu71MBgcQ-RQjYup9H3ftk78lyHoC7eeM",
-    libraries: "places" // necessary for places input
-  }
-});
+Vue.use(VueCurrencyInput)
+Vue.use(VueResource);
+Vue.use(ImageUploader);
+Vue.use(VModal)
+Vue.mixin(Car);
+Vue.use(VuePageTransition)
 
 Vue.use(VueCurrencyFilter, {
   symbol : 'JMD $',
@@ -31,25 +34,23 @@ Vue.use(VueCurrencyFilter, {
   symbolSpacing: true
 })
 
-Vue.use(VueCurrencyInput)
-Vue.use(VueResource);
-Vue.use(ImageUploader);
-Vue.use(VModal)
-Vue.mixin(Car);
-Vue.use(VuePageTransition)
-Vue.config.productionTip = false
-
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyBu71MBgcQ-RQjYup9H3ftk78lyHoC7eeM",
+    libraries: "places" // necessary for places input
+  }
+});
 
 // inject a handler for `myOption` custom option
 Vue.mixin({
    methods: {
     showCarImage(image) {
-       return 'http://18.206.230.202/storage/images/'+image
-       // return 'http://127.0.0.1:8000/storage/images/'+image
+       // return 'http://18.206.230.202/storage/images/'+image
+       return 'http://127.0.0.1:8000/storage/images/'+image
     },
     showCarThumbnail(thumbnail) {
-       return 'http://18.206.230.202/storage/thumbnail/'+thumbnail
-      // return 'http://127.0.0.1:8000/storage/thumbnail/'+thumbnail
+       // return 'http://18.206.230.202/storage/thumbnail/'+thumbnail
+      return 'http://127.0.0.1:8000/storage/thumbnail/'+thumbnail
     },
     avatar(value) {
       var name = value.split(" ");
