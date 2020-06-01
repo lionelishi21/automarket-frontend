@@ -134,6 +134,12 @@
                             Invites</a>
                           </router-link>
                           <!-- Others -->
+
+                           <router-link tag="li" active-class="active" to="/business-card" class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#l">
+                             <i class="fas fa-user-friends"></i>
+                            (AM) Business Card</a>
+                          </router-link>
                         </ul>
                       </div>
                     </nav>

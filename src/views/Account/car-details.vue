@@ -1,7 +1,7 @@
 <template>
 <div class="container space-top-1 space-top-sm-2">
 	<!-- Page Preloader -->
-  	<div id="jsPreloader" class="page-preloader" v-show="loading">
+  	<div class="page-preloader" v-show="loading">
       <div class="page-preloader__content-centered">
         <div class="spinner-grow text-primary" role="status">
           <span class="sr-only">Loading...</span>
@@ -92,9 +92,9 @@
 			     </div>
 			     <div class="col-md-6">
 			     	<div class="form-group">
-						<select class="custom-select" v-model="CarDetails.bodystyle_id">
-						<option :value="CarDetails.bodystyle_id">{{CarDetails.bodystyle}}</option>
-						 <option v-for="body in getBodystyles" value="body.id">{{body.name}}</option>
+			     		{{CarDetails.bodystyle}}
+						<select class="form-control" v-model="bodystyle">
+						    <option v-for="body in getBodystyles" :value="body.id">{{body.name}}</option>
 						</select>
 					</div>
 			     </div>
@@ -195,12 +195,19 @@
 					</div>
 				</div>
 			</div>
-			<!--    <div class="row">
+		<!-- 	   <div class="row">
 					<div class="border-bottom">
 	                   <h2 class="h6 text-primary mb-0 ml-3 mb-2">Car Features</h2>
 	                </div>
+				</div>
+
+				<div class="row mb-5">
+					<div class="col-md-12" >
+						<button v-for="feat in CarDetails.features" class="btn mr-2 btn-sm btn-soft-secondary">{{ feat.name}} | <i class="fas fa-times"></i></button>
+					</div>
+
 				</div> -->
-	<!-- 			<div class="row">
+    		<!-- 	<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 						  <div class="custom-control custom-checkbox">
@@ -253,8 +260,8 @@
 						  </div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+				</div> -->
+			<!-- 	<div class="row">
 					 <div class="border-bottom pb-3 mb-2">
 	                  <h2 class="h6 text-primary mb-0">Seat</h2>
 	                </div>
@@ -342,7 +349,7 @@
 					 <div class="border-bottom pb-3 mb-2">
 	                  <h2 class="h6 text-primary mb-0">Entertainment</h2>
 	                </div>
-				</div> -->
+				</div>  -->
 			<!-- 		<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -422,26 +429,29 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
+							   <small><span class="text-primary">Price: </span>{{CarDetails.price | currency}}</small>
 							   <div class="input-group">
 		                            <div class="input-group-prepend">
 		                              <span class="input-group-text" id="listingPriceLabel">
 		                                <span class="fas fa-dollar-sign"></span>
 		                              </span>
 		                            </div>
-		                            <input class="form-control" name="price" v-model="CarDetails.price" id="listingPrice" placeholder="Price" v-currency="{currency: 'JMD', locale: 'en'}">
+		                            <input class="form-control" name="price" v-model="CarDetails.price" id="listingPrice" placeholder="Price">
+
 		                          </div>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<textarea class="form-control" rows="6" name="text" placeholder="Seller Notes" v-model="CarDetails.description"></textarea>
+								<textarea class="form-control" rows="6" placeholder="Seller Notes" v-model="CarDetails.desc"></textarea>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 ">
 							   <!-- End uploader image input  -->
-              					<button type="submit" class="btn mb-10 btn-primary btn-block transition-3d-hover">Update</button>
+              				<button @click="updateInformation()" type="submit" class="btn mb-10 btn-primary btn-block transition-3d-hover">Update</button>
+
 						</div>
 					</div>
 			</div>
@@ -459,6 +469,7 @@ export default {
 	data() {
 		return {
 		   loading: false,
+		   bodystyle: null,
 		   formData: {
 	           main: {
 	             added_by: null,
@@ -535,7 +546,10 @@ export default {
 	        'AllYears',
 	        'getPlanDetails',
 	        'getBodystyles'
-	       ])
+	       ]),
+		bodyStyle: function() {
+			this.bodystyle = CarDetails.bodystyle_id
+		}
 	},
 	beforeUpdate() {
 	  $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
@@ -571,7 +585,7 @@ export default {
 			this.loading = true
 
 			let formData = new FormData()
-			formData.append('main', JSON.stringify(this.formData.main))	
+			formData.append('main', JSON.stringify(this.CarDetails))	
 			formData.append('car_safety', this.formData.car_safety);
 	        formData.append('car_others', this.formData.others);
 	        formData.append('car_features', this.formData.car_features);
@@ -579,13 +593,62 @@ export default {
 	        formData.append('profile', this.formData.profile);
 	        formData.append('car_entertainment', this.formData.car_seats);
 			
-			this.$store.dispatch('UPDATE_ADS', formData,
+
+
+
+	          var main = {
+	        	make_id: this.CarDetails.make_id,
+	        	model_id: this.CarDetails.model_id,
+	        	year_id: this.CarDetails.year_id,
+	        	vehicle_id: this.CarDetails.vehicle_id,
+	        	steering: this.CarDetails.steering,
+	        	district: this.CarDetails.district,
+	        	parish: this.CarDetails.parish,
+	        	doors: this.CarDetails.doors,
+	        	negotiable: this.CarDetails.negotiable,
+	        	drive_type: this.CarDetails.drive_type,
+	        	fuel_type: this.CarDetails.fuel_type,
+	        	interior_color: this.CarDetails.interior_color,
+	        	exterior_color: this.CarDetails.exterior_color,
+	        	milage: this.CarDetails.milage,
+	        	description: this.CarDetails.desc,
+	        	price: this.CarDetails.price,
+	        	body_type: this.bodystyle
+
+	        }
+
+			var payload = {
+				id: this.$route.params.id,
+				params: main	
+			}
+			console.log(payload)
+			this.$store.dispatch('UPDATE_USER_CAR', payload,
 			  {
 		          headers: {
 		            'content-type': `multipart/form-data`,
 		          },
 		       }
 			)
+			.then( response => {
+
+				var self = this
+				setTimeout(function(){
+					self.loading = false
+					var msg = 'Vehicle update successfully';
+				self.success(msg)
+				},1000)
+			})
+			.catch( error => {
+				
+				console.log(error.response)
+
+				var self = this
+				setTimeout(function(){
+					self.loading = false
+					var msg = 'Something went wrong went trying to update vichle information';
+				    self.error(msg)
+				},1000)
+			})
 		},
 		rotateImage(image_id) {
 
@@ -598,7 +661,10 @@ export default {
 			          // Add the component back in
 			          this.initData()
 			        });
-					
+				    this.loading = false
+				})
+				.catch(error => {
+					console.log(error.response)
 				})
 		},
 		removeImage(image_id) {
@@ -606,7 +672,7 @@ export default {
 			this.loading = true
 			this.$store.dispatch('REMOVE_IMAGE', image_id)
 
-		}
+		},
 	}
 }
 </script>

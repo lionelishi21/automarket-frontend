@@ -33,6 +33,15 @@ export default {
 
 	rotateAutoImage(id) {
 		return Api().get('/cars/rotate/image/'+id)
-	}
+	},
 
+	updateCarDetails(params) {
+		console.log(params['params'])
+		return Api().post('/cars/edit/'+params['id'], params['params'])
+	},
+
+	postSold(batch) {
+		console.log(batch)
+		return Api().get('/cars/sold/'+batch)
+	}
 }

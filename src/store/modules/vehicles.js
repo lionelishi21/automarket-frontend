@@ -172,7 +172,7 @@ const actions = {
 	 			commit ('SET_FILTER_CARS', response.data)
 	 		})
 	 		.catch ((err) => {
-	 			console.log(err.message)
+	 			console.log(err.response)
 	 		})
 	 }
 }

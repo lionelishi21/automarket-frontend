@@ -174,7 +174,7 @@
                     <div class="ml-3">
                      {{username}}
 
-                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1">{{useraccount}}</span></span>
+                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1"></span></span>
 
                       <span class="u-sidebar--account__holder-text">User Account</span>
                     </div>

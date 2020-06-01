@@ -39,212 +39,88 @@
       <!-- Title -->
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
                <!-- Title -->
-              <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-9">
-                <span class="btn btn-xs btn-soft-success btn-pill mb-2">AutoMarket (DR)</span>
+              <div class="w-md-100 w-lg-100 text-center mb-9">
+                <span class="btn btn-xs btn-soft-success btn-pill mb-1">AutoMarket (DR)</span>
                 <h2 class="text-primary">Dealer <span class="font-weight-semi-bold">Rep</span></h2>
                 <p>Earn commission from Car Dealers</p>
               </div>
               <!-- End Title -->
 
-            <div class="row">
-              <div class="col-sm-12 col-lg-12 mb-7 mb-lg-0">
-                <ul class="list-unstyled u-indicator-vertical-dashed">
-                    <!-- Info -->
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
-                        <span class="fas fa-check btn-icon__inner"></span>
-                      </span>
+              <div class="row">
+                <div class="col-sm-12 col-lg-12 mb-7 mb-lg-0">
+                    <ul class="list-unstyled u-indicator-vertical-dashed">
 
-                      <div class="media-body mt-n1">
-                        <h3 class="h5 text-primary">AutoMarket Credit</h3>
-                        <p>Buy AutoMarket (AM) Advertising Credits</p>
-                      </div>
-                    </li>
-                    <!-- End Info -->
-
-                    <!-- Info -->
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
-                        <span class="fas fa-check btn-icon__inner"></span>
-                      </span>
-                      <div class="media-body mt-n1">
-                        <h3 class="h5 text-primary">AutoMarket Authorization</h3>
-                        <p>Be an Authorized AutoMarket Rep with an AutoMarket (AM) Business Card</p>
-                      </div>
-                    </li>
-                    <!-- End Info -->
-
-                    <!-- Info -->
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
-                        <span class="fas fa-check btn-icon__inner"></span>
-                      </span>
-                      <div class="media-body mt-n1">
-                        <h3 class="h5 text-primary">Earn $$$</h3>
-                        <p>Earn $$$ from Dealers when you have made succesfull refferal</p>
-                      </div>
-                    </li>
-                    <!-- End Info -->
-
-                      <!-- Info -->
-                    <li class="media u-indicator-vertical-dashed-item">
-                      <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
-                        <span class="fas fa-check btn-icon__inner"></span>
-                      </span>
-                      <div class="media-body mt-n1">
-                        <h3 class="h5 text-primary">Dealer Commission</h3>
-                        <p> Visit and agree commission with car dealer</p>
-                      </div>
-                    </li>
-                    <!-- End Info -->
-                  </ul>
-              </div>
-              </div>
-        </div>
-        <div class="col-md-6">
-           <form class=""  @submit.prevent="register(user)">
-            <!-- Title -->
-          <!--   <div class="mb-7">
-              <h1 class="h3 text-primary font-weight-normal mb-0">Welcome to <span class="font-weight-semi-bold">AutoMarketJM</span></h1>
-              <p>Fill out the form to get started.</p>
-            </div> -->
-            <!-- End Title -->
-            <validation-error :errors="validationErrors"></validation-error>
-
-            <div class="row">
-             <!-- Form Group -->
-            <div class="form-group col-md-6">
-              <label class="form-label" for="signinSrEmail">Full Name</label>
-              <input type="text" class="form-control" name="name" v-model="user.name" id="signinSrEmail" placeholder="Full name">
-
-                     <div class="invalid-feedback">
-                        {{errors.name}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-
-                <!-- Form Group -->
-            <div class="form-group col-md-6 ">
-              <label class="form-label" for="signinSrEmail">Username</label>
-              <input type="username" class="form-control" name="username" id="signinSrEmail" v-model="user.username" placeholder="Enter Username" aria-label="Username" 
-                     data-msg="Please enter a valid email address."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-                     <div class="invalid-feedback">
-                        {{errors.username}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-            </div>
-            <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrEmail">Email address</label>
-              <input type="email" class="form-control" name="email" id="signinSrEmail" v-model="user.email" placeholder="Email address" aria-label="Email address" 
-                     data-msg="Please enter a valid email address."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-                     <div class="invalid-feedback">
-                        {{errors.email}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-
-          <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrEmail">Phone Number</label>
-              <input type="phone_number" class="form-control" name="phone_number" id="signinSrEmail" v-model="user.phone" placeholder="Mobile Phone Number" aria-label="Email address" 
-                     data-msg="Please enter a valid email address."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-                     <div class="invalid-feedback">
-                        {{errors.phone}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-
-                <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrEmail">Parish</label>
-                    
-                   <!-- Select -->
-                    <select class="form-control form-control-sm" v-model="user.parish">
-                       <option value="null">Select Parish</option>
-                       <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
-                    </select>
-                    <!-- End Select -->
-
-                     <div class="invalid-feedback">
-                        {{errors.parish}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-
-             <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrEmail">Location</label>
-              <input type="address" class="form-control" name="address" v-model="user.location" placeholder="" aria-label="Email address" 
-                     data-msg="Please enter a valid email address."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-                     <div class="invalid-feedback">
-                        {{errors.address}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
-
-            <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrPassword">Password</label>
-              <input type="password" class="form-control" name="password" v-model="user.password" id="signinSrPassword" placeholder="********" aria-label="********" 
-                     data-msg="Your password is invalid. Please try again."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
+                         <!-- Info -->
+                        <li class="media u-indicator-vertical-dashed-item">
+                          <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
+                            <span class="fas fa-check btn-icon__inner"></span>
+                          </span>
+                          <div class="media-body mt-n1">
+                            <h3 class="h5 text-primary">Earn $$$</h3>
+                            <p>Earn $$$ from Dealers when you have made succesfull refferal</p>
+                          </div>
+                        </li>
 
 
-                     <div class="invalid-feedback">
-                        {{errors.password}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
+                        <!-- Info -->
+                        <li class="media u-indicator-vertical-dashed-item">
+                          <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
+                            <span class="fas fa-check btn-icon__inner"></span>
+                          </span>
 
-            <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrConfirmPassword">Confirm password</label>
-              <input type="password" class="form-control" name="confirmPassword" v-model="user.password_confimation" id="signinSrConfirmPassword" placeholder="********" aria-label="********" 
-                     data-msg="Password does not match the confirm password."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-
-                     <div class="invalid-feedback">
-                        {{errors.password_confimation}}
-                     </div>
-            </div>
-            <!-- End Form Group -->
+                          <div class="media-body mt-n1">
+                            <h3 class="h5 text-primary">AutoMarket Free Credits</h3>
+                            <p>Get 3 Automarket Addvertising Credits</p>
+                          </div>
+                        </li>
+                        <!-- End Info -->
 
 
-            <!-- Button -->
-            <div class="row align-items-center mb-5">
-              <div class="col-5 col-sm-6">
-                <span class="small text-muted">Already have an account?</span>
-                <router-link to="/signin" tag="a" class="small"> Login</router-link>
-              </div>
+                        <!-- Info -->
+                        <li class="media u-indicator-vertical-dashed-item">
+                          <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
+                            <span class="fas fa-check btn-icon__inner"></span>
+                          </span>
+                          <div class="media-body mt-n1">
+                            <h3 class="h5 text-primary">AutoMarket Authorization</h3>
+                            <p>Be an Authorized AutoMarket Rep with an AutoMarket (AM) Business Card</p>
+                          </div>
+                        </li>
+                        <!-- End Info -->
 
-              <div class="col-7 col-sm-6 text-right">
-                <button type="submit" class="btn btn-primary transition-3d-hover">Sign up</button>
+
+                        <!-- Info -->
+                        <li class="media u-indicator-vertical-dashed-item">
+                          <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
+                            <span class="fas fa-check btn-icon__inner"></span>
+                          </span>
+                          <div class="media-body mt-n1">
+                            <h3 class="h5 text-primary">Earn $$$</h3>
+                            <p>Earn $$$ from Dealers when you have made succesfull refferal</p>
+                          </div>
+                        </li>
+                        <!-- End Info -->
+
+
+                        <!-- Info -->
+                        <li class="media u-indicator-vertical-dashed-item">
+                          <span class="btn btn-xs btn-icon btn-primary rounded-circle mr-3">
+                            <span class="fas fa-check btn-icon__inner"></span>
+                          </span>
+                          <div class="media-body mt-n1">
+                            <h3 class="h5 text-primary">Dealer Commission</h3>
+                            <p> Visit and agree commission with car dealer</p>
+                          </div>
+                        </li>
+                        <!-- End Info -->
+                    </ul>
+                    <button @click="goToRegister()" class="btn btn-primary">Register</button>
+                </div>
               </div>
             </div>
-            <!-- End Button -->
-          </form>
-        </div>
       </div>
-
-
     </div>
     <!-- End Team Section -->
   </main>
@@ -306,6 +182,9 @@ export default {
         password: null,
         password_confirmation: null,
       }
+    },
+    goToRegister() {
+      this.$router.push('/autorep-register')
     },
    register(user) {
         console.log(user)

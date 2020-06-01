@@ -36,6 +36,7 @@
     <!-- Login Form -->
     <div class="container">
         <div class="row">
+          <div class="col-md-3"></div>
           <div class="col-md-6">
           <form class=""  @submit.prevent="register(user)">
             <!-- Title -->
@@ -171,6 +172,7 @@
             <!-- End Button -->
           </form>
          </div>
+         <div class="col-md-3"></div>
        </div>
     </div>
     <!-- End Login Form -->

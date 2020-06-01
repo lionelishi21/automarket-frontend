@@ -301,7 +301,7 @@
                   <!-- Input -->
                   <div class="form-group" :class="{ 'u-has-error' : priceIsInvalid, 'u-has-success' : !priceIsInvalid }">
                     <div class="js-focus-state">
-                      <label class="form-label" for="listingPrice">Price <span class="text-danger">*</span></label>
+                      <label class="form-label" for="listingPrice">Price <span class="text-danger">*</span> {{formData.main.price | currency}}</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="listingPriceLabel">
@@ -1069,8 +1069,8 @@ export default {
        formData.append('car_entertainment', this.formData.car_seats);
 
 
-      axios.post('http://127.0.0.1:8000/api/cars/post', formData,
-     // axios.post('http://18.206.230.202/api/cars/post', formData,
+      // axios.post('http://127.0.0.1:8000/api/cars/post', formData,
+     axios.post('http://18.206.230.202/api/cars/post', formData,
         {
            headers: {
             'content-type': `multipart/form-data`,

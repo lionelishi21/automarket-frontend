@@ -48,6 +48,7 @@
                      <h3>
                       Sell My Car(s)
                     </h3>
+                     <p class="text-white"> Post as many cars</p> 
                   <span class="d-block">
                       <!-- SVG Icon -->
                       <figure class="ie-for-sale">
@@ -87,6 +88,8 @@
                      <h3>
                       Find My Car
                     </h3>
+                    <p><small class="text-muted"></small> Need a car? Start here</p> 
+
                   <span class="d-block">
                       <figure class="ie-buyer">
                          <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
@@ -116,11 +119,8 @@
               <!-- Pricing -->
               <div class="card border-0 shadow-sm">
                 <header class="card-header border-0 position-relative bg-wanrning  p-4 text-center ">
-                    <h3>
-                      Dealer Rep
-                      <small class="text-muted">(DR)</small>
-                      <!-- <small class="text-muted">Earn $$$</small> -->
-                    </h3>
+                    <h3> Earn $$$ </h3>
+                    <p><small class="text-muted">as</small> Dealer Rep</p> 
                   <span class="d-block">
                       <figure class="ie-buyer">
                          <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"

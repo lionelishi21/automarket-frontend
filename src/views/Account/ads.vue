@@ -36,6 +36,17 @@
       </div>
     </a>
   </li>
+ <li class="nav-item">
+    <a class="nav-link font-weight-medium" id="pills-two-example2-tab" data-toggle="pill" href="#pills-two-example2" role="tab" aria-controls="pills-two-example2" aria-selected="false">
+      <div class="d-md-flex justify-content-md-center align-items-md-center">
+        <figure class="ie-height-40 d-none d-md-block w-100 max-width-6 mr-3">
+          <img class="js-svg-injector" src="../../assets/svg/icons/icon-63.svg" alt="SVG"
+               data-parent="#SVGnavIcons">
+        </figure>
+        Sold <span class="badge badge-danger">0</span>
+      </div>
+    </a>
+  </li>
 </ul>
 <!-- End Nav Classic -->
 
@@ -50,14 +61,16 @@
           <div class="col-lg-12">
             <!-- List View -->
             <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-6" v-for="car in ActiveCars" >
+              <div class="col-md-4 col-sm-6 col-xs-6" v-for="car in ActiveCars" >
                   <div class="card mb-4 mb-md-0">
+
                       <img v-if="showPlaceHolder(car.image)" class="img-fluid" :src="showCarImage(car.image)">
                       <img v-else class="img-fluid" src="http://18.206.230.202/public/assets/placeholder/placeholder.jpg" alt="" style="height: 180px;">
                       <!-- Card -->
 
                       <div class="card-body">
-                            <h4 class="h6" >{{car.year}} {{car.make}} <span class="btn btn-xs btn-soft-success">Active</span></h4>
+
+                            <h4 class="h6" >{{car.year}} {{car.make}}  <span class="btn btn-xs btn-soft-success">Active</span></h4>
                             <p>Price: <strong>{{car.price | currency}}</strong></p>
                             <div class="btn-group">
                               <a href="#"
@@ -66,6 +79,40 @@
                                  Edit vehicle
                              </a>
                             </div>
+                             <div class="btn-group">
+                              {{car.sold}}
+                              <a href="#"
+                                 class="btn btn-soft-primary btn-xs" 
+                                 @click.prevent="sold(car.batch_id)">
+                                 Set as Sold
+                             </a>
+                            </div>
+                            <br>
+                            <small>Share:</small>
+                            <br>
+                            <ShareNetwork
+                                class="btn btn-sm text-white btn-icon btn-primary transition-3d-hover"
+                                network="facebook"
+                                :url="'http://automarketjm.com'"
+                                :title="car.year+' '+car.make"
+                                :description="car.price"
+                                quote="Sell it a Sell"
+                                hashtags="automarketjm, automarket"
+                              >
+                              <span class="fab fa-facebook-f btn-icon__inner"></span>
+                            </ShareNetwork>
+                            
+                             <ShareNetwork
+                                class="btn btn-xs btn-soft-success"
+                                network="whatsapp"
+                                :url="'http://automarketjm.com'"
+                                :title="car.year+' '+car.make"
+                                :description="'Price: '+car.price | currency"
+                                quote="Sell it a Sell"
+                                hashtags="automarketjm, automarket"
+                              >
+                                Whatsapp
+                            </ShareNetwork>
                             <hr>
                         <small style="style:color: red;">Expire in <span class="badge badge-danger">{{car.days}} days</span></small>
                         <br>
@@ -269,6 +316,16 @@
         return false
       }
       return true;
+    },
+    sold(id){
+
+      this.$store.dispatch('SET_SOLD', id)
+        .then( response => {
+              console.log(response)
+             this.$store.dispatch('GET_INACTIVE_CARS')
+             this.$store.dispatch('GET_ACTIVE_CARS')
+             this.success('Vehicle status has updated to sold')
+        })
     },
     showPlans(id) {
       this.car_selected = id

@@ -26,6 +26,20 @@ const actions = {
 			})
 	},
 
+	UPDATE_USER_CAR({commit, dispatch}, payload ) {
+		return new Promise((resolve, reject) => {
+			api.updateCarDetails(payload)
+			.then( response => {
+				console.log(response)
+				resolve(response)
+			})
+			.catch(error => {
+				consol.log(error.response)
+				reject(error)
+			})
+		});
+	},
+
 	GET_CAR_DETAILS({commit, dispatch}, batchId) {
 		console.log('detail loading....')
 		
@@ -99,6 +113,19 @@ const actions = {
 				})
 
 			}) 
+	},
+	SET_SOLD(context, id) {
+		return new Promise((resolve, reject) => {
+			console.log('sold')
+			api.postSold(id)
+				.then( response => {
+					resolve(response)
+				})
+				.catch(error => {
+					console.log(error.response)
+					reject(error)
+				})
+		})
 	}
 
 }

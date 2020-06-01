@@ -188,6 +188,11 @@ const routes = [
 
         },
         {
+          path: '/business-card',
+          name: 'BusinessCard',
+          component: () => import('../views/Account/BusinessCard.vue')
+        },
+        {
           path: '/invites',
           name: 'Invite',
           component:() => import('../views/Invite.vue')

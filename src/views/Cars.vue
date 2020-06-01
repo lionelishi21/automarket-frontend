@@ -907,7 +907,7 @@
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 
-                <premium-placement :cars="FilteredCars"></premium-placement>
+                <!-- <premium-placement :cars="FilteredCars"></premium-placement> -->
 
                 <!-- List and Grid view -->
                 <ul v-if="list" class="list-unstyled">
