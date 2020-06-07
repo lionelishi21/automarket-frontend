@@ -26,10 +26,10 @@
           <div class="d-none d-sm-inline-block ml-sm-auto">
             <ul class="list-inline mb-0">
               <li class="list-inline-item mr-0">
-                <a class="u-header__navbar-link" href="../pages/help.html">Help</a>
+                <a class="u-header__navbar-link" href="#">Help</a>
               </li>
               <li class="list-inline-item mr-0">
-                <a class="u-header__navbar-link" href="../pages/contacts-agency.html">
+                <a class="u-header__navbar-link" href="/credits">
                     {{GetCredits.unactive}} Credits Available
                 </a>
               </li>
@@ -174,9 +174,9 @@
                     <div class="ml-3">
                      {{username}}
 
-                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1"></span></span>
+                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1">{{plan}}</span></span>
 
-                      <span class="u-sidebar--account__holder-text">User Account</span>
+                      <span class="u-sidebar--account__holder-text">{{ useraccount }}</span>
                     </div>
 
                   <!-- Settings -->
@@ -225,12 +225,12 @@
                     </li>
 
 
-                     <li class="u-sidebar--account__list-item">
+                   <!--   <li class="u-sidebar--account__list-item">
                       <router-link to="/browse-dealer" class="u-sidebar--account__list-link">
                         <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
                        Browse Dealer
                       </router-link>
-                    </li>
+                    </li> -->
 
                     <li class="u-sidebar--account__list-item">
                       <router-link to="/edit-profile" class="u-sidebar--account__list-link"> 
@@ -449,11 +449,40 @@ export default {
           return this.getCurrentUser.name
       }
     },
+    plan: function() {
+        if (this.getCurrentUser) {
+            if (this.getCurrentUser.plan_id == 1) {
+              return 'Starter'
+            }
 
+            if (this.getCurrentUser.plan_id == 2) {
+              return 'Individual'
+            }
+
+            if ( this.getCurrentUser.plan_id == 3 ) {
+              return 'Dealer'
+            } 
+
+            if ( this,getCurrentUser.plan_id == 4) {
+              return 'Premium'
+            }
+        }
+    },  
     useraccount: function() {
-      if (this.getCurrentUser.role_id == 3) {
-        return 'Dealer Rep.'
-      }
+      if (this.getCurrentUser){
+        if (this.getCurrentUser.role_id == 3) {
+          return 'Dealer Rep.'
+        }
+
+        if (this.getCurrentUser.role_id == 2) {
+          return 'Dealer.'
+        }
+
+        if (this.getCurrentUser.role_id == 1) {
+          return 'Buyer'
+        }
+      } 
+      return 'Not Login'
     }
   },
   created() {

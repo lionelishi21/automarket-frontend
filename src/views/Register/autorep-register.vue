@@ -99,20 +99,20 @@
             </div>
             <!-- End Form Group -->
 
-            <legend>Location:</legend>
-                <!-- Form Group -->
-            <div class="js-form-message form-group">
-              <label class="form-label" for="signinSrEmail">Parish</label>
-              <input type="address" class="form-control" name="address" v-model="user.address" placeholder="A" aria-label="Email address" 
-                     data-msg="Please enter a valid email address."
-                     data-error-class="u-has-error"
-                     data-success-class="u-has-success">
-
-                     <div class="invalid-feedback">
-                        {{errors.address}}
-                     </div>
+                <!-- Input -->
+            <div class="form-group" :class="{ 'u-has-error' : parishIsInvalid, 'u-has-success' : !parishIsInvalid }">
+                <label class="form-label">Parish <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <span class="fas fa-map"></span>
+                    </span>
+                  </div>
+                    <select class="custom-select" v-model="user.parish">
+                       <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
+                    </select>
+                </div>
             </div>
-            <!-- End Form Group -->
 
              <div class="js-form-message form-group">
               <label class="form-label" for="signinSrEmail">Location</label>
@@ -193,9 +193,30 @@ export default {
         name: null,
         email: null,
         password: null,
+        username: null,
+        phone: null,
+        type: 3,
+        location: null,
         password_confimation: null,
         referral_id: ''
       },
+      parishes: [
+        { name: 'Kingston' },
+        { name: 'St. Andrew' },
+        { name: 'Portland' },
+        { name: 'St.Thomas' },
+        { name: 'St. Catherine' },
+        { name: 'St. Mary'},
+        { name: 'St. Mary'},
+        { name: 'St. Ann'},
+        { name: 'Manchester'},
+        { name: 'Clarendon'},
+        { name: 'Hanover'},
+        { name: 'Westmoreland'},
+        { name: 'St. James'},
+        { name: 'Trelawny'},
+        { name: 'St. Elizabeth'},
+      ],
       validationErrors: "",
       errors: {
         name: [],
@@ -210,6 +231,11 @@ export default {
          this.user.referral_id = this.$route.query.referral_id
       }
   },  
+  computed: {
+    parishIsInvalid() {
+      return !this.user.parish
+    },
+  },
   methods: {
     resetUser() {
       this.user = {
@@ -227,17 +253,12 @@ export default {
           .then(response => {
             
             this.resetUser()
-            
             var self = this
-           
             setTimeout(function() {
-              
                self.loading = false
-              
                let successMessage = response.data.message
-              
-               self.$router.push('/signin?user=registered')
-            }, 1000)
+               // self.$router.push('/signin?user=registered')
+            }, 500)
            
            
           })

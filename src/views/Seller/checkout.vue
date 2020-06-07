@@ -23,19 +23,19 @@
     <div class="container" v-else style="height: 100vh;">
 
         <div class="row">
-                    strip
-                      <stripe-checkout
-                        ref="checkoutRef"
-                        :pk="publishableKey"
-                        :items="items"
-                        :successUrl="successUrl"
-                        :cancelUrl="cancelUrl"
-                      >
-                        <template slot="checkout-button">
-                          <button @click="checkout">Shutup and take my money!</button>
-                        </template>
-                      </stripe-checkout>
-                </div>qew
+               strip
+              <stripe-checkout
+                ref="checkoutRef"
+                :pk="publishableKey"
+                :items="items"
+                :successUrl="successUrl"
+                :cancelUrl="cancelUrl"
+              >
+                <template slot="checkout-button">
+                  <button @click="checkout">Shutup and take my money!</button>
+                </template>
+              </stripe-checkout>
+        </div>
       <!-- <div class="row">
         <div class="col-md-6 p-10">
           <!-- Item -->

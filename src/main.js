@@ -74,14 +74,14 @@ Vue.mixin({
         if (this.notice !== null) this.notice.close()
       },
 
-      error(msg) {
+      error_message(msg) {
         this.$notice.error({
           title: "Error notice",
           description: msg,
         })
       },
 
-      info() {
+      info_message() {
         this.$notice.info({
           title: "Informational notice",
           description: "This notification has no close button",
@@ -89,7 +89,7 @@ Vue.mixin({
         })
       },
 
-      success(msg) {
+      success_message(msg) {
         this.$notice.success({
           title: "Success notice",
           description: msg,
@@ -100,7 +100,7 @@ Vue.mixin({
         })
       },
 
-      warning() {
+      warning_message() {
         this.$notice.warning({
           title: "Warning notice",
           description: "This notice should be 500px wide",

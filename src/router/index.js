@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
+import AutoRepHome from '../views/AutorepHome.vue'
+
 import { isLoggedIn } from '../utils/auth.js'
 
 
@@ -20,6 +22,11 @@ const routes = [
             allowAnonymous: true
           }
 
+        },
+        {
+          path:'autorep/:id',
+          name: 'Auto Rep',
+          component: AutoRepHome
         },
         {
           path: '/privacy',
@@ -73,11 +80,8 @@ const routes = [
         },
         {
           path: '/signin',
-          name: 'signin',
+          name: 'Default Sign',
           component: () => import('../views/Sign/user.vue'),
-          meta: {
-            allowAnonymous: true
-          }
         },
         {
           path: '/register',

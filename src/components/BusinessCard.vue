@@ -11,7 +11,7 @@
     <ul>
       <li><strong>Phone:</strong><a href="https://twitter.com/fredddieq" target="_blank">{{phone}}</a></li>
       <li><strong>Email:</strong><a href="https://twitter.com/fredddieq" target="_blank">{{email}}</a></li>
-      <li><strong>Homepage:</strong><a href="https://twitter.com/fredddieq" target="_blank">automarketjsm.com/dealer-rep/1210212021</a></li>
+      <li><strong>Homepage:</strong><a href="https://twitter.com/fredddieq" target="_blank">automarketjsm.com/autorep-rep/{{uuid}}</a></li>
     </ul>
   </nav>
 </div>

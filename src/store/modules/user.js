@@ -46,11 +46,12 @@ const actions = {
      
       api.fetchCurrentUser()
         .then (response => {
+          console.log(response)
           let responseData = response.data
           context.commit('updateCurrentUser', responseData)
           resolve(response)
         }).catch( err => { 
-          console.log(err.message)
+          console.log(err.response)
           reject(err)
         })
     })

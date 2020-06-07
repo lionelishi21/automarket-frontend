@@ -13,13 +13,13 @@
               <!-- End Title -->
             </div>
           </div>
-
           <div class="col-md-6">
             <!-- Stats -->
             <business-card 
             :name="getCurrentUser.name" 
             :email="getCurrentUser.email"
-            phone="876 5136710"
+            :phone="getCurrentUser.phone"
+            :uuid="getCurrentUser.uuid"
             >
             </business-card>
             <!-- End Stats -->

@@ -13,24 +13,6 @@
       </div>
       <!-- End Page Preloader -->
     <div v-if="isCredit" >
-    <!-- Hero Section -->
-    <div id="SVGwave1BottomSMShape" class=" position-relative bg-primary">
-      <div class="container space-top-2 space-bottom-2">
-        <div class="w-md-80 w-lg-60 text-center mx-auto">
-          <div class="">
-            <h1 class="text-white">Sell your Car Fast and Easy - Online Listing</h1>
-          </div>
-        </div>
-      </div>
-
-      <!-- SVG Background -->
-      <figure class="position-absolute right-0 bottom-0 left-0">
-        <img class="js-svg-injector" src="../../assets/svg/components/wave-1-bottom-sm.svg" alt="Image Description"
-             data-parent="#SVGwave1BottomSMShape">
-      </figure>
-      <!-- End SVG Background -->
-    </div>
-    <!-- End Hero Section -->
 
     <!-- Pricing Section -->
        <div class="position-relative mt-23 z-index-2 space-bottom-2 space-bottom-md-3">
@@ -54,7 +36,7 @@
                                 <!-- Range Slider -->
                                 <div class="text-secondary font-weight-semi-bold mb-4">
                                     <h3 class="ml-n2"> <b><span class="text-primary">{{free}}</span> </b></h3><br>
-                                    br
+                                    
                                    <span class="mr-2"> <img src="@/assets/automarket.png" width="50">Credits </span>
                                   <span class="ml-n2"> <b>{{credits}}</b></span>
                                 </div>
@@ -251,9 +233,9 @@ import { mapGetters } from 'vuex';
 
  export default {
   components: {
-      RangeSlider,
-        PayPal,
-   StripeCheckout
+     RangeSlider,
+    PayPal,
+    StripeCheckout
   },
   data() {
     return {
@@ -298,20 +280,23 @@ import { mapGetters } from 'vuex';
   computed: {
     ...mapGetters([
       'getPlans',
+      'getCurrentUser'
      ]),
     cost: function() {
 
-      if (this.credits < 5 ) {
+      if (this.getCurrentUser.plan_id == 1 ) {
          return this.credits * 800
       }
 
-      if (this.credits >= 5 && this.credits < 10) {
-        return this.credits * 600
+
+      if (this.getCurrentUser.plan_id == 2 ) {
+         return this.credits * 600
       }
 
-      if (this.credits >= 10) {
+       if (this.getCurrentUser.plan_id   == 3 ) {
          return this.credits * 400
       }
+
     },
     free: function() {
 
