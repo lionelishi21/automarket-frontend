@@ -7,8 +7,9 @@
                data-parent="#iconChecked"> -->
         </figure>
         <div class="mb-5">
-          <h1 class="h3 font-weight-medium">Your vechiles is completed!</h1>
-          <p>Thank you for using AutoMarketJm, </p>
+          <h1 class="h3 font-weight-medium">Your ads Upload Successfully!</h1>
+          <p>Thank you for using AutoMarketJm.</p>
+          <p><i> </i></p>
         </div>
         <router-link to="/my-account" class="btn btn-primary btn-pill transition-3d-hover px-5" href="#">Back to Dashboard</router-link>
       </div>

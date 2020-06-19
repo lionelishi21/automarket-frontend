@@ -13,7 +13,10 @@ const state = {
   currentUser: null,
   link: '',
   referees: {},
-  points: 0
+  points: 0,
+  autorep: {
+    details: {}
+  }
 }
 
 const actions = {
@@ -157,12 +160,24 @@ const actions = {
         console.log(error)
         console.log(error.response)
       })
+  },
+
+  GET_SALES_REP_AUTO({commit}, uuid) {
+
+    api.fetchSalesDetails(uuid)
+      .then( response => {
+        commit('SET_SALES_REP_AUTO',response.data)
+      })
+      .catch( error => {
+        console.log(error.response)
+      })
   }
 
 }
 
 
 const mutations = {
+
 
     updateTokens(state, tokens) {
       state.tokens = tokens
@@ -186,6 +201,10 @@ const mutations = {
 
     SET_REFERRAL_POINTS(state, points) {
       state.points = points
+    },
+
+    SET_SALES_REP_AUTO(state, detail) {
+      state.autorep.details = detail
     }
 }
 
@@ -213,6 +232,10 @@ const getters = {
 
     getRefPoints(state) {
       return state.points
+    },
+
+    GetRepDetails(state) {
+      return state.autorep.details
     }
 
 }

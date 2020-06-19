@@ -80,7 +80,6 @@
                              </a>
                             </div>
                              <div class="btn-group">
-                              {{car.sold}}
                               <a href="#"
                                  class="btn btn-soft-primary btn-xs" 
                                  @click.prevent="sold(car.batch_id)">
@@ -164,68 +163,37 @@
         <!-- Alert Dialog -->
     <modal
        name="plans"
-       width="60%"
-       min-width="1000"
-         height="auto"  
+       height="auto"  
     >
-      <div class="card-body p-5 text-center">
-          <p>Subscriptions</p>
+      <div class="card-body text-center">
+        <div class="container">
+             <p>Use Credit</p>
+
               <!-- Subscription -->
               <div class="row">
-                <div class="col-md-4">
-                 <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon w-100">
-                      <input type="radio" id="pricingRadio4" value="basic-plan" v-model="plans" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
-                      <label class="checkbox-outline__label checkbox-icon__label card w-100 p-6 mb-0" for="pricingRadio4">
-                        <h4 class="h6 text-primary mb-3">Basic</h4>
-                        <span class="d-block mb-2">
-                          <span class="h4 font-weight-normal">$1000 JMD</span>
-                          <span class="font-size-1">/ mon</span>
-                        </span>
-                        <p class="font-size-1 mb-0">For a single car to get started</p>
-                      </label>
-                    </div>
-                  </div>
-                    <div class="col-md-4">
-                     <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon w-100">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                     <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon">
                           <input type="radio" value="dealer-plan" v-model="plans" id="pricingRadio2" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
-                          <label class="checkbox-outline__label checkbox-icon__label card w-100 p-6 mb-0" for="pricingRadio2">
-                            <h4 class="h6 text-primary mb-3">Dealer</h4>
+                          <label class="checkbox-outline__label checkbox-icon__label card  p-6 mb-0" for="pricingRadio2">
+                            <h4 class="h6 text-primary mb-3">1 Credit</h4>
                             <span class="d-block mb-2">
-                              <span class="h4 font-weight-normal">$5000 JMD</span>
-                              <span class="font-size-1">/ mon</span>
                             </span>
-                            <p class="font-size-1 mb-0">For Dealer, a limit amount a cars</p>
-                          </label>
-                        </div>
-                     </div>
-                   <div class="col-md-4">
-                     <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon w-100">
-                          <input type="radio" id="pricingRadio3" value="premium-plan" v-model="plans" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
-                          <label class="checkbox-outline__label checkbox-icon__label card w-100 p-6 mb-0" for="pricingRadio3">
-                            <h4 class="h6 text-primary mb-3">Premium</h4>
-                            <span class="d-block mb-2">
-                              <span class="h4 font-weight-normal">Contact Us</span>
-                            </span>
-                            <p class="font-size-1 mb-0">Post up 20 or more cars</p>
+                            <p class="font-size-1 mb-0">Use 1 Credit to Activate for 15 days</p>
                           </label>
                         </div>
                      </div>
               </div>
               <!-- End Subscription -->
               <div class="row text-center">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4 center-block">
-                       <div class="position-relative" style="height: 100%;">
-                          <button v-if="btn_plan" @click="selectPlans()" class="btn btn-primary center-block mt-10 content-centered-y-md"> Select Plan</button>
-                          <button v-else disabled="disabled" class="btn btn-primary center-block mt-10 content-centered-y-md"> Select Plan</button>
-
-
-                          <button @click="hideModal()" class="btn ml-1 btn-soft-success center-block mt-10 content-centered-y-md"> Cancel</button>
-                      </div>
-                          
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 mt-5">
+                          <button v-if="btn_plan" @click="activateCredit()" class="btn btn-primary "> Select Plan</button>
+                          <button v-else disabled="disabled" class="btn btn-primary"> Select Plan</button>
+                          <button @click="hideModal()" class="btn ml-2 btn-soft-success "> Cancel</button>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-1"></div>
               </div>
+            </div>
       </div>
     </modal>
     <!-- End Alert Dialog -->
@@ -247,7 +215,7 @@
                     <h4 class="h6" >{{car.year}} {{car.make}} - <span class="btn btn-xs btn-soft-danger">Inactive</span></h4>
                     <p>Price: <strong>{{car.price | currency}}</strong></p>
                     <div class="btn-group">
-                      <a href="#" class="btn btn-primary btn-xs" @click.prevent="showPlans(car.batch_id)">Upgrade Plan</a>
+                      <a href="#" class="btn btn-primary btn-xs" @click.prevent="showPlans(car.id)">Use Credit</a>
                       <a class="btn btn-soft-success btn-xs" href="#" @click.prevent="edit(car.batch_id)"> Edit vehicle</a>
                     </div>
                     <hr>
@@ -280,7 +248,7 @@
         active_car_count: 0,
         plans: '',
         btn_plan: false,
-        car_selected: ''
+        car_selected: 1
  	 	  }
  	 },
    watch:{
@@ -318,7 +286,6 @@
       return true;
     },
     sold(id){
-
       this.$store.dispatch('SET_SOLD', id)
         .then( response => {
               console.log(response)
@@ -347,17 +314,20 @@
     hideModal() {
       this.$modal.hide('plans')
     },
-    selectPlans() {
+    renewPlan() {
+
+    },
+    
+    activateCredit(value) {
 
       this.isLoading = true 
       var plan_slug = this.plans
       var car_id = this.car_selected
-      var url =  '/checkout/'+car_id+'/'+plan_slug+'/car'
 
       var self = this
       setTimeout(function() {
         self.isLoading = false
-        self.$router.push(url)
+        self.$store.dispatch('USE_ACTIVE_CREDIT', car_id)
       }, 1000)
 
       

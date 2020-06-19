@@ -56,5 +56,9 @@ export default {
 
 	verifyAcount() {
 		return Api().get('/email/resend')
+	},
+
+	fetchSalesDetails(uuid) {
+		return Api().get('/autorep/'+uuid )
 	}
 }

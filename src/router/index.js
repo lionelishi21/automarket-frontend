@@ -24,9 +24,12 @@ const routes = [
 
         },
         {
-          path:'autorep/:id',
+          path:'/autorep/:id',
           name: 'Auto Rep',
-          component: AutoRepHome
+          component: AutoRepHome,
+          meta: {
+            allowAnonymous: true
+          }
         },
         {
           path: '/privacy',

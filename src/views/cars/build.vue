@@ -272,8 +272,8 @@
 
                          <div class="col-md-6 mb-2">
                             <!-- Input -->
-                            <div class="form-group"  :class="{ 'u-has-error' : districtIsInvalid, 'u-has-success' : !districtIsInvalid }" >
-                                <label class="form-label">District <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <label class="form-label">District <span class="text-danger"></span></label>
                                 <div class="input-group">
                                   <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -283,7 +283,7 @@
                                      <input type="text" class="form-control" v-model="formData.main.district"  placeholder="Vehicle District">
                                 </div>
                             </div>
-                             <span class="helper-block text-danger"  v-if="districtIsInvalid">Please select district</span>
+                             <!-- <span class="helper-block text-danger"  v-if="districtIsInvalid">Please select district</span> -->
                             <!-- End Input -->
                           </div>
                     </div>
@@ -1018,7 +1018,7 @@ export default {
 
       if ( !this.makeIsInvalid && !this.modelIsInvalid && !this.yearIsInvalid && !this.transmissionIsInvalid &&
           !this.milageIsInvalid && !this.bodyTypeIsInvalid && !this.colorIsInvalid && !this.incolorIsInvalid && !this.parishIsInvalid 
-          && !this.districtIsInvalid && !this.priceIsInvalid && !this.noteIsInvalid) {
+          && !this.priceIsInvalid && !this.noteIsInvalid) {
           
           return false
       }
@@ -1069,8 +1069,8 @@ export default {
        formData.append('car_entertainment', this.formData.car_seats);
 
 
-     axios.post('http://127.0.0.1:8000/api/cars/post', formData,
-     // axios.post('http://18.206.230.202/api/cars/post', formData,
+     // axios.post('http://127.0.0.1:8000/api/cars/post', formData,
+     axios.post('http://18.206.230.202/api/cars/post', formData,
         {
            headers: {
             'content-type': `multipart/form-data`,

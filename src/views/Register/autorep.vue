@@ -16,7 +16,7 @@
       <div class="container py-5">
         <div class="row align-items-sm-center">
           <div class="col-sm-6 mb-sm-0">
-            <h1 class="h4 mb-0">Dealer <abbr> Rep </abbr></h1>
+            <h1 class="h4 mb-0">Auto <abbr> Rep </abbr></h1>
           </div>
 
           <div class="col-sm-6">
@@ -24,7 +24,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-no-gutter justify-content-sm-end mb-0">
                 <li class="breadcrumb-item"><router-link tag="a" to="/">Home</router-link></li>
-                <li class="breadcrumb-item"><a href="#">Dealer Rep</a></li>
+                <li class="breadcrumb-item"><a href="#">Auto Rep</a></li>
               </ol>
             </nav>
             <!-- End Breadcrumb -->

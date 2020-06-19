@@ -41,7 +41,10 @@ export default {
 	},
 
 	postSold(batch) {
-		console.log(batch)
 		return Api().get('/cars/sold/'+batch)
+	},
+
+	activatePlan(id) {
+		return Api().get('/cars/activate-credit/'+id)
 	}
 }

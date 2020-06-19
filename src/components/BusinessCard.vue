@@ -1,19 +1,20 @@
 <template>
 <div class="card">
   <header>
-    <div>
-      <h3><strong>{{name}}</strong></h3>
-      <h5>AM Dealer Rep</h5>
-    </div>
     <img src="@/assets/automarket.png">
+      <div>
+      <h3><strong>{{name}}</strong></h3>
+      <h5>AM Auto Rep</h5>
+    </div>
   </header>
   <nav>
     <ul>
       <li><strong>Phone:</strong><a href="https://twitter.com/fredddieq" target="_blank">{{phone}}</a></li>
       <li><strong>Email:</strong><a href="https://twitter.com/fredddieq" target="_blank">{{email}}</a></li>
-      <li><strong>Homepage:</strong><a href="https://twitter.com/fredddieq" target="_blank">automarketjsm.com/autorep-rep/{{uuid}}</a></li>
+      <li><strong>Homepage:</strong><a href="https://twitter.com/fredddieq" target="_blank">automarketjm.com/autorep-rep/{{uuid}}</a></li>
     </ul>
   </nav>
+  
 </div>
 </template>
 <script>

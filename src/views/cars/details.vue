@@ -89,6 +89,22 @@
             {{CarDetails.location}}
           </a>
         </div>
+        <div class="mb-3">
+               <small>Share:</small>
+                            <br>
+                <ShareNetwork
+                    class="btn btn-sm text-white btn-icon btn-primary transition-3d-hover"
+                    network="facebook"
+                    :url="'http://automarketjm.com/car/details/'+CarDetails.batch_id"
+                    :title="CarDetails.year+' '+CarDetails.make"
+                    :description="CarDetails.price"
+                    quote="Sell it a Sell"
+                    hashtags="automarketjm, automarket"
+                  >
+                  <span class="fab fa-facebook-f btn-icon__inner"></span>
+                </ShareNetwork>
+                            
+        </div>
       <!--  -->
       <div class="mb-4">
         <textarea  class="form-control mb-4  transition-3d-hover">I am interested in  {{CarDetails.year}} {{CarDetails.make}} {{CarDetails.model}} </textarea>

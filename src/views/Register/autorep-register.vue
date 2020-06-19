@@ -249,15 +249,19 @@ export default {
       console.log(user)
         this.validationErrors = ''
         this.loading = true;
+        user.type = 3
         this.$store.dispatch('AUTH_REGISTER', user)
           .then(response => {
+            console.log(response)
             
             this.resetUser()
             var self = this
+
             setTimeout(function() {
-               self.loading = false
+               
                let successMessage = response.data.message
-               // self.$router.push('/signin?user=registered')
+               self.loading = false
+               self.$router.push('/signin?user=registered')
             }, 500)
            
            

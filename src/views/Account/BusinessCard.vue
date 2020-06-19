@@ -7,19 +7,41 @@
             <div class="pr-md-4">
               <!-- Title -->
               <div class="mb-3">
-                <h2 class="h4">Dealer Rep</h2>
+                <h2 class="h4">Auto Rep</h2>
                 <p>Welcom to your AutoMarket Dealer Rep <a href="#">Read the terms</a></p>
+
               </div>
               <!-- End Title -->
             </div>
+                   <!-- Clipboard Input -->
+                  <form>
+                    <div class="js-focus-state mb-2">
+                      <div class="input-group">
+                        <input id="referralLink" type="text" class="form-control" :value="'automarketjm.com/autorep-rep/'+getCurrentUser.username">
+                        <div class="input-group-append">
+                          <a class="js-clipboard input-group-text" href="javascript:;"
+                             data-content-target="#referralLink"
+                             data-class-change-target="#linkIcon"
+                             data-default-class="fas fa-clone"
+                             data-success-class="fas fa-check">
+                            <span id="linkIcon" class="fas fa-clone"></span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <small class="form-text text-muted">Copy or share your homepage url</small>
+                  </form>
+                  <!-- End Clipboard Input -->
           </div>
           <div class="col-md-6">
+
+
             <!-- Stats -->
             <business-card 
             :name="getCurrentUser.name" 
             :email="getCurrentUser.email"
             :phone="getCurrentUser.phone"
-            :uuid="getCurrentUser.uuid"
+            :uuid="getCurrentUser.username"
             >
             </business-card>
             <!-- End Stats -->

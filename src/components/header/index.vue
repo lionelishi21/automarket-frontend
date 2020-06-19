@@ -471,7 +471,7 @@ export default {
     useraccount: function() {
       if (this.getCurrentUser){
         if (this.getCurrentUser.role_id == 3) {
-          return 'Dealer Rep.'
+          return 'Auto Rep.'
         }
 
         if (this.getCurrentUser.role_id == 2) {

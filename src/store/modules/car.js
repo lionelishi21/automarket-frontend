@@ -100,6 +100,7 @@ const actions = {
 				console.log(error.response)
 			})
 	},
+
 	ROTATE_IMAGE( context , id) {
 		return new Promise((resolve, reject) => {
 			console.log('...rotating images')
@@ -114,6 +115,7 @@ const actions = {
 
 			}) 
 	},
+
 	SET_SOLD(context, id) {
 		return new Promise((resolve, reject) => {
 			console.log('sold')
@@ -126,6 +128,20 @@ const actions = {
 					reject(error)
 				})
 		})
+	},
+
+	USE_ACTIVE_CREDIT({dispatch}, car_id) {
+		
+		api.activatePlan(car_id)
+			.then( response => {
+				 console.log(response)
+				 dispatch('GET_INACTIVE_CARS')
+                 dispatch('GET_ACTIVE_CARS')
+
+			})
+			.catch( error => {
+				console.log(error.response)
+			})
 	}
 
 }
