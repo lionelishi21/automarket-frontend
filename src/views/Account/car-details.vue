@@ -78,12 +78,12 @@
 					</div>
 			     </div>
 			       <div class="col-md-6">
-			     	 <div class="form-group">
+			     	 <!-- <div class="form-group">
 						<select class="custom-select" v-model="CarDetails.vehicle.transmission">
 							 <option :value="CarDetails.vehicle.transmission">{{CarDetails.vehicle.transmission}}</option>
 							 <option v-for="(detail, key, index) in AllDetails" :value="detail.transmission" >{{detail.transmission}}</option>
 						</select>
-					</div>
+					</div> -->
 			     </div>
 			     <div class="col-md-6">
 			     	 <div class="form-group">

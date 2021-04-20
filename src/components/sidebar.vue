@@ -71,12 +71,16 @@
           <div class="u-sidebar__content--account">
             <!-- List Links -->
             <ul class="list-unstyled u-sidebar--account__list">
+              
               <li class="u-sidebar--account__list-item">
                 <a class="u-sidebar--account__list-link" href="dashboard.html">
                   <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
                   Dashboard
                 </a>
               </li>
+
+              
+
               <li class="u-sidebar--account__list-item">
                 <a class="u-sidebar--account__list-link" href="profile.html">
                   <span class="fas fa-user-circle u-sidebar--account__list-icon mr-2"></span>

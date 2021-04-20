@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a111585ae1b32a3c0388af2e13ebcfec.js"
+  "/precache-manifest.a3ae8d3c137a08e31adbe3284dff5aa0.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "automarket_jm"});

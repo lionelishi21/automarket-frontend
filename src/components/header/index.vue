@@ -1,392 +1,198 @@
 <template>
+<div>
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="header">
+    <div class="header-section">
+      <!-- Topbar -->
+      <div class="container header-hide-content pt-2">
+        <div class="d-flex align-items-center">
+        
 
-<!-- ========== HEADER ========== -->
-<header id="header" class="u-header">
-  <div class="u-header__section">
-    <!-- Topbar -->
-    <div class="container u-header__hide-content pt-2">
-      <div class="d-flex align-items-center">
-
-        <div class="ml-auto">
-          <!-- Jump To -->
-          <div class="d-inline-block d-sm-none position-relative mr-2">
-              <a class="dropdown-nav-link d-flex">
-                  {{credits}} Credits Available
+          <div class="ml-auto">
+            <!-- Jump To -->
+            <div class="hs-unfold d-sm-none mr-2">
+              <a class="js-hs-unfold-invoker dropdown-nav-link dropdown-toggle d-flex align-items-center" href="javascript:;"
+                data-hs-unfold-options='{
+                  "target": "#jumpToDropdown",
+                  "type": "css-animation",
+                  "event": "hover",
+                  "hideOnScroll": "true"
+                }'>
+               {{credits}}  Credits Available
               </a>
-          </div>
-          <div class="d-inline-block d-sm-none position-relative mr-2">
-             <router-link tag="a" class="btn btn-sm btn-warning transition-3d-hover" to="/pricing-and-packages">
-                  Post Ads
-                </router-link>
-            
-          </div>
-          <!-- End Jump To -->
 
-          <!-- Links -->
-          <div class="d-none d-sm-inline-block ml-sm-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item mr-0">
-                <a class="u-header__navbar-link" href="#">Help</a>
-              </li>
-              <li class="list-inline-item mr-0">
-                <a class="u-header__navbar-link" href="/credits">
-                    {{GetCredits.unactive}} Credits Available
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- End Links -->
-        </div>
+              <div id="jumpToDropdown" class="hs-unfold-content dropdown-menu">
+                <a class="dropdown-item" href="#"></a>
+                <a class="dropdown-item" href="#">Contacts</a>
+              </div>
+            </div>
+            <!-- End Jump To -->
 
-        <ul class="list-inline ml-2 mb-0">
+            <!-- Links -->
+            <div class="nav nav-sm nav-y-0 d-none d-sm-flex">
+              <a class="nav-link" href="#"> {{credits}} Credits Available</a>
+            </div>
+            <!-- End Links -->
+
+          </div>
+
+          <ul class="list-inline mb-0">
+          
+        
+              <!-- Account -->
+          <li class="list-inline-item" v-if="getCurrentUser" >
+                <dropdown-menu v-model="show">
+                    <button class="btn btn-link dropdown-toggle">
+                       <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div slot="dropdown">
+                        <router-link to="/my-account" class="dropdown-item" href="#">Profile</router-link>
+                        <router-link to="/edit-profile" class="dropdown-item" href="#">Settings</router-link>
+                        <a @click="logout()" class="dropdown-item" href="#">Sign Outs</a>
+                    </div>
+                </dropdown-menu>
+          </li>
+          <!-- End Account -->
 
           <!-- Account Login -->
-         <li v-if="getCurrentUser" class="list-inline-item position-relative">
-            <!-- Account Dropdown -->
-           
-              <!-- Account Sidebar Toggle Button -->
-             <a id="sidebarNavToggler" 
-                 class="btn btn-xs btn-text-secondary u-sidebar--account__toggle-bg ml-1"
-                 href="javascript:;" 
-                 @click="showSidebarContent()">
-                  
-                  <span class="position-relative">
-                      <span class="u-sidebar--account__toggle-text">{{username}}</span>
-                      <span class="u-sidebar--account__toggle-text"></span>
-                      <img class="u-sidebar--account__toggle-img" 
-                           src="../../assets/img/100x100/img1.jpg" 
-                           alt="Image Description">
-                            
-                      <span class="badge badge-sm badge-success badge-pos rounded-circle">3</span>
-                  </span>
+          <li class="list-inline-item" v-else  >
+            <div class="hs-unfold">
+              <a class="js-hs-unfold-invoker btn btn-icon btn-xs btn-ghost-secondary" href="javascript:;" data-toggle="modal" data-target="#signupModal">
+                <i style="color:blue;" class="fas fa-user-circle"></i>
               </a>
-              <!-- End Account Sidebar Toggle Button -->
+            </div>
           </li>
-
-
-       <li v-else class="list-inline-item">
-             
-              <a class="btn btn-xs btn-text-secondary u-sidebar--account__toggle-bg ml-1"
-                 href="javascript:;" 
-                 @click="showLoginContent()"
-                 role="button">
-                <span class="fas fa-user-circle mr-1"></span>
-                Sign in
-              </a>
-            </li>
-
           <!-- End Account Login -->
-        </ul>
-      </div>
-    </div>
-    <!-- End Topbar -->
-
-    <div id="logoAndNav" class="container">
-      <!-- Nav -->
-      <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space">
-
-        <!-- Logo -->
-        <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center" @click.prevent="goToHome()" href="#" aria-label="Front">
-          <img src="@/assets/automarket.png" width="150">
-
-        </a>
-        <!-- End Logo -->
-
-        <!-- Responsive Toggle Button -->
-        <button type="button" class="navbar-toggler btn u-hamburger"
-                aria-label="Toggle navigation"
-                aria-expanded="false"
-                aria-controls="navBar"
-                data-toggle="collapse"
-                data-target="#navBar">
-          <span id="hamburgerTrigger" class="u-hamburger__box">
-            <span class="u-hamburger__inner"></span>
-          </span>
-        </button>
-        <!-- End Responsive Toggle Button -->
-
-        <!-- Navigation -->
-        <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
-          <ul class="navbar-nav u-header__navbar-nav">
-             
-                  <!-- Link -->
-              <router-link to="/" active-class="active" class="nav-item u-header__nav-item" exact>
-                  <a class="nav-link u-header__nav-link" href="/">Home</a>
-              </router-link>
-
-              <!-- End Link -->
-              <!-- Link -->
-              <router-link tag="li" to="/cars" active-class="active" class="nav-item u-header__nav-item ">
-                  <a class="nav-link u-header__nav-link" href="#">Car for Sale</a>
-              </router-link>
-              <!-- End Link -->
-
-                  <!-- Link -->
-          
            
-                   <!-- Link -->
-              <router-link tag="li" to="/contactus" active-class="active" class="nav-item u-header__nav-item ">
-                  <a class="nav-link u-header__nav-link" href="#">Contact us</a>
-              </router-link>
-              <!-- End Link -->
-            
-              <!-- Button -->
-              <li class="nav-item u-header__nav-last-item">
-                <router-link tag="a" class="btn btn-sm btn-warning transition-3d-hover" to="/build">
-                  Post Ads
-                </router-link>
-              </li>
-              <!-- End Button -->
           </ul>
         </div>
-        <!-- End Navigation -->
-      </nav>
-      <!-- End Nav -->
+      </div>
+      <!-- End Topbar -->
+
+      <div id="logoAndNav" class="container">
+        <!-- Nav -->
+        <nav class="js-mega-menu navbar navbar-expand-lg">
+          <!-- Logo -->
+          <a class="navbar-brand" href="#" aria-label="Front">
+            <img src="@/assets/automarket.png" width="150">
+          </a>
+          <!-- End Logo -->
+
+          <!-- Responsive Toggle Button -->
+          <button type="button" class="navbar-toggler btn btn-icon btn-sm rounded-circle"
+                  aria-label="Toggle navigation"
+                  aria-expanded="false"
+                  aria-controls="navBar"
+                  data-toggle="collapse"
+                  data-target="#navBar">
+                  
+            <span class="navbar-toggler-default">
+              <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M17.4,6.2H0.6C0.3,6.2,0,5.9,0,5.5V4.1c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,5.9,17.7,6.2,17.4,6.2z M17.4,14.1H0.6c-0.3,0-0.6-0.3-0.6-0.7V12c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,13.7,17.7,14.1,17.4,14.1z"/>
+              </svg>
+            </span>
+
+            <span class="navbar-toggler-toggled">
+              <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1 c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z"/>
+              </svg>
+            </span>
+          </button>
+          <!-- End Responsive Toggle Button -->
+
+          <!-- Navigation -->
+          <div id="navBar" class="collapse navbar-collapse">
+            <div class="navbar-body header-abs-top-inner">
+              <ul class="navbar-nav">
+                    <!-- Link -->
+                  <router-link to="/" active-class="active" class="nav-item u-header__nav-item" exact>
+                      <a class="nav-link u-header__nav-link" href="/">Home</a>
+                  </router-link>
+
+                  <!-- End Link -->
+                  <!-- Link -->
+                  <router-link tag="li" to="/cars" active-class="active" class="nav-item u-header__nav-item ">
+                      <a class="nav-link u-header__nav-link" href="#">Car for Sale</a>
+                  </router-link>
+                  <!-- End Link -->
+
+                      <!-- Link -->
+              
+                    <!-- Link -->
+                  <router-link tag="li" to="/autoreps" active-class="active" class="nav-item u-header__nav-item ">
+                      <a class="nav-link u-header__nav-link" href="#">Auto Reps</a>
+                  </router-link>
+                  <!-- End Link -->
+
+                      <!-- Link -->
+                  <router-link tag="li" to="/contactus" active-class="active" class="nav-item u-header__nav-item ">
+                      <a class="nav-link u-header__nav-link" href="#">Contact us</a>
+                  </router-link>
+                  <!-- End Link -->
+                
+                  <!-- Button -->
+                  <li class="nav-item u-header__nav-last-item">
+                    <router-link tag="a" class="btn btn-sm btn-warning transition-3d-hover" to="/my-account/build">
+                      Post Ads
+                    </router-link>
+                  </li>
+                  <!-- End Button -->
+              </ul>
+            </div>
+          </div>
+          <!-- End Navigation -->
+        </nav>
+        <!-- End Nav -->
+      </div>
+    </div>
+  </header>
+  <!-- ========== END HEADER ========== -->
+
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+       
+        <!-- Header -->
+        <div class="modal-close">
+          <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+            <svg width="10" height="10" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1 c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z"/>
+            </svg>
+          </button>
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="modal-body p-sm-5">
+          <form class="js-validate">
+            <!-- Sign in -->
+            <div id="signinModalForm">
+              <div class="text-center mb-5">
+                <h2>Sign in</h2>
+                <p>Don't have an account yet?
+                  <a @click="signin()" class="js-animation-link" href="javascript:;">Sign up here</a>
+                </p>
+              </div>
+
+              <!-- <a class="btn btn-block btn-white mb-2" href="#">
+                  <span class="d-flex justify-content-center align-items-center">
+                    <img class="avatar avatar-xss mr-2" src="../../assets/svg/brands/google.svg" alt="Image Description">
+                    Sign in with Google
+                  </span>
+              </a> -->
+
+              <a  @click="signin()" class="js-animation-link btn btn-block btn-primary mb-2" href="#">Sign in with Email</a>
+            </div>
+            <!-- End Sign in -->
+          </form>
+        </div>
+        <!-- End Body -->
+      </div>
     </div>
   </div>
-    
-    <!-- TODO: to be anace in a component by itself  -->
-    <!-- Account Sidebar Navigation -->
-    <transition name="slide">
-       <aside v-show="sidebarContent" class="u-sidebar">
-        <div class="u-sidebar__scroller">
-          <div class="u-sidebar__container">
-            <div class="u-sidebar--account__footer-offset">
-              <!-- Toggle Button -->
-              <div class="d-flex justify-content-between align-items-center pt-4 px-7">
-                <h3 class="h6 mb-0">My Account</h3>
-
-                <button type="button" class="close ml-auto" @click="showSidebarContent()"
-                        >&times;</span>
-                </button>
-              </div>
-              <!-- End Toggle Button -->
-
-              <!-- Content -->
-              <div class="js-scrollbar u-sidebar__body">
-
-                <!-- Holder Info -->
-                 <header class="d-flex align-items-center u-sidebar--account__holder mt-3">
-                    <div class="position-relative" v-if="getCurrentUser">
-                      <img class="u-sidebar--account__holder-img" src="../../assets/img/100x100/img1.jpg" alt="Image Description">
-                      <span class="badge badge-xs badge-outline-success badge-pos rounded-circle"></span>
-                    </div>
-                    <div class="ml-3">
-                     {{username}}
-
-                      <span class="font-weight-semi-bold"> <span class="badge badge-success ml-1">{{plan}}</span></span>
-
-                      <span class="u-sidebar--account__holder-text">{{ useraccount }}</span>
-                    </div>
-
-                  <!-- Settings -->
-                  <div class="btn-group position-relative ml-auto mb-auto">
-                    <a id="sidebar-account-settings-invoker" class="btn btn-xs btn-icon btn-text-secondary rounded" href="javascript:;" role="button"
-                            aria-controls="sidebar-account-settings"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            data-toggle="dropdown"
-                            data-unfold-event="click"
-                            data-unfold-target="#sidebar-account-settings"
-                            data-unfold-type="css-animation"
-                            data-unfold-duration="300"
-                            data-unfold-delay="300"
-                            data-unfold-animation-in="slideInUp"
-                            data-unfold-animation-out="fadeOut">
-                      <span class="fas fa-ellipsis-v btn-icon__inner"></span>
-                    </a>
-
-                    <div id="sidebar-account-settings" class="dropdown-menu dropdown-unfold dropdown-menu-right" aria-labelledby="sidebar-account-settings-invoker">
-                      <a class="dropdown-item" href="#">Settings</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#" @click="logout()">Sign Out</a>
-                    </div>
-                  </div>
-                  <!-- End Settings -->
-                </header>
-                <!-- End Holder Info -->
-
-                <div class="u-sidebar__content--account">
-                  <!-- List Links -->
-                  <ul class="list-unstyled u-sidebar--account__list">
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/my-account" class="u-sidebar--account__list-link" href="#" @click.prevent="myAccount()">
-                        <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
-                        Dashboard
-                      </router-link>
-                    </li>
-
-
-                     <li class="u-sidebar--account__list-item">
-                      <router-link to="/build" class="u-sidebar--account__list-link">
-                        <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
-                        Post an Ad
-                      </router-link>
-                    </li>
-
-
-                   <!--   <li class="u-sidebar--account__list-item">
-                      <router-link to="/browse-dealer" class="u-sidebar--account__list-link">
-                        <span class="fas fa-home u-sidebar--account__list-icon mr-2"></span>
-                       Browse Dealer
-                      </router-link>
-                    </li> -->
-
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/edit-profile" class="u-sidebar--account__list-link"> 
-                        <span class="fas fa-user-circle u-sidebar--account__list-icon mr-2"></span>
-                        Profile
-                      </router-link>
-                    </li>
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/my-ads" class="u-sidebar--account__list-link" href="#" @click.prevent="myAds()">
-                        <span class="fas fa-tasks u-sidebar--account__list-icon mr-2"></span>
-                        My Ads
-                      </router-link>
-                    </li>
-                  
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/activity" class="u-sidebar--account__list-link">
-                        <span class="fas fa-exchange-alt u-sidebar--account__list-icon mr-2" @click="goToBilling"></span>
-                        Billing
-                      </router-link>
-                    </li>
-
-                <!--     <li class="u-sidebar--account__list-item">
-                      <router-link to="/plans" class="u-sidebar--account__list-link" href="#">
-                        <span class="fas fa-cubes u-sidebar--account__list-icon mr-2"></span>
-                        Plans
-                      </router-link>
-                    </li> -->
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/credits" class="u-sidebar--account__list-link" href="#">
-                        <span class="fas fa-cubes u-sidebar--account__list-icon mr-2"></span>
-                        Credits
-                      </router-link>
-                    </li>
-                  </ul>
-                  <!-- End List Links -->
-
-                  <div class="u-sidebar--account__list-divider"></div>
-
-                  <!-- List Links -->
-                  <ul class="list-unstyled u-sidebar--account__list">
-                    <li class="u-sidebar--account__list-item">
-                      <router-link to="/invites" class="u-sidebar--account__list-link">
-                          <span class="fas fa-user-plus u-sidebar--account__list-icon mr-2"></span>
-                          Invite
-                      </router-link>
-                    </li>
-                  </ul>
-                  <!-- End List Links -->
-                </div>
-              </div>
-            </div>
-
-            <!-- Footer -->
-            <footer id="SVGwaveWithDots" class="u-sidebar__footer u-sidebar__footer--account">
-              
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item pr-3">
-                  <a class="u-sidebar__footer--account__text" href="#" @click,prevent="privacy()">Privacy</a>
-                </li>
-                <li class="list-inline-item pr-3">
-                  <a class="u-sidebar__footer--account__text" href="#" @click.prevent="terms()">Terms</a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="u-sidebar__footer--account__text" href="#">
-                    <i class="fas fa-info-circle"></i>
-                  </a>
-                </li>
-              </ul>
-
-              <!-- SVG Background Shape -->
-              <div class="position-absolute right-0 bottom-0 left-0">
-                <img class="js-svg-injector" src="@/assets/svg/components/wave-bottom-with-dots.svg" alt="Image Description"
-                       data-parent="#SVGwaveWithDots">
-              </div>
-              <!-- End SVG Background Shape -->
-            </footer>
-            <!-- End Footer -->
-          </div>
-        </div>
-      </aside>
-    </transition>
-  <!-- End Account Sidebar Navigation -->
-
-   <!-- Account Sidebar Navigation -->
-  <transition name="slide">
-    <aside  v-show="sidebarLoginContent" class="u-sidebar" >
-      <div class="u-sidebar__scroller">
-        <div class="u-sidebar__container">
-          <div class="u-header-sidebar__footer-offset">
-          
-            <!-- Toggle Button -->
-            <div class="d-flex align-items-center pt-4 px-7">
-              <button type="button" class="close ml-auto" @click="showLoginContent()">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <!-- End Toggle Button -->
-
-            <!-- Content -->
-            <div class="js-scrollbar u-sidebar__body">
-              <div class="u-sidebar__content u-header-sidebar__content">
-                <div class="">
-               
-                  <!-- Login -->
-                  <login-component v-show="form.signin" @go-signup="signUp()"></login-component>
-                  <!-- End Login -->
-
-                  <!-- Signup -->
-                   <signup-component v-show="form.signup" @go-signin="showLogin()"></signup-component>
-                  <!-- End Signup -->
-
-                  <!-- Forgot Password -->
-                  <!-- TODO; add forgetpassword -->
-                  <forget-component v-show="form.forgetpassword"></forget-component>
-                  <!-- End Forgot Password -->
-
-                </div>
-              </div>
-            </div>
-            <!-- End Content -->
-          </div>
-
-          <!-- Footer -->
-          <footer id="SVGwaveWithDots" class="u-sidebar__footer u-sidebar__footer--account">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item pr-3">
-                <a class="u-sidebar__footer--account__text" href="../pages/privacy.html">Privacy</a>
-              </li>
-              <li class="list-inline-item pr-3">
-                <a class="u-sidebar__footer--account__text" href="../pages/terms.html">Terms</a>
-              </li>
-              <li class="list-inline-item">
-                <a class="u-sidebar__footer--account__text" href="../pages/help.html">
-                  <i class="fas fa-info-circle"></i>
-                </a>
-              </li>
-            </ul>
-
-            <!-- SVG Background Shape -->
-            <div class="position-absolute right-0 bottom-0 left-0">
-             <!--  <img class="" src="../../assets/svg/components/wave-bottom-with-dots.svg" alt="Image Description"
-                     data-parent="#SVGwaveWithDots"> -->
-            </div>
-            <!-- End SVG Background Shape -->
-          </footer>
-          <!-- End Footer -->
-        </div>
-      </div>
-    </aside>
-  </transition>
-  <!-- End Account Sidebar Navigation -->
-
-
-</header>
-<!-- ========== END HEADER ========== -->
-
+  <!-- End Sign Up Modal -->
+</div>
 </template>
 <script>
 import { Plugins } from "@capacitor/core";
@@ -407,15 +213,24 @@ import { mapGetters } from 'vuex';
 import LoginComponent from './components/LoginComponent.vue';
 import SignupComponent from './components/SignupComponent.vue';
 import ForgetComponent from './components/ForgetComponent.vue';
+import DropdownMenu from '@innologica/vue-dropdown-menu'
+
+
 
 export default {
   components: {
     LoginComponent,
     SignupComponent,
-    ForgetComponent
+    ForgetComponent,
+    DropdownMenu
   },
   data() {
     return {
+      show: false,
+      arrayOfObjects: [{ 'name': 'user'}],
+      object: {
+        name: 'User',
+      },
       mobile: true,
       credits: 0,
       userdata:{},
@@ -467,7 +282,7 @@ export default {
               return 'Premium'
             }
         }
-    },  
+    }, 
     useraccount: function() {
       if (this.getCurrentUser){
         if (this.getCurrentUser.role_id == 3) {
@@ -486,12 +301,13 @@ export default {
     }
   },
   created() {
-     $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
      this.$store.dispatch('GET_CREDIT')
   },
   mounted() {
-      // initialization of unfold component
-     $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+         // INITIALIZATION OF UNFOLD
+        // =======================================================
+    //  var unfold = new HSUnfold('.js-hs-unfold-invoker').init();
 
      this.$store.dispatch('getCurrentUser')
        .then( resp => {
@@ -501,6 +317,9 @@ export default {
    })
   },
 	methods: {
+       methodToRunOnSelect(payload) {
+            this.object = payload;
+          },
     showSidebarContent() {
       this.sidebarContent = !this.sidebarContent
     },
@@ -548,6 +367,7 @@ export default {
       this.$router.push('/forget-password')
     },
 		signin() {
+      $('#signupModal').modal('hide')
 			this.$router.push('/signin')
 		},
     myAccount() {
@@ -574,7 +394,6 @@ export default {
              
              this.$store.dispatch('getCurrentUser')
                .then( resp => {
-                   
                    location.reload()
 
                }).catch( err => {

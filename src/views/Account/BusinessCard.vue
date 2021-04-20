@@ -17,7 +17,7 @@
                   <form>
                     <div class="js-focus-state mb-2">
                       <div class="input-group">
-                        <input id="referralLink" type="text" class="form-control" :value="'automarketjm.com/autorep-rep/'+getCurrentUser.username">
+                        <input id="referralLink" type="text" class="form-control" :value="'automarketjm.com/automarketrep/'+getCurrentUser.username">
                         <div class="input-group-append">
                           <a class="js-clipboard input-group-text" href="javascript:;"
                              data-content-target="#referralLink"

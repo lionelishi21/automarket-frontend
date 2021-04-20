@@ -1,77 +1,27 @@
 <template>
-<!-- Car -->
-<!-- Property Item -->
+
+<!-- Grid -->
 <div class="row">
-	<div class="col-md-4 col-sm-6 col-xs-6 col-lg-3" v-for="car in cars">
-	    <div class="card">
-	    <!-- Gallery -->
-	 	<router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }">
-	        <img class="img-fluid w-100" :src="showCarThumbnail(car.image)" alt="Image Description">
-		</router-link>
-	
-		 <a class="js-fancybox u-media-viewer" href="javascript:;"
-	       data-src="../../assets/img/1920x1080/car1.jpg"
-	       data-fancybox="fancyboxGalleryExample1"
-	       data-caption="Front in frames - image #01"
-	       data-speed="700"
-	       data-is-infinite="true">
-	      <div class="position-absolute bottom-0 right-0 pb-2 pr-2">
-	        <span class="btn btn-icon btn-sm btn-white">
-	          <span class="fas fa-images btn-icon__inner"></span>
-	        </span>
-	      </div>
-	    </a>
+	<div class="col-md-3 col-sm-6 col-xs-6 col-lg-3 mb-5" v-for="(car, index) in cars" :key="index">
 
-	<!-- Gallery -->
-	    <img class="js-fancybox d-none" v-for="img in car.images" alt="Image Description"
-	         data-fancybox="fancyboxGalleryExample1"
-	         :data-src="showCarImage(img.image)"
-	         data-caption="Front in frames - image #02"
-	         data-speed="700"
-	         data-is-infinite="true">
-	  <!-- End Gallery -->
+	  <!-- Card -->
+      <router-link :to="{ path:'car/details/'+ car.batch_id }" class="card bg-img-hero shadow-none min-h-380rem h-100 transition-3d-hover p-5" :style="'background-image: url('+showCarThumbnail(car.image)+')'">
+			<div class="mb-4">
+			   <span class="d-block small text-white font-weight-bold text-cap mb-2">{{car.make}} > {{car.model}}</span>
+			</div>
 
-	  <div class="card-body shadow-soft">
-	    <!-- Location -->
-	    <div class="">
-	        <h5>
-              <router-link tag="a" :to="{ path:'car/details/'+ car.batch_id }"><small>{{car.year}} <br> {{car.make}} {{car.model}} </small></router-link>
-            </h5>
-	    </div>
-	    <!-- End Location -->
-
-	        <!-- Location -->
-	    <div class="">
-	         <h2 class="h5 mb-1">
-              <router-link  tag="a" :to="{ path:'car/details/'+ car.batch_id }"> {{ car.price | currency}} </router-link>
-            </h2>
-	    </div>
-	    <!-- End Location -->
-		
-  <!-- Category -->
-        <div>
-          <a class="font-size-1" href="property-description.html">
-             <span class="fas fa-list-alt mr-1"></span>
-             {{car.make}} > {{car.model}}
-            
-          </a>
-        </div>
-        <!-- Category -->
-
-        <!-- Location -->
-        <div>
-          <a class="font-size-1" href="property-description.html">
-            <span class="fas fa-map-marker-alt mr-1"></span>
-            {{car.location}}
-          </a>
-        </div>
-        <!-- End Location -->
-	  </div>
+			<div class="mt-auto">
+				<h3 class="h5 text-white">{{ car.price | currency}}</h3>
+				<span class="text-white-50"> {{car.location}} <i class="fas fa-angle-right fa-sm ml-1"></i></span>
+			</div>
+      </router-link>
+      <!-- End Card -->
 	</div>
 </div>
-</div>
-<!-- End Property Item -->
+<!-- End Grid -->
+
 </template>
+
 <script>
 export default {
 	props: ['cars'],

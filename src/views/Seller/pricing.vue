@@ -61,10 +61,6 @@
                             <div class="card-footer border-0 pt-0 px-7">
                               <!-- Icon Blocks -->
                               <div class="media align-items-center">
-                                <figure id="icon13" class="svg-preloader ie-height-56 w-100 max-width-8 mr-4">
-                                  <img class="js-svg-injector" src="../../assets/svg/icons/icon-13.svg" alt="SVG"
-                                       data-parent="#icon13">
-                                </figure>
                                 <div class="media-body">
                                   <h4 class="h6 mb-1">Info</h4>
                                   <p class="small mb-0"><a class="font-size-1" href="../pages/contacts-start-up.html">Contact us</a> for information regarding our credits system</p>
@@ -78,10 +74,7 @@
                             <div class="card-body py-9 px-7">
                               <!-- Icon Blocks -->
                               <div class="media align-items-center border-bottom pb-4 mb-4">
-                                <figure id="icon21" class="svg-preloader ie-height-56 w-100 max-width-8 mr-4">
-                                  <img class="js-svg-injector" src="../../assets/svg/icons/icon-21.svg" alt="SVG"
-                                       data-parent="#icon21">
-                                </figure>
+                               
                                 <div class="media-body">
                                   <h3 class="h5">Buy AutoMarket Credit</h3>
                                   <p class="mb-0">
@@ -94,7 +87,7 @@
                               <!-- Icon Blocks -->
                               <div class="media align-items-center">
                                 <div class="media-body">
-                                <button @click="buyCredits()" type="button" class="btn btn-soft-twitter mb-1 btn-block">Buy {{credits}} Credits</button>
+                                <button @click="buyCredits()" type="button" class="btn btn-primary mb-1 btn-block">Buy {{credits}} Credits</button>
                                 </div>
                               </div>
                               <!-- End Icon Blocks -->
@@ -275,32 +268,29 @@ import { mapGetters } from 'vuex';
     }
   },
   created(){
-      this.$store.dispatch('GET_ALL_PLANS');
+      this.$store.dispatch('getCurrentUser')
   },
   computed: {
     ...mapGetters([
-      'getPlans',
-      'getCurrentUser'
+        'getPlans',
+        'getCurrentUser'
      ]),
     cost: function() {
+      return this.credits * 800;
+      // if (this.getCurrentUser.plan_id == 1 ) {
+      //    return this.credits * 800
+      // }
 
-      if (this.getCurrentUser.plan_id == 1 ) {
-         return this.credits * 800
-      }
+      // if (this.getCurrentUser.plan_id == 2 ) {
+      //    return this.credits * 600
+      // }
 
-
-      if (this.getCurrentUser.plan_id == 2 ) {
-         return this.credits * 600
-      }
-
-       if (this.getCurrentUser.plan_id   == 3 ) {
-         return this.credits * 400
-      }
+      //  if (this.getCurrentUser.plan_id   == 3 ) {
+      //    return this.credits * 400
+      // }
 
     },
     free: function() {
-
-
       if (this.credits < 5 ) {
          return ' 800 per credit'
       }
@@ -313,10 +303,6 @@ import { mapGetters } from 'vuex';
        return ' $400 per credit'
       }
     }
-  },
-  mounted() {
-     $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-     $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
   },
   methods: {
     buyCredits() {

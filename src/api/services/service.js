@@ -9,8 +9,8 @@ export default {
 		return Api().get('/vehicles/makes?make_type='+params)
 	},
 
-	fetchVehicleModel(make) {
-		return Api().get('/vehicles/'+make+'/models')
+	fetchVehicleModel(make, params = 'all') {
+		return Api().get('/vehicles/'+make+'/models?model_types='+params)
 	},
 
 	fetchVehicleYear(make, model) {

@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
 import AutoRepHome from '../views/AutorepHome.vue'
+import AutoReps from '../views/Autoreps.vue';
+import Signin from '../views/Sign/user.vue';
+import UserAccount from '../views/Account/userAccount.vue';
 
 import { isLoggedIn } from '../utils/auth.js'
 
@@ -29,6 +32,15 @@ const routes = [
           component: AutoRepHome,
           meta: {
             allowAnonymous: true
+          }
+        },
+
+        {
+          path: '/autoreps',
+          name: 'AutoReps',
+          component: AutoReps,
+          meta: {
+             allowAnonymous: true
           }
         },
         {
@@ -84,7 +96,10 @@ const routes = [
         {
           path: '/signin',
           name: 'Default Sign',
-          component: () => import('../views/Sign/user.vue'),
+          component: Signin,
+          meta: {
+            allowAnonymous: true
+          }
         },
         {
           path: '/register',
@@ -128,21 +143,27 @@ const routes = [
         },
         {
           path: '/user-filters',
-          name: 'User-Filter',
           component: () => import('../views/Account/user-filters.vue')
         },
         {
           path: '/seller/sign',
-          name: 'Employer-signin',
           component: () => import('../views/EmployerSign')
         },
         {
           path: '/pricing-and-packages',
-          name: 'seller-pricing',
           component: () => import('../views/Seller/pricing.vue')
+        },
+        {
+          path: '/compare-research',
+          component: () => import('../views/cars/compare.vue')
         }
       ]
-    },
+   },
+  {
+    path: '/automarketrep/:id',
+    name: 'AutoRep Home',
+    component: AutoRepHome
+  },
   {
     path: '/sell',
     name: 'sell',
@@ -185,48 +206,52 @@ const routes = [
   {
     path: '/my-account',
     name: 'My-account',
-      component: () => import ('../views/Account/index.vue'),
+    component: () => import ('../views/Account/index.vue'),
       children: [
+
         {
-          path: '/credits',
+          path: '',
+          name: 'user-account',
+          component: UserAccount,
+         
+       },
+
+        {
+          path: 'credits',
           name: 'Credit',
           component: () => import('../views/Account/Credits.vue'),
-
-
         },
         {
-          path: '/business-card',
+          path: 'business-card',
           name: 'BusinessCard',
           component: () => import('../views/Account/BusinessCard.vue')
         },
         {
-          path: '/invites',
+          path: 'invites',
           name: 'Invite',
           component:() => import('../views/Invite.vue')
         },
+
         {
-            path: '',
-            name: 'user-account',
-            component: () => import ('../views/Account/userAccount.vue'),
-           
-        },
-        {
-          path: '/build',
+          path: 'build',
           name: 'build-add',
-          component: () => import ('../views/cars/build.vue')
+          component: () => import ('../views/cars/build.vue'),
+          meta: {
+            allowAnonymous: false
+          }
         },
         {
-            path: '/my-ads',
+            path: 'my-ads',
             name: 'car-ads',
             component: () => import ('../views/Account/ads.vue')
         },
         {
-          path: '/edit-profile',
+          path: 'edit-profile',
           name: 'edit-profile',
           component: () => import('../views/Account/edit-profile.vue')
         },
         {
-          path: '/edit/vehicle/:id/car',
+          path: 'edit/vehicle/:id/car',
           name: 'Edit-Vehicle',
           component: () => import('../views/Account/car-details.vue')
         },
@@ -236,28 +261,29 @@ const routes = [
           component: () => import ('../views/Resume/index.vue')
         },
         {
-            path: '/payment-methods',
+            path: 'payment-methods',
             name: 'Payment-Methods',
             component: () => import('../views/Account/payment-methods.vue')
          },
          {
-          path: '/plans',
+          path: 'plans',
           name: 'User-Plans',
           component: () => import('../views/Account/plans.vue')
          },
          {
-          path: '/activity',
+          path: 'activity',
           name: 'Activity',
           component: () => import('../views/Account/activity.vue')
          },
          {
-             path: '/browse-dealer',
+             path: 'browse-dealer',
              name: 'Browse-Dealer',
              component: () => import('../views/Account/browse-dealer.vue')
          }
         
       ]
   },
+ 
   {
   path: '/getting-started',
   name: 'starter',
@@ -276,12 +302,14 @@ const routes = [
 
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
   linkActiveClass: "active", // active class for non-exact links.
   linkExactActiveClass: "active" // active class for *exact* links.
 })
 
 router.beforeEach((to, from, next) => {
+  
   if (to.name == 'signin' && isLoggedIn()) {
     next({ path: '/' })
   } else if (!to.meta.allowAnonymous && !isLoggedIn()) {
@@ -294,6 +322,7 @@ router.beforeEach((to, from, next) => {
   }  else {
     next()
   }
+
 })
 
 export default router

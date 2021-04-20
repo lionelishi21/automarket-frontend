@@ -6,8 +6,6 @@
    <!-- End Slick Carousel -->
 
 
-
-  
 <!-- Divider -->
   <div class="container">
     <hr class="my-0">
@@ -30,32 +28,17 @@
   <!-- Cards Section -->
   <div class="container space-2">
       <!-- Title -->
-      <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-9">
+      <div class="w-md-80 w-lg-50 text-center mx-md-auto">
         <h2 class="font-weight-medium">Browse Categories</h2>
       </div>
-     <cat-View></cat-View>
+       <cat-View></cat-View>
   </div>
   <!-- End Cards Section -->
 <hr>
 
    <!-- Cards Section -->
-  <div class="container">
-      <!-- Title -->
-      <div class="row">
-          <div class="col-md-3 center-block text-center">
-             <div class="mb-10 text-center">
-                <h2 class="h1 font-weight-semi-bold"> Hot Cars</h2>
-              </div>
-              <img class="js-svg-injector mb-5" src="../../assets/img/hotcar.png" alt="SVG"
-                         width="250px" 
-                       data-parent="#SVGkeyFeatures">
-          </div>
-          <div class="col-md-9 mb-5">
-             <CarGrid :cars="HotCars"></CarGrid>
-           </div>
-      </div>
-  </div>
-  <!-- End Cards Section -->
+   <app-compare></app-compare>
+   <!-- End Cards Section -->
 
   <hr class="my-0">
 
@@ -76,10 +59,12 @@ import HeroComponent from '@/components/hero/index.vue';
 import RecSys from '@/components/cars/CarGrid.vue';
 import CatView from './components/categories.vue';
 import CarGrid from '@/components/cars/GridView.vue';
+import AppCompare from '@/components/Compare.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'home',
+
   data() {
     return {
       filterMake: '',
@@ -90,6 +75,7 @@ export default {
     }
   },
   components: {
+    AppCompare,
     HelloWorld,
     HeroComponent,
     RecSys,
@@ -155,6 +141,15 @@ export default {
     goToRegister() {
       this.$router.push('/dealer-register')
     },
+
+    goToCompareCars() {
+
+      var url = 'compare-research?make='
+
+      this.$router.push('/compare-research')
+    },
+
+
     makeChange() {
 
     }

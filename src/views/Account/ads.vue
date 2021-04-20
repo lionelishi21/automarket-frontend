@@ -1,76 +1,87 @@
 <template>
+<!-- Features Section -->
 <div class="container min-height-100vh">
-
-
-<!-- Page Preloader -->
-<div id="jsPreloader" class="page-preloader" v-show="isLoading">
-  <div class="page-preloader__content-centered">
-    <div class="spinner-grow text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
+  <!-- Title -->
+  <div class="w-md-80 w-lg-50 text-center mx-md-auto">
+    <h2>Your Ads</h2>
   </div>
-</div>
-<!-- End Page Preloader -->
+  <!-- End Title -->
 
-<!-- Nav Classic -->
-<ul id="SVGnavIcons" class="svg-preloader nav nav-classic nav-rounded nav-shadow nav-justified border" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link font-weight-medium active" id="pills-one-example2-tab" data-toggle="pill" href="#pills-one-example2" role="tab" aria-controls="pills-one-example2" aria-selected="true">
-      <div class="d-md-flex justify-content-md-center align-items-md-center">
-        <figure class="ie-height-40 d-none d-md-block w-100 max-width-6 mr-3">
-          <img class="js-svg-injector" src="../../assets/svg/icons/icon-13.svg" alt="SVG"
-               data-parent="#SVGnavIcons">
-        </figure>
-       Active<span class="badge badge-danger">{{ActiveCars.length}}</span>
-      </div>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link font-weight-medium" id="pills-two-example2-tab" data-toggle="pill" href="#pills-two-example2" role="tab" aria-controls="pills-two-example2" aria-selected="false">
-      <div class="d-md-flex justify-content-md-center align-items-md-center">
-        <figure class="ie-height-40 d-none d-md-block w-100 max-width-6 mr-3">
-          <img class="js-svg-injector" src="../../assets/svg/icons/icon-63.svg" alt="SVG"
-               data-parent="#SVGnavIcons">
-        </figure>
-        Inactive <span class="badge badge-danger">{{ InactiveCars.length }}</span>
-      </div>
-    </a>
-  </li>
- <li class="nav-item">
-    <a class="nav-link font-weight-medium" id="pills-two-example2-tab" data-toggle="pill" href="#pills-two-example2" role="tab" aria-controls="pills-two-example2" aria-selected="false">
-      <div class="d-md-flex justify-content-md-center align-items-md-center">
-        <figure class="ie-height-40 d-none d-md-block w-100 max-width-6 mr-3">
-          <img class="js-svg-injector" src="../../assets/svg/icons/icon-63.svg" alt="SVG"
-               data-parent="#SVGnavIcons">
-        </figure>
-        Sold <span class="badge badge-danger">0</span>
-      </div>
-    </a>
-  </li>
-</ul>
-<!-- End Nav Classic -->
+<modal
+       name="plans"
+       height="auto"  
+    >
+      <div class="card-body text-center">
+        <div class="container">
+             <p>Use Credit</p>
 
-<!-- Tab Content -->
-<div class="tab-content">
-  <div class="tab-pane fade pt-6 show active" id="pills-one-example2" role="tabpanel" aria-labelledby="pills-one-example2-tab">
-    <!-- Title -->
-   
+              <!-- Subscription -->
+              <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                     <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon">
+                          <input type="radio" value="dealer-plan" v-model="plans" id="pricingRadio2" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
+                          <label class="checkbox-outline__label checkbox-icon__label card  p-6 mb-0" for="pricingRadio2">
+                            <h4 class="h6 text-primary mb-3">1 Credit</h4>
+                            <span class="d-block mb-2">
+                            </span>
+                            <p class="font-size-1 mb-0">Use 1 Credit to Activate for 15 days</p>
+                          </label>
+                        </div>
+                     </div>
+              </div>
+              <!-- End Subscription -->
+              <div class="row text-center">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 mt-5">
+                          <button v-if="btn_plan" @click="activateCredit()" class="btn btn-primary "> Submit</button>
+                          <button v-else disabled="disabled" class="btn btn-primary"> Select Plan</button>
+                          <button @click="hideModal()" class="btn ml-2 btn-soft-success "> Cancel</button>
+                    </div>
+                    <div class="col-md-1"></div>
+              </div>
+            </div>
+      </div>
+    </modal>
+
+
+
+
+  <!-- Nav -->
+  <div class="text-center">
+    <ul class="nav nav-segment nav-pills scrollbar-horizontal mb-7" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-one-code-features-example1-tab" data-toggle="pill" href="#pills-one-code-features-example1" role="tab" aria-controls="pills-one-code-features-example1" aria-selected="true">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-two-code-features-example1-tab" data-toggle="pill" href="#pills-two-code-features-example1" role="tab" aria-controls="pills-two-code-features-example1" aria-selected="false">Inactive</a>
+      </li>
+    </ul>
+  </div>
+  <!-- End Nav -->
+
+  <!-- Tab Content -->
+  <div class="tab-content pr-lg-4">
+    <div class="tab-pane fade show active" id="pills-one-code-features-example1" role="tabpanel" aria-labelledby="pills-one-code-features-example1-tab">
+     
       <!-- List of Cars Section -->
       <div class="container space-top-1 space-bottom-2">
         <div class="row">
           <div class="col-lg-12">
+          
             <!-- List View -->
             <div class="row">
-              <div class="col-md-4 col-sm-6 col-xs-6" v-for="car in ActiveCars" >
+               <div class="col-md-4 col-sm-6 col-xs-6" v-for="(car, index) in ActiveCars"  :key="index">
                   <div class="card mb-4 mb-md-0">
-
                       <img v-if="showPlaceHolder(car.image)" class="img-fluid" :src="showCarImage(car.image)">
                       <img v-else class="img-fluid" src="http://18.206.230.202/public/assets/placeholder/placeholder.jpg" alt="" style="height: 180px;">
                       <!-- Card -->
 
                       <div class="card-body">
 
-                            <h4 class="h6" >{{car.year}} {{car.make}}  <span class="btn btn-xs btn-soft-success">Active</span></h4>
+                            <h4 class="h6" >{{car.year}} {{car.make}}  
+                              <span class="btn btn-xs btn-soft-success" v-if="car.sold !== 1">Active</span>
+                               <span class="btn btn-xs btn-soft-danger" v-else>Sold</span>
+                            </h4>
                             <p>Price: <strong>{{car.price | currency}}</strong></p>
                             <div class="btn-group">
                               <a href="#"
@@ -83,9 +94,10 @@
                               <a href="#"
                                  class="btn btn-soft-primary btn-xs" 
                                  @click.prevent="sold(car.batch_id)">
-                                 Set as Sold
+                                 Set as Sold 
                              </a>
                             </div>
+
                             <br>
                             <small>Share:</small>
                             <br>
@@ -119,12 +131,12 @@
                       </div>
                       <!-- End Card -->
                      </div>
-                </div>
+               </div>
             </div>
           <!-- End List View -->
 
             <!-- Pagination -->
-        <!--     <div class="d-flex justify-content-between align-items-center">
+            <!--<div class="d-flex justify-content-between align-items-center">
               <nav aria-label="Page navigation">
                 <ul class="pagination mb-0">
                   <li class="page-item ml-0">
@@ -152,54 +164,11 @@
           </div>
         </div>
       </div>
-      
+    </div>
 
-
-
-
-  </div>
-
-  <div class="tab-pane fade pt-6" id="pills-two-example2" role="tabpanel" aria-labelledby="pills-two-example2-tab">
-        <!-- Alert Dialog -->
-    <modal
-       name="plans"
-       height="auto"  
-    >
-      <div class="card-body text-center">
-        <div class="container">
-             <p>Use Credit</p>
-
-              <!-- Subscription -->
-              <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                     <div class="custom-control custom-radio custom-control-inline checkbox-outline checkbox-icon">
-                          <input type="radio" value="dealer-plan" v-model="plans" id="pricingRadio2" name="pricingRadio1" class="custom-control-input checkbox-outline__input checkbox-icon__input">
-                          <label class="checkbox-outline__label checkbox-icon__label card  p-6 mb-0" for="pricingRadio2">
-                            <h4 class="h6 text-primary mb-3">1 Credit</h4>
-                            <span class="d-block mb-2">
-                            </span>
-                            <p class="font-size-1 mb-0">Use 1 Credit to Activate for 15 days</p>
-                          </label>
-                        </div>
-                     </div>
-              </div>
-              <!-- End Subscription -->
-              <div class="row text-center">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10 mt-5">
-                          <button v-if="btn_plan" @click="activateCredit()" class="btn btn-primary "> Select Plan</button>
-                          <button v-else disabled="disabled" class="btn btn-primary"> Select Plan</button>
-                          <button @click="hideModal()" class="btn ml-2 btn-soft-success "> Cancel</button>
-                    </div>
-                    <div class="col-md-1"></div>
-              </div>
-            </div>
-      </div>
-    </modal>
-    <!-- End Alert Dialog -->
-      <!-- Grid View -->
-      <div class="row">
-          <div class="col-md-3 col-sm-6 col-sx-6" v-for="car in InactiveCars">
+    <div class="tab-pane fade" id="pills-two-code-features-example1" role="tabpanel" aria-labelledby="pills-two-code-features-example1-tab">
+         <div class="row mb-3">
+             <div class="col-md-3 col-sm-6 col-sx-6" v-for="(car, index) in InactiveCars" :key="index">
               <div class="card" >
                   <img v-if="showPlaceHolder(car.image)" 
                        class="img-fluid" 
@@ -227,11 +196,12 @@
                  </div>
             </div>
         </div>
-        <!-- End Grid View -->
+    </div>
+
   </div>
+  <!-- End Tab Content -->
 </div>
-<!-- End Tab Content -->
-</div>
+<!-- End Features Section -->
 </template>
 <script>
 
@@ -253,15 +223,13 @@
  	 },
    watch:{
       plans: function(value) {
-
         if (value == '') {
           this.btn_plan = false
         } else {
           this.btn_plan = true
         }
-
-
-      }
+      },
+      
    },
    created() {
       this.$store.dispatch('GET_INACTIVE_CARS')
@@ -286,9 +254,10 @@
       return true;
     },
     sold(id){
+      
       this.$store.dispatch('SET_SOLD', id)
         .then( response => {
-              console.log(response)
+             console.log(response)
              this.$store.dispatch('GET_INACTIVE_CARS')
              this.$store.dispatch('GET_ACTIVE_CARS')
              this.success('Vehicle status has updated to sold')
@@ -328,9 +297,12 @@
       setTimeout(function() {
         self.isLoading = false
         self.$store.dispatch('USE_ACTIVE_CREDIT', car_id)
+
       }, 1000)
 
-      
+       this.$modal.hide('plans')
+       //TODO:
+       //Add notification message saying that plans has been activated
     }
    }
 

@@ -1,7 +1,9 @@
 <template>
 <!-- Hero Section -->
-<div class="bg-img-hero" style="background-image: url(../../assets/img/1920x800/img17.jpg);">
+<!-- <div class="bg-img-hero" style="background-image: url(../../assets/img/1920x800/img17.jpg);"> -->
+<div class="" style="background: grey">
   <div class="container space-2 space-md-3">
+   
     <div class="row justify-content-end" v-if="mobile">
       <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
           <div class="shadow-sm text-center">
@@ -37,112 +39,61 @@
         <div class="col-lg-2 mb-7">
         </div>
 
-        <div class="col-lg-10 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
           <!-- Monthly Plans -->
-          <div id="pricingMonthlyExample1" class="row align-items-center mb-3">
-            <div class="col-sm-4">
-              <!-- Pricing -->
-              <div class="card border-0 shadow-sm">
-                <header id="SVGwave1BottomShapeID1" class="svg-preloader card-header border-0 position-relative bg-danger
-                 text-white p-5 text-center">
-                     <h3>
-                      Sell My Car(s)
-                    </h3>
-                     <p class="text-white"> Post as many cars</p> 
-                  <span class="d-block">
-                      <!-- SVG Icon -->
-                      <figure class="ie-for-sale">
-                        <img class="js-svg-injector" src="../../assets/img/crossover.png" alt="SVG"
-                             width="130px" 
-                           data-parent="#SVGkeyFeatures">
-                      </figure>
-                    <!-- End SVG Icon -->
-                  </span>
-
-                  <div class="position-absolute right-0 bottom-0 left-0">
-                    <figure class="ie-wave-1-bottom">
-                      <img class="js-svg-injector" src="../../assets/svg/components/wave-1-bottom.svg" alt="Image Description"
-                           data-parent="#SVGwave1BottomShapeID1">
-                    </figure>
+          <div class="row align-items-center">
+           <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+              <!-- Card -->
+              <a class="card card-bg-light h-100 shadow-none overflow-hidden transition-3d-hover" href="#">
+                <div class="row align-items-center">
+                  <div class="col-8 col-md-6">
+                    <div class="py-3 pl-4">
+                      <h2 class="h4">Sell my Car</h2>
+                      <a href="#" @click="goToOnboarding()" class="font-size-1 font-weight-bold">Learn More <i class="fas fa-angle-right fa-sm ml-1"></i></a>
+                    </div>
                   </div>
-                </header>
-
-                <!-- Content -->
-                <div class="card-body pt-0 px-2 pb-1">
-                  <button 
-                    type="button" 
-                    @click="goToOnboarding()" 
-                    class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">
-                        Get Started
-                   </button>
+                  <div class="col-4 col-md-6 px-0">
+                    <img class="img-fluid" src="@/assets/illustrations/sellmycar.png" alt="SVG">
+                  </div>
                 </div>
-                <!-- End Content -->
-              </div>
-              <!-- End Pricing -->
+              </a>
+              <!-- End Card -->
             </div>
 
-            <div class="col-sm-4">
-              <!-- Pricing -->
-              <div class="card border-0 shadow-sm">
-                <header id="SVGwave1BottomShapeID2" class="svg-preloader card-header border-0 position-relative bg-wanrning  p-5 text-center ">
-                     <h3>
-                      Find My Car
-                    </h3>
-                    <p><small class="text-muted"></small> Need a car? Start here</p> 
-
-                  <span class="d-block">
-                      <figure class="ie-buyer">
-                         <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
-                             width="130px" 
-                           data-parent="#SVGkeyFeatures">
-                      </figure>
-                  </span>
-
-                  <div class="position-absolute right-0 bottom-0 left-0">
-                    <figure class="ie-wave-1-bottom">
-                      <img class="js-svg-injector" src="../../assets/svg/components/wave-1-bottom.svg" alt="Image Description"
-                           data-parent="#SVGwave1BottomShapeID2">
-                    </figure>
+            <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+              <!-- Card -->
+              <a class="card card-bg-light h-100 shadow-none overflow-hidden transition-3d-hover" href="#">
+                <div class="row align-items-center">
+                  <div class="col-8 col-md-6">
+                    <div class="py-3 pl-4">
+                      <h2 class="h4">Find my Car</h2>
+                      <a href="#" @click="goToCars()" class="font-size-1 font-weight-bold">Learn More <i class="fas fa-angle-right fa-sm ml-1"></i></a>
+                    </div>
                   </div>
-                </header>
-
-                <!-- Content -->
-                <div class="card-body pt-0 px-2 pb-">
-                  <button type="button" @click="goToCars()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
+                  <div class="col-4 col-md-6 px-0">
+                    <img class="img-fluid" src="@/assets/illustrations/findmycar.png" alt="SVG">
+                  </div>
                 </div>
-                <!-- End Content -->
-              </div>
-              <!-- End Pricing -->
+              </a>
+              <!-- End Card -->
             </div>
 
-            <div class="col-sm-4">
-              <!-- Pricing -->
-              <div class="card border-0 shadow-sm">
-                <header class="card-header border-0 position-relative bg-wanrning  p-4 text-center ">
-                    <h3> Earn $$$ </h3>
-                    <p><small class="text-muted">as</small> Dealer Rep</p> 
-                  <span class="d-block">
-                      <figure class="ie-buyer">
-                         <img class="js-svg-injector" src="../../assets/img/car.png" alt="SVG"
-                             width="130px" >
-                      </figure>
-                  </span>
-
-                  <div class="position-absolute right-0 bottom-0 left-0">
-                    <figure class="ie-wave-1-bottom">
-                      <img class="js-svg-injector" src="../../assets/svg/components/wave-1-bottom.svg" alt="Image Description"
-                           data-parent="#SVGwave1BottomShapeID2">
-                    </figure>
+            <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+              <!-- Card -->
+              <a class="card card-bg-light h-100 shadow-none overflow-hidden transition-3d-hover" href="#">
+                <div class="row align-items-center">
+                  <div class="col-8 col-md-6">
+                    <div class="py-3 pl-4">
+                      <h2 class="h4">Earn $$$</h2>
+                      <a href="#" @click="goToDeailerRep()" class="font-size-1 font-weight-bold">Learn More <i class="fas fa-angle-right fa-sm ml-1"></i></a>
+                    </div>
                   </div>
-                </header>
-
-                <!-- Content -->
-                <div class="card-body pt-0 px-2">
-                  <button type="button" @click="goToDeailerRep()" class="btn btn-sm btn-block btn-soft-primary transition-3d-hover">Get Started</button>
+                  <div class="col-4 col-md-6 px-0">
+                    <img class="img-fluid" src="@/assets/illustrations/earn.png" alt="SVG">
+                  </div>
                 </div>
-                <!-- End Content -->
-              </div>
-              <!-- End Pricing -->
+              </a>
+              <!-- End Card -->
             </div>
 
           </div>
@@ -151,6 +102,7 @@
       </div>
        <!-- End Pricing Section -->
     </div>
+
   </div>
 </div>
 <!-- End Hero Section -->

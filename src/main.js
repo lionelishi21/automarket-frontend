@@ -15,7 +15,9 @@ import PrettyCheckbox from 'pretty-checkbox-vue';
 import Croppa from 'vue-croppa';
 import CripNotice from 'crip-vue-notice'
 import SocialSharing from 'vue-social-sharing'
- 
+import Lightbox from 'vue-easy-lightbox'
+
+Vue.use(Lightbox);
 Vue.use(SocialSharing);
 Vue.use(CripNotice)
 Vue.config.productionTip = false
@@ -48,12 +50,12 @@ Vue.use(VueGoogleMaps, {
 Vue.mixin({
    methods: {
     showCarImage(image) {
-       return 'http://18.206.230.202/storage/images/'+image
-       // return 'http://127.0.0.1:8000/storage/images/'+image
+      //  return 'http://18.206.230.202/storage/images/'+image
+       return 'http://127.0.0.1:8002/storage/images/'+image
     },
     showCarThumbnail(thumbnail) {
-      return 'http://18.206.230.202/storage/thumbnail/'+thumbnail
-      // return 'http://127.0.0.1:8000/storage/thumbnail/'+thumbnail
+      // return 'http://18.206.230.202/storage/thumbnail/'+thumbnail
+      return 'http://127.0.0.1:8002/storage/images/'+thumbnail
     },
     avatar(value) {
       var name = value.split(" ");

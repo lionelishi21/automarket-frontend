@@ -359,7 +359,7 @@ export default {
       formData.append('profile', JSON.stringify(this.GetUserProfile))
       // formData.append('profile', this.GetUserProfile)
 
-      axios.post('http://18.206.230.202/api/update-profile', formData)
+      axios.post('http://127.0.0.1:8000/api/update-profile', formData)
         .then( response => {
           console.log( response )
 

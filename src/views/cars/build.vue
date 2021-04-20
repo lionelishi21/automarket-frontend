@@ -11,7 +11,6 @@
     </div>
 <!-- End Page Preloader -->
 
-
     <!-- FAQ Topics Section -->
     <div class="container space-2 space-md-3">
       <div class="row">
@@ -127,7 +126,7 @@
                           </span>
                         </div>
                           <select class="custom-select" v-model="formData.main.year_id">
-                             <option v-for="(year, key, index) in AllYears" :value="year.id">{{year.year}}</option>
+                             <option v-for="year in years" :value="year.year">{{year.year}}</option>
                           </select>
                       </div>
                   </div>
@@ -139,16 +138,18 @@
                   <!-- Input -->
                   <div class="form-group" :class="{ 'u-has-error' : transmissionIsInvalid, 'u-has-success' : !transmissionIsInvalid }">
                       <label class="form-label">Transimition <span class="text-danger">*</span></label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <span class="fas fa-car"></span>
-                          </span>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <span class="fas fa-car"></span>
+                            </span>
+                          </div>
+                            <select class="custom-select" v-model="formData.main.transmission">
+                              <option value="Automatic">Automatic</option>
+                              <option value="Manual">Manual</option>
+                              <option value="Tiptronic">Tiptronic</option>
+                            </select>
                         </div>
-                        <select class="custom-select" v-model="formData.main.transmission">
-                             <option v-for="(detail, key, index) in AllDetails" :value="detail.transmission" >{{detail.transmission}}</option>
-                          </select>
-                      </div>
                   </div>
                 <span class="helper-block text-danger" v-if="transmissionIsInvalid">Please select vehicle transimition</span>
                   <!-- End Input -->
@@ -664,6 +665,7 @@
                   <small>Browse your device and upload images</small>
                   <small class="d-block text-muted">Maximum file size is 2MB</small>
                 </div>
+
                 <!-- uploader image input -->
                  <div class="row">
                      <div class="col-md-4">
@@ -672,27 +674,28 @@
                         <a class="js-fancybox u-media-viewer mb-3" href="javascript:;" v-if="imageData.length > 0">
                           <img class="img-fluid rounded " :src="imageData" alt="Image Description" style="max-height: 360px;">
                           <span class="u-media-viewer__container">
-                            <span class="u-media-viewer__icon" @click="imageData = !imageData">
+                            <span class="u-media-viewer__icon" @click="imageData = !imageData" >
                               <span class="fas fa-trash u-media-viewer__icon-inner"></span>
                             </span>
                           </span>
                         </a>
                         <!-- End Gallery -->
-                        <div v-else class="u-dropzone">
+                        <div v-else  class="js-dropzone dz-dropzone dz-dropzone-boxed">
                           <div class="dz-message p-0">
-                            <img class="js-svg-injector max-width-10 mb-3" src="../../assets/svg/illustrations/add-file.svg" alt="SVG"
-                                 data-parent="#uploadForm">
-                              <span class="d-block mb-2">Add Image</span>
-                              <input @change="onFileSelected" 
+                              <img @click="$refs.firstInput.click()" class="avatar mb-3" src="../../assets/svg/illustrations/add-file.svg">
+                              <span class="d-block">Browse your device and upload images</span>
+                              <small class="d-block text-muted">Maximum file size is 2MB</small>
+                              <input hidden="hidden" ref="firstInput" @change="onFileSelected" 
                                   id="imagesAttachmentInput" 
                                   name="images-attachment"
-                                  type="file" class="js-custom-file-attach file-attachment-input__label" data-result-text-target="#fileUploadText">
+                                  type="file">
                               </div>
                         </div>
                          <!-- End File Attachment Input -->
                       </div>
                       <div class="col-md-4">
                         <!-- File Attachment Input -->
+                      
                         <!-- Gallery -->
                         <a class="js-fancybox u-media-viewer mb-3" href="javascript:;" v-if="imgData.img1.length > 0">
                           <img class="img-fluid rounded " :src="imgData.img1" alt="Image Description" style="max-height: 360px;">
@@ -703,15 +706,14 @@
                           </span>
                         </a>
                         <!-- End Gallery -->
-                        <div v-else class="u-dropzone">
+                        <div v-else class="js-dropzone dz-dropzone dz-dropzone-boxed">
                           <div class="dz-message p-0">
-                            <img class="js-svg-injector max-width-10 mb-3" src="../../assets/svg/illustrations/add-file.svg" alt="SVG"
-                                 data-parent="#uploadForm">
-                              <span class="d-block mb-2">Add Image</span>
-                              <input @change="selectedImage1" 
+                              <img @click="$refs.secoundInput.click()" class="avatar mb-3" src="../../assets/svg/illustrations/add-file.svg">
+                              <span class="d-block">Browse your device and upload images</span>
+                              <small class="d-block text-muted">Maximum file size is 2MB</small>
+                              <input hidden="hidden" ref="secoundInput" @change="selectedImage1" 
                                   id="imagesAttachmentInput" 
                                   name="images-attachment"
-                                  ref="file"
                                   type="file" class="js-custom-file-attach file-attachment-input__label" >
                               </div>
                         </div>
@@ -729,13 +731,15 @@
                           </span>
                         </a>
                         <!-- End Gallery -->
-                        <div v-else class="u-dropzone">
+                        <div v-else class="js-dropzone dz-dropzone dz-dropzone-boxed">
                           <div class="dz-message p-0">
-                            <img class="js-svg-injector max-width-10 mb-3" src="../../assets/svg/illustrations/add-file.svg" alt="SVG"
-                                 data-parent="#uploadForm">
-                              <span class="d-block mb-2">Add Image</span>
+                             <img @click="$refs.thirdInput.click()" class="avatar mb-3" src="../../assets/svg/illustrations/add-file.svg">
+                              <span class="d-block">Browse your device and upload images</span>
+                              <small class="d-block text-muted">Maximum file size is 2MB</small>
                               <input @change="selectedImage2" 
                                   id="imagesAttachmentInput" 
+                                  hidden="hidden"
+                                  ref="thirdInput"
                                   name="images-attachment"
                                   type="file" class="js-custom-file-attach file-attachment-input__label" data-result-text-target="#fileUploadText">
                               </div>
@@ -754,12 +758,14 @@
                           </span>
                         </a>
                         <!-- End Gallery -->
-                        <div v-else class="u-dropzone">
+                        <div v-else class="js-dropzone dz-dropzone dz-dropzone-boxed">
                           <div class="dz-message p-0">
-                            <img class="js-svg-injector max-width-10 mb-3" src="../../assets/svg/illustrations/add-file.svg" alt="SVG"
-                                 data-parent="#uploadForm">
-                              <span class="d-block mb-2">Add Image</span>
+                           <img @click="$refs.fortInput.click()" class="avatar mb-3" src="../../assets/svg/illustrations/add-file.svg">
+                              <span class="d-block">Browse your device and upload images</span>
+                              <small class="d-block text-muted">Maximum file size is 2MB</small>
                               <input @change="selectedImage3" 
+                                  ref="fortInput"
+                                  hidden="hidden"
                                   id="imagesAttachmentInput" 
                                   name="images-attachment"
                                   type="file" class="js-custom-file-attach file-attachment-input__label" data-result-text-target="#fileUploadText">
@@ -779,12 +785,14 @@
                           </span>
                         </a>
                         <!-- End Gallery -->
-                        <div v-else class="u-dropzone ">
+                        <div v-else class="js-dropzone dz-dropzone dz-dropzone-boxed">
                           <div class="dz-message p-0">
-                            <img class="js-svg-injector max-width-10 mb-3" src="../../assets/svg/illustrations/add-file.svg" alt="SVG"
-                                 data-parent="#uploadForm">
-                              <span class="d-block mb-2">Add Image</span>
+                            <img @click="$refs.fifthInput.click()" class="avatar mb-3" src="../../assets/svg/illustrations/add-file.svg">
+                              <span class="d-block">Browse your device and upload images</span>
+                              <small class="d-block text-muted">Maximum file size is 2MB</small>
                               <input @change="selectedImage4" 
+                                  ref="fifthInput"
+                                  hidden="hidden"
                                   id="imagesAttachmentInput" 
                                   name="images-attachment"
                                   type="file" class="js-custom-file-attach file-attachment-input__label" data-result-text-target="#fileUploadText">
@@ -792,7 +800,7 @@
                         </div>
                          <!-- End File Attachment Input -->
                       </div>
-                    </div>
+                </div>
                     <div class="row text-center mt-5">
                           <div class="col-md-12">
                           <!-- End uploader image input  -->
@@ -806,7 +814,7 @@
         </form>
       </div>
       </div>
-     </div>
+    </div>
     <!-- End FAQ Topics Section -->
 
     <!-- Sticky Block End Point -->
@@ -847,6 +855,40 @@ export default {
         img4: '',
         img5: ''
       },
+      years: [
+        { year: '1990' },
+        { year: '1991' },
+        { year: '1992' },
+        { year: '1993' },
+        { year: '1994' },
+        { year: '1995' },
+        { year: '1996' },
+       { year: '1997' },
+       { year: '1998' },
+       { year: '1999' },
+       { year: '2000' },
+       { year: '2001' },
+       { year: '2002' },
+       { year: '2003' },
+       { year: '2004' },
+       { year: '2005' },
+       { year: '2006' },
+        { year: '2007' },
+        { year: '2008' },
+        { year: '2009' },
+        { year: '2010' },
+        { year: '2011' },
+        { year: '2012' },
+        { year: '2013' },
+        { year: '2014' },
+        { year: '2015' },
+        { year: '2016' },
+        { year: '2017' },
+        { year: '2018' },
+        { year: '2019' },
+        { year: '2020' },
+        { year: '2021'  } 
+      ],
       parishes: [
         { name: 'Kingston' },
         { name: 'St. Andrew' },
@@ -1070,7 +1112,7 @@ export default {
 
 
      // axios.post('http://127.0.0.1:8000/api/cars/post', formData,
-     axios.post('http://18.206.230.202/api/cars/post', formData,
+     axios.post('http://127.0.0.1:8000/api/cars/post', formData,
         {
            headers: {
             'content-type': `multipart/form-data`,

@@ -92,50 +92,39 @@ export default {
       ]
     }
   },
+  watch:{
+      $route (to, from){
+         this.init()
+         alert('workingg');
+      }
+  },
   computed: {
     ...mapGetters([
       'GetUserProfile',
       'GetCredits'
     ])
   },
+
   created() {
-    console.log('dashboard component created...')
-    var userdata = localStorage.getItem('user')
-    if ( userdata != null ) {
-      this.userdata = JSON.parse(userdata);
-    }
-
-    this.$store.dispatch('GET_USER_PROFILE')
-      .then( response => {
-        console.log('profile data')
-      })
-       this.$store.dispatch('GET_CREDIT')
+  
   },
-  mounted() {
-      
-      $.HSCore.components.HSFocusState.init();
 
-      // initialization of header
-      $.HSCore.components.HSHeader.init($('#header'));
+  methods: {
 
-      // initialization of unfold component
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function () {
-          $(this).find('input[type="search"]').focus();
+    init() {
+        console.log('dashboard component created...')
+        var userdata = localStorage.getItem('user')
+        if ( userdata != null ) {
+          this.userdata = JSON.parse(userdata);
         }
-      });
 
-      // initialization of malihu scrollbar
-      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
-
-      // initialization of text editors
-      $.HSCore.components.HSSummernoteEditor.init('.js-summernote-editor');
-
-      // initialization of range datepicker
-      $.HSCore.components.HSRangeDatepicker.init('.js-range-datepicker');
-
-      // initialization of go to
-      $.HSCore.components.HSGoTo.init('.js-go-to');
+        this.$store.dispatch('GET_USER_PROFILE')
+          .then( response => {
+            console.log('profile data')
+          })
+          this.$store.dispatch('GET_CREDIT')
+        }
   }
+
 }
 </script>

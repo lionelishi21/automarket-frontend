@@ -46,5 +46,9 @@ export default {
 
 	activatePlan(id) {
 		return Api().get('/cars/activate-credit/'+id)
+	},
+
+	fetchCompareCars( params ) {
+		return Api().post('/cars/compare-cars', params)
 	}
 }

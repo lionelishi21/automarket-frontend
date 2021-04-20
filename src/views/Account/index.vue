@@ -17,7 +17,6 @@
                       <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
                     <!-- End Breadcrumb -->
-
                     <!-- Breadcrumb Nav Toggle Button -->
                     <div class="d-lg-none">
                       <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--white"
@@ -40,10 +39,9 @@
                   <!-- User Info -->
                   <div class="media d-block d-sm-flex align-items-sm-center">
                     <div class="u-lg-avatar position-relative mb-3 mb-sm-0 mr-3">
-                      <img class="img-fluid rounded-circle" src="../../assets/img/160x160/img2.jpg" alt="Image Description">
-                      <span class="badge badge-md badge-outline-success badge-pos badge-pos--bottom-right rounded-circle">
-                        <span class="fas fa-check"></span>
-                      </span>
+                     <!-- <avatar>{{userdata.name}}</avatar> -->
+                     <avatar color="blue" :fullname="userdata.name" :size="96"></avatar>
+
                     </div>
                     <div class="media-body">
                       <h1 class="h3 text-white font-weight-medium mb-1">Hi, {{userdata.name}}</h1>
@@ -54,7 +52,8 @@
                 </div>
               </div>
             </div>
-
+          </div>
+          <div>
             <div class="container space-bottom-1 space-bottom-lg-0">
               <div class="d-lg-flex justify-content-lg-between align-items-lg-center">
                 <!-- Navbar -->
@@ -65,81 +64,70 @@
                         <ul class="navbar-nav u-header__navbar-nav">
 
                           <!-- Dashboard -->
-                          <li class="nav-item">
-                            <router-link tag="a" to="/my-account" id="generalDropdown" active-class="active" class="nav-link u-header__nav-link">
-                             <i class="fas fa-home"></i>
-                             Dashboard
+                            <router-link tag="li" to="/my-account" id="generalDropdown" active-class="dashboard-active" class="nav-link text-white ">
+                              <a href="">
+                                <i class="fas fa-home"></i>
+                                <strong> Dashboard </strong>
+                              </a>
                             </router-link>
-                          </li>
                           <!-- End Dashboard -->
 
                           <!-- General -->
                          <li class="nav-item">
-                            <router-link tag="a" to="/my-ads" class="nav-link u-header__nav-link active">
+                            <router-link tag="a" to="/my-account/my-ads" class="nav-link u-header__nav-link active" active-class="dashboard-active">
                              <i class="fas fa-car"></i>
-                              My ads
+                              <strong> My ads </strong>
                             </router-link>
                         </li>
                           <!-- General -->
 
                           <!-- Billing -->
-                          <li class="nav-item hs-has-sub-menu u-header__nav-item"
-                              data-event="hover"
-                              data-animation-in="slideInUp"
-                              data-animation-out="fadeOut">
-
-                                <a id="billingDropdown" class="nav-link u-header__nav-link u-header__nav-link-toggle"
-                                    href="javascript:;"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    aria-labelledby="billingDropdownMenu">
+                          <li class="nav-item">
+                               <dropdown-menu v-model="show">
+                                  <button class="btn btn-link dropdown-toggle">
                                      <i class="fas fa-money-bill-alt"></i>
-                                  Billing
-                                </a>
-
-                                <ul id="billingDropdownMenu" class="hs-sub-menu u-header__sub-menu u-header__sub-menu--spacer" style="min-width: 230px;" aria-labelledby="billingDropdown">
-                                  <li><router-link to="/activity" class="nav-link u-header__sub-menu-nav-link" href="activity.html">Activity</router-link></li>
-                                  <li><router-link to="/payment-methods" class="nav-link u-header__sub-menu-nav-link" href="payment-methods.html">Payment methods</router-link></li>
-                                </ul>
+                                     Billing
+                                  </button>
+                                     <div slot="dropdown">
+                                      <router-link to="/my-account/activity" class="dropdown-item" href="#">Activity</router-link>
+                                      <router-link to="/my-account/payment-methods" class="dropdown-item" href="#">Payment methods</router-link>
+                                     </div>
+                               </dropdown-menu>
                           </li>
                           <!-- Billing -->
                         
                         <!-- General -->
                          <li class="nav-item">
-                            <router-link tag="a" to="/edit-profile"  active-class="active" id="generalDropdown" class="nav-link u-header__nav-link">
+                            <router-link tag="a" to="/my-account/edit-profile"  active-class="dashboard-active" id="generalDropdown" class="nav-link u-header__nav-link">
                              <i class="fas fa-user"></i>
                               Edit profile
                             </router-link>
                         </li>
 
                         
-                          <router-link tag="li" active-class="active" to="/credits" class="nav-item u-header__nav-item">
+                          <router-link tag="li" active-class="dashboard-active" to="/my-account/credits" class="nav-item u-header__nav-item">
                              <a class="nav-link u-header__nav-link" href="#">
                                <i class="fas fa-credit-card"></i>
                              Credits</a>
                           </router-link>
 
+
                           <!-- Others -->
-                    <!--      <router-link tag="li" active-class="active" to="/plans" class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#l">
-                             <i class="fas fa-handshake"></i>
-                            Plans</a>
-                          </router-link> -->
+                           <router-link tag="li" active-class="dashboard-active" to="/my-account/invites" class="nav-item u-header__nav-item">
+                              <a class="nav-link u-header__nav-link" href="#l">
+                              <i class="fas fa-user-friends"></i>
+                              Invites</a>
+                            </router-link>
                           <!-- Others -->
 
-                             <!-- Others -->
-                         <router-link tag="li" active-class="active" to="/invites" class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#l">
-                             <i class="fas fa-user-friends"></i>
-                            Invites</a>
-                          </router-link>
-                          <!-- Others -->
-
-                           <router-link tag="li" active-class="active" to="/business-card" class="nav-item u-header__nav-item">
+                          <!-- Business Card -->
+                           <router-link tag="li" aactive-class="dashboard-active" to="/my-account/business-card" class="nav-item u-header__nav-item">
                             <a class="nav-link u-header__nav-link" href="#l">
                              <i class="fas fa-user-friends"></i>
                             (AM) Business Card</a>
                           </router-link>
+                          <!-- Business Card End -->
+
                         </ul>
                       </div>
                     </nav>
@@ -178,16 +166,25 @@
 import HeaderComponent from '@/components/header/index.vue';
 import FooterComponent from '@/components/footer/index.vue';
 import { mapGetters } from 'vuex';
+import Avatar from 'vue-avatar-component'
+import DropdownMenu from '@innologica/vue-dropdown-menu'
+
+
 
 export default {
   components: {
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DropdownMenu,
+    Avatar,
+   
   },
   computed: {
+
     ...mapGetters([
        'getCurrentUser'
     ])
+
   },
   created() {
     this.$store.dispatch('getCurrentUser')
@@ -215,15 +212,10 @@ export default {
         breakpoint: 991.98,
         hideTimeOut: 0
       });
+
      // initialization of header
       $.HSCore.components.HSHeader.init($('#header'));
 
-      // initialization of unfold component
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function () {
-          $(this).find('input[type="search"]').focus();
-        }
-      });
 
       // initialization of malihu scrollbar
       $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
@@ -252,6 +244,7 @@ export default {
   data() {
     return {
          userdata: {},
+         show:false
     }
   }
 }
@@ -262,6 +255,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.dashboard-active {
+  border-bottom: 1px solid red !important;
 }
 
 #nav {
@@ -277,5 +274,3 @@ export default {
   }
 }
 </style>
-
-"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'vehicle_models.car_id' in 'where clause' (SQL: select * from `vehicle_models` where `vehicle_models`.`car_id` = 1 and `vehicle_models`.`car_id` is not null limit 1)"

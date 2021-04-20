@@ -10,14 +10,9 @@
             Car Filter
            <span class="text-secondary font-size-1">Showing {{FilteredCars.length}} vehicles</span>
           </h3>
-          <div class="form-group">
-                <!-- Select -->
-              <select class="form-control form-control-sm" v-model="filterParish">
-                 <option value="null">Select Parish</option>
-                 <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
-              </select>
-              <!-- End Select -->
-          </div>
+
+
+
           <div class="form-group bg-soft-dark p-2">
               <select class="form-control form-control-sm" v-model="filterMin_year">
                   <option value="null">year</option>
@@ -65,12 +60,11 @@
                   <option value="2019" selected>2019</option>
                 </select>
           </div>
-          
           <div class="form-group bg-soft-dark p-2">
                 <div class="">
                      <label>Car makes</label>
                 </div>
-                 <div class="custom-control custom-control-inline custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes">
+                 <div class="custom-control custom-control-inline custom-checkbox font-size-1 text-lh-md mb-2" v-for="(make, key, index) in AllMakes" :key="index">
                       <input class="custom-control-input col-sm-2"
                          type="checkbox"
                          :value="make.id"
@@ -165,7 +159,16 @@
               </div>
           </div>
           <div class="form-group">
-              <button @click="saveFilter()" class="btn btn-success btn-block">Save</button>
+              <!-- Select -->
+              <select class="form-control form-control-sm" v-model="filterParish">
+                  <option value="null">Select Parish</option>
+                  <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
+              </select>
+              <!-- End Select -->
+          </div>
+
+          <div class="form-group">
+<!--              <button @click="saveFilter()" class="btn btn-success btn-block">Save</button>-->
               <button @click="hideFilter()" class="btn btn btn-secondary btn-block">Close</button>
           </div>
       </div>
@@ -181,6 +184,7 @@
         </div>
       </div>
     </div>
+   
     <!-- Title Section -->
     <div class="bg-light">
       <div class="container py-5">
@@ -292,26 +296,8 @@
                   <!-- Sidebar Filter -->
                   <div class="card p-4">
                     <!-- Location Type -->
-              
-                    <!-- End LocationType -->
-                    
-                   <div class="border-bottom">
-                      <label class="form-label mb-2"><b>Parish</b></label>
-                           <div class="row">
-                              <div class="col-sm-12">
-                                <div class="border-bottom mb-4 ">
-                                      <!-- Select -->
-                                      <select class="form-control form-control-sm" v-model="filterParish">
-                                          <option value="null">Select parish</option>
-                                         <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
-                                      </select>
-                                      <!-- End Select -->
-                                 </div>
-                              </div>
-                          </div>
-                        
-                    </div>
-                    <!-- End LocationType -->
+
+
                     <div class="text-center">
                       <span class="u-divider u-divider--text"></span>
                     </div>
@@ -340,8 +326,25 @@
                       <a v-show="makesType == 'all'" @click="changeMakes('popular')" class="btn btn-link"><small> Choose from popular makes </small></a>
                     </div>
                     <!-- End Car Make -->
-
                     <hr>
+                      <!-- End LocationType -->
+                      <div class="border-bottom">
+                          <label class="form-label mb-2"><b>Parish</b></label>
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="border-bottom mb-4 ">
+                                      <!-- Select -->
+                                      <select class="form-control form-control-sm" v-model="filterParish">
+                                          <option value="null">Select parish</option>
+                                          <option v-for="parish in parishes" :value="parish.name" >{{ parish.name}}</option>
+                                      </select>
+                                      <!-- End Select -->
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- End LocationType -->
+                      <hr>
                     <!-- Year -->
                     <div class="border-bottom">
                       <label class="form-label mb-2"><b>Year</b></label>
@@ -911,7 +914,7 @@
 
                 <!-- List and Grid view -->
                 <ul v-if="list" class="list-unstyled">
-                  <car-list v-for="car in FilteredCars" :car="car" class="mb-2" ></car-list>
+                  <car-list v-for="(car, index) in FilteredCars" :car="car" class="mb-2" :key="index"></car-list>
                 </ul>
                 <!-- End List Grid View=z -->
                 <car-grid  v-if="grid" :cars="FilteredCars"></car-grid>
@@ -1130,13 +1133,19 @@ export default {
     filterMax_year: function(value) {
 
       var params = {
+
           miles: this.filterMiles,
           parish: this.filterParish,
           minYear: this.filterMin_year,
           maxYear: value,
-          minPrice: this.filterMin_price,
-          maxPrice: this.filterMax_price,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
           bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType,
+          sorting: this.filterSorting
       }
 
       this.$store.distpatch('FILTER_CARS', params)
@@ -1156,9 +1165,14 @@ export default {
           parish: value,
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
-          minPrice: this.filterMin_price,
-          maxPrice: this.filterMax_price,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
           bodyStyle: this.filterBodyStyle,
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType,
+          sorting: this.filterSorting
       }
 
       this.isLoading = true
@@ -1172,14 +1186,21 @@ export default {
     filterMin_price: function ( value ) {
 
       var params = {
+
           miles: this.filterMiles,
           parish: this.filterParish,
-          minYear: this.filterMin_year,
+          minYear: value,
           maxYear: this.filterMax_year,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: this.filterMax_year,
           bodyStyle: this.filterBodyStyle,
-          minPrice: value,
-          maxPrice: this.filterMax_price
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType,
+          sorting: this.filterSorting
       }
+
       this.isLoading = true
       var self = this
       setTimeout(function(){
@@ -1196,9 +1217,14 @@ export default {
           parish: this.filterParish,
           minYear: this.filterMin_year,
           maxYear: this.filterMax_year,
-          minPrice: this.filterMin_price,
+          make: this.filterMake,
+          minPrice: this.filterMin_year,
+          maxPrice: value,
           bodyStyle: this.filterBodyStyle,
-          maxPrice: value
+          transmission: this.filterTransmission,
+          cyclinder: this.cyclinder,
+          sellerType: this.filterSellerType,
+          sorting: this.filterSorting
       }
 
       this.isLoading = true
@@ -1212,13 +1238,19 @@ export default {
 
     filterBodyStyle: function( value ) {
         var params = {
-          miles: this.filterMiles,
-          parish: this.filterParish,
-          minYear: this.filterMin_year,
-          maxYear: this.filterMax_year,
-          minPrice: this.filterMin_price,
-          maxPrice: this.filterMax_price,
-          bodyStyle: value
+
+            miles: this.filterMiles,
+            parish: this.filterParish,
+            minYear: this.filterMin_year,
+            maxYear: this.filterMax_year,
+            make: this.filterMake,
+            minPrice: this.filterMin_year,
+            maxPrice: this.filterMax_price,
+            bodyStyle: value,
+            transmission: this.filterTransmission,
+            cyclinder: this.cyclinder,
+            sellerType: this.filterSellerType,
+            sorting: this.filterSorting
        }
 
       this.isLoading = true

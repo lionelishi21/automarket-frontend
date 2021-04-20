@@ -9,7 +9,9 @@ import vehicles from './modules/vehicles.js'
 import car from './modules/car.js'
 import filters from './modules/filters.js'
 import payments from './modules/payment.js'
+import autorep from './modules/autorep.js'
 // import carMake from './modules/carMake.js'
+import compare from './modules/compare.js';
 
 Vue.use(Vuex)
 Vue.config.debug = true
@@ -21,7 +23,9 @@ export default new Vuex.Store({
     	vehicles,
     	car,
     	filters,
-    	payments
+    	payments,
+    	autorep,
+		compare
     	// carMake
     },
 });

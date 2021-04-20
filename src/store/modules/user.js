@@ -81,21 +81,25 @@ const actions = {
     let token = localStorage.getItem('access_token')
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
+
     return new Promise(( resolve, reject) => {
         
         api.logoutUser().then( response => {
  
              localStorage.removeItem('access_token')
              let user = {}
+
              context.dispatch('getCurrentUser')
              
             resolve(response)
+
         }).catch( error => {
             reject(error)
         })
     });
   
    },
+
   GET_USER_PROFILE({commit}, payload) {
 
      let token = localStorage.getItem('access_token')
@@ -114,12 +118,14 @@ const actions = {
         })
     })
   },
+
+
   FETCH_BITLY_LINK({commit}) {
 
    api.fetchBitlyLink() 
     .then( response => {
-      console.log(response.data)
-      commit('SET_BITLY_LINK', response.data.bitly_link)
+       console.log(response.data)
+       commit('SET_BITLY_LINK', response.data.bitly_link)
     }) 
     .catch( error => {
        console.log(error.response)

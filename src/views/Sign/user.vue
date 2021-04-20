@@ -67,17 +67,17 @@
     <!-- End Login Form -->
 </template>
 <script>
-import { Plugins } from "@capacitor/core";
-const { PushNotifications } = Plugins;
+// import { Plugins } from "@capacitor/core";
+// const { PushNotifications } = Plugins;
  
 //
 // with type support
-import { FCM } from "capacitor-fcm";
-const fcm = new FCM();
+// import { FCM } from "capacitor-fcm";
+// const fcm = new FCM();
  
 //
 // alternatively - without types
-const { FCMPlugin } = Plugins;
+// const { FCMPlugin } = Plugins;
  
 
 export default {
@@ -98,15 +98,15 @@ export default {
     },
     created() {
 
-      this.successMsg = false
-      if (this.$route.query.user != undefined ) {
-         this.successMsg = true
-      }
+      // this.successMsg = false
+      // if (this.$route.query.user != undefined ) {
+      //    this.successMsg = true
+      // }
 
     },
     mounted() {
       // initialization of form validation
-      $.HSCore.components.HSValidation.init('.js-validate');
+      // $.HSCore.components.HSValidation.init('.js-validate');
     },
     methods: {
       login( user) {
