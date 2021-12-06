@@ -61,7 +61,7 @@
     <!-- End Row -->
 
     <div class="d-none d-lg-block col-lg-6 position-lg-absolute top-0 right-0">
-      <img class="img-fluid rounded-lg" src="@/assets/compare.jpg" alt="Image Description">
+      <img class="img-fluid rounded-lg" alt="Image Description">
 
       <figure class="max-w-15rem w-100 position-absolute top-0 left-0 z-index-n1">
         <div class="mt-n6 ml-n5">
